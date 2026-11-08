@@ -1,0 +1,2822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>국어 문법 마당</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2a3d8f">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="문법 마당">
+<meta name="description" content="고등 국어 문법 개념 정리, 단원별 퀴즈, 기출 자료실">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 쪽빛(indigo) 잉크와 인주(seal red) 하나: 교과서 여백처럼 조용한 바탕 위에 단원색 띠로 길을 찾는 구성 */
+:root{
+  --bg:#f3f4f7; --surface:#ffffff; --ink:#161b2e; --muted:#5a6276; --line:#dde1ea;
+  --accent:#2a3d8f; --seal:#c23b26; --soft:rgba(42,61,143,.07);
+  --u1:#2a3d8f; --u2:#1d7466; --u3:#a8711a; --u4:#74479e; --u5:#c23b26;
+  --t-sub:#2a3d8f; --t-del:#c23b26; --t-add:#1d7466; --t-con:#a8711a;
+  --display:"Hahmlet","Noto Serif KR","Batang",serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  --old:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans CJK KR","Noto Serif CJK KR","Source Han Sans K",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141c; --surface:#191d28; --ink:#e8eaf0; --muted:#9aa2b5; --line:#2b3142;
+    --accent:#9badff; --seal:#ff7c62; --soft:rgba(155,173,255,.09);
+    --u1:#9badff; --u2:#5cc9b6; --u3:#e3b257; --u4:#c49cf0; --u5:#ff7c62;
+    --t-sub:#9badff; --t-del:#ff7c62; --t-add:#5cc9b6; --t-con:#e3b257;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11141c; --surface:#191d28; --ink:#e8eaf0; --muted:#9aa2b5; --line:#2b3142;
+  --accent:#9badff; --seal:#ff7c62; --soft:rgba(155,173,255,.09);
+  --u1:#9badff; --u2:#5cc9b6; --u3:#e3b257; --u4:#c49cf0; --u5:#ff7c62;
+  --t-sub:#9badff; --t-del:#ff7c62; --t-add:#5cc9b6; --t-con:#e3b257;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.3;text-wrap:balance;margin:0}
+.old{font-family:var(--old)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none}
+.seal{width:32px;height:32px;border-radius:6px;background:var(--seal);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:17px;transform:rotate(-4deg)}
+.brand b{font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:-.01em}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:500;font-size:15px;padding:6px 11px;border-radius:8px;white-space:nowrap}
+nav.tabs a:hover{color:var(--ink);background:var(--soft)}
+nav.tabs a.on{color:var(--ink);background:var(--surface);box-shadow:inset 0 -2px 0 var(--c,var(--accent))}
+.dict{flex:none;display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px 3px 3px 10px}
+.dict input{border:0;background:transparent;width:130px;outline:none;font-size:14px}
+.dict a{font-size:13px;font-weight:600;text-decoration:none;background:#03c75a;color:#fff;padding:5px 10px;border-radius:7px;white-space:nowrap}
+@media (max-width:860px){.top-in{flex-wrap:wrap;gap:8px 12px}.dict{order:2;margin-left:auto}nav.tabs{order:3;flex-basis:100%}}
+@media (max-width:420px){.dict input{width:96px}}
+
+main{max-width:1200px;margin:0 auto;padding:28px 20px 80px}
+.muted{color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--soft);color:var(--ink);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:9px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.danger{color:var(--seal);border-color:color-mix(in srgb,var(--seal) 40%,var(--line))}
+.btn.small{padding:4px 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:default}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:32px;align-items:center;margin-bottom:36px}
+.hero h1{font-size:clamp(32px,4.6vw,50px);font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--seal)}
+.hero p{color:var(--muted);max-width:34em;margin:14px 0 0}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 22px 18px;position:relative;overflow:hidden}
+.demo-label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:10px}
+.chain{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 2px;min-height:118px;transition:opacity .35s}
+.chain.fade{opacity:0}
+.form{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.01em;padding:2px 8px;border-radius:8px;color:var(--muted);transition:color .3s,background .3s}
+.form.on{color:var(--ink);background:var(--soft)}
+.form.final{color:var(--seal)}
+.arrow{display:flex;flex-direction:column;align-items:center;padding-top:10px;min-width:54px}
+.arrow i{font-style:normal;color:var(--muted);font-size:20px;line-height:1}
+.arrow small{font-size:11px;font-weight:600;line-height:1.3;text-align:center;max-width:84px;margin-top:4px;color:var(--tc,var(--muted))}
+.demo-foot{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.demo-foot button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:2px 10px;font-size:13px;cursor:pointer;color:var(--muted)}
+.demo-foot button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+
+/* home units */
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:8px 0 14px}
+.sec-h h2{font-size:22px}
+.units{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ucard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px;border-top:4px solid var(--c);transition:transform .15s}
+.ucard:hover{transform:translateY(-2px)}
+.ucard .n{font-family:var(--display);font-weight:800;color:var(--c);font-size:14px}
+.ucard h3{font-size:20px}
+.ucard p{margin:0;font-size:14px;color:var(--muted);line-height:1.55;flex:1}
+.ucard .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+@media (max-width:1000px){.units{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.units{grid-template-columns:1fr}}
+.home-row{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:28px}
+@media (max-width:860px){.home-row{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel h3{font-size:18px;margin-bottom:10px}
+
+/* unit */
+.uhead{border-left:5px solid var(--c);padding:4px 0 4px 18px;margin-bottom:26px}
+.uhead h1{font-size:clamp(30px,4vw,42px);font-weight:800;letter-spacing:-.02em}
+.uhead p{margin:6px 0 10px;color:var(--muted);max-width:44em}
+.ulayout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:32px;align-items:start}
+.toc{position:sticky;top:76px;display:flex;flex-direction:column;gap:2px;font-size:14px;max-height:calc(100vh - 96px);overflow:auto}
+.toc a{text-decoration:none;color:var(--muted);padding:5px 10px;border-radius:7px;display:flex;gap:8px;line-height:1.45}
+.toc a span{font-family:var(--display);font-weight:700;color:var(--c);flex:none;width:20px}
+.toc a:hover{background:var(--soft);color:var(--ink)}
+@media (max-width:860px){.ulayout{grid-template-columns:1fr}.toc{position:static;flex-direction:row;overflow-x:auto;max-height:none}.toc a{flex:none;background:var(--surface);border:1px solid var(--line)}}
+.topic{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:16px;scroll-margin-top:80px}
+.topic>h2{font-size:22px;display:flex;gap:12px;align-items:baseline;margin-bottom:10px}
+.topic>h2 span{font-weight:800;color:var(--c);font-size:16px}
+.topic h4{font-size:16px;margin:20px 0 6px;color:var(--ink)}
+.topic p,.topic ul{margin:8px 0;max-width:70ch}
+.topic ul{padding-left:20px}
+.topic li{margin:3px 0}
+.scroll{overflow-x:auto}
+.tbl{border-collapse:collapse;margin:10px 0;font-size:14.5px;width:100%;line-height:1.55}
+.tbl th,.tbl td{border:1px solid var(--line);padding:7px 10px;vertical-align:top;text-align:left}
+.tbl th{background:var(--soft);font-weight:600;white-space:nowrap}
+.tbl.center td,.tbl.center th{text-align:center;vertical-align:middle}
+.tbl.center td{font-size:17px}
+.ex{background:var(--soft);border-radius:10px;padding:10px 14px;margin:10px 0;line-height:1.8}
+.tip{border-left:3px solid var(--seal);padding:6px 12px;margin:10px 0;font-size:14.5px;color:var(--muted);line-height:1.65}
+.tip b{color:var(--ink)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+@media (max-width:600px){.grid4{grid-template-columns:repeat(2,1fr)}}
+.kcard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;line-height:1.4;gap:2px}
+.kcard b{font-family:var(--display);font-size:17px}
+.kcard span{font-size:13px;color:var(--muted)}
+.kcard em{font-style:normal;font-weight:700;color:var(--seal);font-size:14px}
+.timeline{display:grid;gap:0;margin:12px 0;border-left:2px solid var(--line);padding-left:18px}
+.timeline>div{position:relative;padding:6px 0 12px;display:flex;flex-direction:column;line-height:1.5}
+.timeline>div::before{content:"";position:absolute;left:-25px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--c)}
+.timeline b{font-family:var(--display);font-size:17px}
+.timeline small{color:var(--muted)}
+a.w{color:inherit;text-decoration:underline;text-decoration-color:#03c75a;text-decoration-thickness:2px;text-underline-offset:3px}
+a.w:hover{background:rgba(3,199,90,.12)}
+
+/* widgets */
+.wg{border:1px dashed var(--line);border-radius:12px;padding:14px;margin:12px 0}
+.wg-pick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.wg-pick button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:3px 10px;cursor:pointer;font-size:15px}
+.wg-pick button.on{background:var(--c);border-color:var(--c);color:var(--surface)}
+.steps{display:flex;flex-direction:column;gap:6px}
+.step{display:grid;grid-template-columns:110px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-radius:9px;background:var(--soft)}
+.step .f{font-family:var(--display);font-weight:700;font-size:22px}
+.step .r{font-size:14px}
+.step .r b{color:var(--tc)}
+.step .cnt{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.step{grid-template-columns:1fr auto}.step .r{grid-column:1/-1;order:3}}
+.mrow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.mc{border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-weight:600;background:var(--surface);line-height:1.4;text-align:center}
+.mc small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+.mc.a{border-color:var(--u2);box-shadow:inset 0 -3px 0 var(--u2)}
+.mc.b{border-color:var(--u3);box-shadow:inset 0 -3px 0 var(--u3)}
+.mtabs{display:flex;gap:6px;flex-wrap:wrap}
+.mtabs button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:2px 12px;cursor:pointer;font-size:13.5px}
+.mtabs button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.sent{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.sent button{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:64px;line-height:1.35}
+.sent button b{font-family:var(--display);font-size:20px}
+.sent button small{font-size:12.5px;font-weight:600;color:transparent;min-height:1.3em}
+.sent button.show small{color:var(--c)}
+.sent button.show{border-color:var(--c)}
+
+/* archive */
+.arch-h{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.arch-h h1{font-size:clamp(30px,4vw,42px);font-weight:800;letter-spacing:-.02em}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.filters select,.filters input{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 9px;font-size:14px}
+.filters input{flex:1;min-width:160px}
+.ufilter{display:flex;gap:4px;flex-wrap:wrap}
+.ufilter button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 11px;font-size:13.5px;cursor:pointer;font-weight:600}
+.ufilter button.on{background:var(--c,var(--ink));border-color:var(--c,var(--ink));color:var(--surface)}
+.qlist{display:flex;flex-direction:column;gap:8px}
+.qitem{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:12px 16px;cursor:pointer;text-align:left;width:100%}
+.qitem:hover{border-color:var(--c)}
+.qitem .src{font-family:var(--display);font-weight:700;font-size:15px;line-height:1.3;min-width:96px;font-variant-numeric:tabular-nums}
+.qitem .src small{display:block;font-family:var(--body);font-weight:500;color:var(--muted);font-size:12.5px}
+.qitem .tt{font-weight:600;line-height:1.45}
+.qitem .tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.qitem .tags .chip{font-size:12px;font-weight:500}
+.qitem .att{font-size:12.5px;color:var(--muted);white-space:nowrap}
+@media (max-width:560px){.qitem{grid-template-columns:1fr}.qitem .att{display:none}}
+.state{border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);text-align:center;background:var(--surface)}
+.example-badge{font-size:11.5px;font-weight:700;color:var(--seal);border:1px solid var(--seal);border-radius:5px;padding:0 5px;margin-left:6px;vertical-align:2px}
+
+/* notes */
+.notes{margin-top:26px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+.note h4{font-size:17px;margin:0 0 4px}
+.note .body{white-space:normal}
+.row-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center}
+
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(10,12,20,.55);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:4vh 14px;overflow:auto}
+.modal{background:var(--surface);border-radius:16px;max-width:760px;width:100%;padding:22px 24px;position:relative;border:1px solid var(--line)}
+.modal h2{font-size:22px;margin-bottom:6px;padding-right:40px}
+.xbtn{position:absolute;top:14px;right:14px;border:0;background:var(--soft);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.field label{font-size:13.5px;font-weight:600}
+.field small{color:var(--muted);font-size:12.5px}
+.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:8px 10px;font-size:15px}
+.field textarea{min-height:90px;resize:vertical;line-height:1.6}
+.frow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:600px){.frow{grid-template-columns:1fr 1fr}}
+.dsec{margin:14px 0}
+.dsec h4{font-size:14px;color:var(--muted);font-family:var(--body);font-weight:700;margin-bottom:4px}
+.dsec .txt{white-space:normal;line-height:1.8}
+.choices{margin:0;padding-left:0;list-style:none}
+.choices li{padding:3px 0}
+.attach{display:flex;flex-direction:column;gap:10px}
+.attach img{max-width:100%;border:1px solid var(--line);border-radius:10px}
+.files-edit{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.files-edit div{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;background:var(--soft);border-radius:8px;padding:4px 10px}
+.err{color:var(--seal);font-size:14px;margin:6px 0}
+.confirm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:color-mix(in srgb,var(--seal) 10%,transparent);border-radius:10px;padding:8px 12px;font-size:14px}
+
+.more{border-top:1px dashed var(--line);margin-top:20px;padding-top:4px}
+.more-h{display:inline-block;font-size:12.5px;font-weight:700;color:var(--c);background:var(--soft);border-radius:6px;padding:1px 8px;margin-top:12px}
+.more h4:first-of-type{margin-top:10px}
+.quiz{border:1px solid var(--line);border-radius:12px;padding:16px}
+.qz-top{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.qz-bar{flex:1;height:6px;background:var(--soft);border-radius:3px;overflow:hidden}
+.qz-bar i{display:block;height:100%;background:var(--c);transition:width .3s}
+.qz-q{font-weight:600;font-size:17px;margin:14px 0 10px!important}
+.qz-c{display:flex;flex-direction:column;gap:6px}
+.qz-c button{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px;cursor:pointer;line-height:1.55}
+.qz-c button:hover:not(:disabled){border-color:var(--c)}
+.qz-c button b{color:var(--c);flex:none}
+.qz-c button.ok{border-color:var(--t-add);background:color-mix(in srgb,var(--t-add) 12%,transparent)}
+.qz-c button.no{border-color:var(--seal);background:color-mix(in srgb,var(--seal) 10%,transparent)}
+.qz-c button.dim{opacity:.55}
+.qz-c button:disabled{cursor:default;color:var(--ink)}
+.qz-e{border-left:3px solid var(--t-add);padding:8px 12px;margin:12px 0 4px;font-size:15px;line-height:1.7}
+.qz-e.no{border-color:var(--seal)}
+.qz-res{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.qz-res b{font-family:var(--display);font-size:40px;color:var(--c);font-variant-numeric:tabular-nums}
+.qz-w{border-top:1px solid var(--line);padding-top:6px;font-size:15px}
+.qz-w p{margin:4px 0!important}
+#editbar{position:sticky;bottom:0;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--ink);color:var(--surface);padding:10px 20px;font-size:14px}
+#editbar .btn{border-color:transparent}
+.sent.wt button:not(.show) small{display:none}
+
+/* 개념 애니메이션 */
+.anim{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px;margin:0 0 18px;overflow:hidden}
+.topic .anim{margin:6px 0 16px;background:var(--bg)}
+.an-body{min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.anim-cap{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+.anim-cap b{color:var(--c)}
+.an-st{text-align:center;font-size:15px;color:var(--muted);min-height:1.6em}
+.an-st.in{animation:anIn .4s ease}
+.an-st b{color:var(--c)}
+@keyframes anIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.an-row{display:flex;align-items:center;gap:4px}
+.an-col{display:flex;flex-direction:column;align-items:center;gap:10px}
+.tl{display:inline-grid;place-items:center;width:36px;height:42px;border:1.5px solid var(--line);border-radius:8px;font-family:var(--display);font-weight:700;font-size:21px;background:var(--surface);transition:all .45s ease;overflow:hidden;white-space:nowrap}
+.tl.hi{border-color:var(--c);background:var(--soft);color:var(--c);transform:translateY(-3px)}
+.tl.swap{border-color:var(--t-sub);background:color-mix(in srgb,var(--t-sub) 14%,transparent);color:var(--t-sub);transform:none}
+.tl.del{border-color:var(--t-del);color:var(--t-del)}
+.tl.add{border-color:var(--t-add);background:color-mix(in srgb,var(--t-add) 14%,transparent);color:var(--t-add)}
+.tl.gone{width:0;opacity:0;border-width:0;margin:0 -2px;transform:translateY(14px)}
+.tl-sp{width:10px}
+.an-eq,.an-plus{font-size:20px;color:var(--muted);font-family:var(--display)}
+.an-big{font-family:var(--display);font-weight:800;font-size:64px;line-height:1;color:var(--ink);min-width:80px;text-align:center}
+.an-big.pop,.an-word .w.pop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(.6);opacity:.2}70%{transform:scale(1.08)}100%{transform:none;opacity:1}}
+.an-gloss{font-size:15px;color:var(--muted);min-width:80px}
+.an-lane{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;padding:4px 0}
+.an-lab{font-weight:700;font-size:14px;color:var(--c)}
+.an-lane.f{grid-template-columns:minmax(170px,auto) auto;justify-content:center;gap:24px}
+.an-res{font-size:15px;opacity:.35;transition:opacity .4s;white-space:nowrap}
+.an-res.done{opacity:1}
+.an-res small{color:var(--muted)}
+.an-stage{display:flex;justify-content:center;min-height:56px;align-items:center;transition:opacity .25s}
+.an-stage.fade{opacity:0}
+.an-sent{font-family:var(--display);font-size:28px;font-weight:700}
+.mt{display:inline-block;padding:5px 11px;border:1.5px solid var(--line);border-radius:9px;font-family:var(--display);font-weight:700;font-size:21px;background:var(--surface);animation:anIn .35s ease}
+.mt.sil,.mt.geun{border-color:var(--u2);color:var(--u2)}
+.mt.hyeong,.mt.jeop{border:1.5px dashed var(--u3);color:var(--u3)}
+.mt.w{border-color:var(--c)}
+.lg{display:inline-block;font-size:12.5px;font-weight:600;padding:1px 8px;border-radius:999px;border:1.5px solid var(--line);margin-left:4px}
+.lg.sil,.lg.geun,.lg.main{border-color:var(--u2);color:var(--u2)}
+.lg.hyeong,.lg.jeop{border:1.5px dashed var(--u3);color:var(--u3)}
+.lg.sub{border-color:var(--u4);color:var(--u4)}
+.lg.base{border-color:var(--ink)}
+.lg.addl{border-color:var(--seal);color:var(--seal)}
+.an-legend{display:flex;justify-content:center;gap:6px;margin-top:4px}
+.join{gap:12px;transition:gap .5s}
+.join .an-plus{transition:opacity .4s,width .4s;width:16px;text-align:center}
+.join.on{gap:0}
+.join.on .an-plus{opacity:0;width:0}
+.join.on .mt:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.join.on .mt:last-child{border-top-left-radius:0;border-bottom-left-radius:0}
+.an-chip{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);transition:border-color .4s}
+.an-chip b{font-family:var(--display);font-size:22px}
+.an-chip small{font-size:13px;font-weight:700;opacity:0;transform:translateY(-4px);transition:all .4s;color:var(--u2)}
+.an-chip small.sub{color:var(--u4)}
+.an-chip.show{border-color:var(--c)}
+.an-chip.show small{opacity:1;transform:none}
+.an-line{font-family:var(--display);font-size:22px;font-weight:700;transition:all .5s;padding:6px 12px;border-radius:10px;border:1.5px solid transparent}
+.an-line.gone{opacity:0;height:0;padding:0;overflow:hidden;margin:-6px 0}
+.an-line.outer{border-color:var(--c);background:var(--soft)}
+.an-box{display:inline-block;padding:2px 8px;border:1.5px dashed var(--u3);border-radius:8px}
+.an-box.in{animation:pop .5s ease;background:var(--surface)}
+.slot{transition:all .4s;border-radius:6px;padding:0 4px}
+.slot.hi{background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
+.hi2{color:var(--seal);transition:color .4s}
+.an-sentence{text-align:center;font-family:var(--display);font-size:22px;font-weight:700;line-height:1.9}
+.an-sentence .m{transition:all .35s;border-radius:5px;padding:0 2px}
+.an-sentence .m.hi{background:var(--c);color:var(--surface)}
+.an-role{display:flex;flex-direction:column;align-items:center;padding:8px 14px;border:1.5px solid var(--line);border-radius:12px;transition:all .35s;opacity:.45}
+.an-role small{color:var(--muted);font-size:12.5px}
+.an-role.on{opacity:1;border-color:var(--c);background:var(--soft)}
+.an-chat{display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:center;max-width:560px;margin:0 auto;width:100%}
+.bub{font-size:18px;font-weight:600;padding:9px 14px;border-radius:16px;background:var(--soft);justify-self:start;grid-column:1}
+.bub.r{justify-self:end;background:var(--c);color:var(--surface);opacity:0;transform:translateY(6px);transition:all .4s}
+.bub.r.show{opacity:1;transform:none}
+.an-tag{font-size:14px;padding:3px 10px;border-radius:8px;border:1.5px solid var(--line);opacity:0;transform:translateY(-4px);transition:all .4s;justify-self:start;grid-column:1}
+.an-tag.show{opacity:1;transform:none}
+.an-tag b{color:var(--c)}
+.an-chat .t2{border-color:var(--c)}
+.win{grid-column:2;grid-row:1/5;width:110px;color:var(--muted)}
+.win .pane-r{transition:transform .9s ease}
+.win.closed .pane-r{transform:translateX(-0px)}
+.win:not(.closed) .pane-r{transform:translateX(52px)}
+.k{transition:all .35s;border-radius:5px;padding:0 2px}
+.k.hi{background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}
+.k.hi2{background:color-mix(in srgb,var(--seal) 18%,transparent);color:var(--seal)}
+.an-time{position:relative;height:46px;margin:0 6%}
+.an-time .bar{position:absolute;left:0;right:0;top:12px;height:3px;background:var(--line);border-radius:2px}
+.an-time .era{position:absolute;top:22px;transform:translateX(-50%);font-size:13px;color:var(--muted)}
+.an-time .mk{position:absolute;top:6px;width:15px;height:15px;border-radius:50%;background:var(--c);transform:translateX(-50%);transition:left 1s ease}
+.an-word{display:grid;grid-template-columns:130px 1fr;align-items:center;gap:14px;width:100%;max-width:440px}
+.an-word .w{font-family:var(--display);font-weight:800;font-size:28px;text-align:right}
+.an-word .w.old{font-family:var(--old)}
+.an-word small{font-size:14px;color:var(--muted)}
+.an-jaeja{display:flex;flex-direction:column;gap:2px;align-items:center}
+.jr{display:grid;grid-template-columns:48px repeat(5,auto);align-items:center;gap:6px}
+.gl{width:44px;height:44px}
+.st{fill:none;stroke:var(--ink);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s ease}
+.st.add{stroke:var(--seal)}
+.gw.drawn .st{stroke-dashoffset:0}
+.gw.drawn .st.add{transition-delay:.55s}
+@media (max-width:520px){.an-big{font-size:48px}.an-lane{grid-template-columns:40px 1fr}.an-lane .an-res{grid-column:1/-1;justify-self:end}.an-line,.an-sentence{font-size:18px}.an-chat{grid-template-columns:1fr}.win{grid-column:1;grid-row:auto;justify-self:end}}
+.drop{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;border:2px dashed var(--line);border-radius:12px;padding:22px 14px;cursor:pointer;background:var(--bg);transition:border-color .2s,background .2s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--soft)}
+.drop b{font-size:15px}
+.drop span{font-size:13px;color:var(--muted);font-weight:400}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:8px}
+.thumbs .th{position:relative;border:1px solid var(--line);border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;background:var(--surface)}
+.thumbs img{width:100%;height:110px;object-fit:cover;object-position:top;border-radius:6px}
+.thumbs .pdf{height:110px;display:grid;place-items:center;font-weight:700;color:var(--muted);background:var(--soft);border-radius:6px}
+.thumbs .no{position:absolute;top:10px;left:10px;background:var(--ink);color:var(--surface);font-size:12px;font-weight:700;border-radius:6px;padding:0 6px}
+.thumbs small{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumbs .ta{display:flex;gap:4px}
+.thumbs .ta button{flex:1;border:1px solid var(--line);background:var(--bg);border-radius:6px;font-size:12.5px;cursor:pointer;padding:2px 0}
+.more-in{margin:4px 0 12px}
+.more-in summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--muted);margin-bottom:8px}
+.qitem{display:flex!important}
+.qitem .qmain{flex:1;min-width:0;display:flex;flex-direction:column}
+.qthumb{width:64px;height:64px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);flex:none}
+.attach img.zoomable{cursor:zoom-in}
+.zoom-ov{position:fixed;inset:0;z-index:80;background:rgba(10,12,20,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px;cursor:zoom-out}
+.zoom-ov img{max-width:100%;max-height:calc(100% - 32px);object-fit:contain;border-radius:6px;background:#fff}
+.zoom-ov span{color:#fff;font-size:13px;opacity:.8}
+.howto{padding-left:20px;margin:0;line-height:1.8;font-size:14.5px}
+/* selection lookup */
+#selpop{position:absolute;z-index:40;display:none;background:var(--ink);color:var(--surface);border-radius:9px;padding:5px 6px;gap:4px;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+#selpop a{color:var(--surface);text-decoration:none;font-size:13px;font-weight:600;padding:3px 8px;border-radius:6px}
+#selpop a:hover{background:rgba(255,255,255,.15)}
+footer{max-width:1200px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="brand" href="#home"><span class="seal">말</span><b>국어 문법 마당</b></a>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="dict" role="search">
+    <input id="dictq" type="search" placeholder="국어사전 검색" aria-label="네이버 국어사전에서 찾을 단어">
+    <a id="dicta" href="https://ko.dict.naver.com/" target="_blank" rel="noopener">네이버 사전</a>
+  </div>
+</div></header>
+<main id="view"></main>
+<footer>개념 정리는 『학교문법과 문법교육』(임지룡 외)의 체계를 참고해 새로 작성했어요. 초록 밑줄 단어를 누르거나 글자를 드래그하면 네이버 국어사전으로 연결돼요.</footer>
+<div id="selpop"><a id="selnaver" href="#" target="_blank" rel="noopener">네이버 사전 ↗</a><a id="selstd" href="#" target="_blank" rel="noopener">표준국어대사전 ↗</a></div>
+<div id="modalroot"></div>
+<script>window.STATIC = true;
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => {});</script>
+<script>
+const UNITS = [];
+UNITS.push({
+  id: "eumun", name: "음운", sub: "말소리의 체계와 변동", color: "var(--u1)",
+  ch: "교재 3장",
+  blurb: "뜻을 구별하는 가장 작은 소리 단위와, 소리가 만나면서 바뀌는 규칙을 다룹니다.",
+  topics: [
+{ id: "eumun-1", title: "음운이란 무엇인가", body: `
+<p><b>음운</b>은 말의 뜻을 구별해 주는 소리의 가장 작은 단위예요. 실제로 입에서 나는 구체적인 소리는 <b>음성</b>이고, 사람들이 머릿속에서 "같은 소리"라고 인식하는 추상적인 소리가 음운이에요.</p>
+<div class="ex"><b>최소 대립쌍</b>으로 확인하기<br>
+<w>불</w> · <w>풀</w> · <w>뿔</w> → 첫소리 ㅂ / ㅍ / ㅃ 하나만 달라도 뜻이 달라짐 → 셋은 각각 다른 음운<br>
+<w>달</w> · <w>돌</w> → 모음 ㅏ / ㅗ가 뜻을 가름</div>
+<p>'감기'의 첫 ㄱ과 둘째 ㄱ은 실제로는 다르게 소리 나지만(안울림소리와 울림소리), 국어 화자는 이를 구별하지 않고 뜻도 달라지지 않아요. 그래서 둘 다 하나의 음운 /ㄱ/에 속하는 <b>변이음</b>이에요.</p>
+<table class="tbl"><tr><th>구분</th><th>내용</th><th>예</th></tr>
+<tr><td>분절 음운</td><td>경계를 그어 나눌 수 있는 음운: 자음 19개, 모음 21개(단모음 10 + 이중 모음 11)</td><td>ㄱ, ㅏ …</td></tr>
+<tr><td>비분절 음운</td><td>소리의 길이처럼 나눌 수 없지만 뜻을 가르는 요소</td><td><w q="눈">눈</w>[눈ː](雪) / 눈(目), <w q="말">말</w>[말ː](言) / 말(馬)</td></tr></table>
+<div class="tip">표기법: 음운은 / /, 실제 발음은 [ ]로 적어요. 'ː'은 긴소리 표시예요.</div>` },
+
+{ id: "eumun-2", title: "자음 체계", body: `
+<p>자음은 공기가 입안에서 <b>장애</b>를 받으며 나는 소리예요. <b>어디서</b>(조음 위치) <b>어떻게</b>(조음 방법) 막는지에 따라 19개로 나뉘어요.</p>
+<div class="scroll"><table class="tbl center"><tr><th colspan="2">조음 방법 ＼ 조음 위치</th><th>입술소리<br><small>양순음</small></th><th>잇몸소리<br><small>치조음</small></th><th>센입천장소리<br><small>경구개음</small></th><th>여린입천장소리<br><small>연구개음</small></th><th>목청소리<br><small>후음</small></th></tr>
+<tr><th rowspan="3">파열음</th><th>예사소리</th><td>ㅂ</td><td>ㄷ</td><td></td><td>ㄱ</td><td></td></tr>
+<tr><th>된소리</th><td>ㅃ</td><td>ㄸ</td><td></td><td>ㄲ</td><td></td></tr>
+<tr><th>거센소리</th><td>ㅍ</td><td>ㅌ</td><td></td><td>ㅋ</td><td></td></tr>
+<tr><th rowspan="3">파찰음</th><th>예사소리</th><td></td><td></td><td>ㅈ</td><td></td><td></td></tr>
+<tr><th>된소리</th><td></td><td></td><td>ㅉ</td><td></td><td></td></tr>
+<tr><th>거센소리</th><td></td><td></td><td>ㅊ</td><td></td><td></td></tr>
+<tr><th rowspan="2">마찰음</th><th>예사소리</th><td></td><td>ㅅ</td><td></td><td></td><td rowspan="2">ㅎ</td></tr>
+<tr><th>된소리</th><td></td><td>ㅆ</td><td></td><td></td></tr>
+<tr><th colspan="2">비음</th><td>ㅁ</td><td>ㄴ</td><td></td><td>ㅇ</td><td></td></tr>
+<tr><th colspan="2">유음</th><td></td><td>ㄹ</td><td></td><td></td><td></td></tr></table></div>
+<ul>
+<li><b>파열음</b>: 막았다가 터뜨림 / <b>마찰음</b>: 좁은 틈으로 마찰 / <b>파찰음</b>: 막았다가 마찰하며 터짐</li>
+<li><b>비음</b>: 코로 공기가 나감 / <b>유음</b>: 혀 옆으로 흘려 보냄</li>
+<li>파열음·파찰음·마찰음 = <b>장애음</b>(안울림소리), 비음·유음 = <b>공명음</b>(울림소리)</li>
+<li>예사소리 → 된소리(긴장) → 거센소리(거친 숨)로 소리의 세기가 나뉘어요.</li></ul>` },
+
+{ id: "eumun-3", title: "모음 체계", body: `
+<p>모음은 공기가 장애 없이 나오는 소리예요. 발음하는 동안 입 모양이 그대로인 <b>단모음</b>(10개)과, 입 모양이 바뀌는 <b>이중 모음</b>(11개)이 있어요.</p>
+<div class="scroll"><table class="tbl center"><tr><th rowspan="2">혀의 높이</th><th colspan="2">전설 모음</th><th colspan="2">후설 모음</th></tr>
+<tr><th>평순</th><th>원순</th><th>평순</th><th>원순</th></tr>
+<tr><th>고모음</th><td>ㅣ</td><td>ㅟ</td><td>ㅡ</td><td>ㅜ</td></tr>
+<tr><th>중모음</th><td>ㅔ</td><td>ㅚ</td><td>ㅓ</td><td>ㅗ</td></tr>
+<tr><th>저모음</th><td>ㅐ</td><td></td><td>ㅏ</td><td></td></tr></table></div>
+<p>세 가지 기준: <b>혀의 최고점 위치</b>(앞=전설 / 뒤=후설), <b>혀의 높이</b>(고·중·저), <b>입술 모양</b>(둥글게=원순 / 평평=평순).</p>
+<div class="tip">표준 발음법은 'ㅚ, ㅟ'를 단모음으로 정하되, 이중 모음으로 발음하는 것도 허용해요.</div>
+<p><b>이중 모음</b> = 반모음 + 단모음. 반모음은 혼자 음절을 이루지 못하는 짧은 소리예요.</p>
+<table class="tbl"><tr><th>반모음</th><th>이중 모음</th></tr>
+<tr><td>'ㅣ'계 반모음 [j]</td><td>ㅑ ㅕ ㅛ ㅠ ㅒ ㅖ</td></tr>
+<tr><td>'ㅗ/ㅜ'계 반모음 [w]</td><td>ㅘ ㅝ ㅙ ㅞ</td></tr>
+<tr><td>'ㅡ'와 'ㅣ'의 결합</td><td>ㅢ</td></tr></table>
+<div class="tip">음운 개수를 셀 때 이중 모음은 <b>반모음 1 + 단모음 1 = 2개</b>로 세는 것이 일반적이에요. (예: '여'는 [j]+[ㅓ])</div>` },
+
+{ id: "eumun-4", title: "음절", body: `
+<p><b>음절</b>은 한 번에 소리 낼 수 있는 덩어리예요. 국어 음절은 반드시 <b>모음</b>을 하나 가져요.</p>
+<table class="tbl"><tr><th>유형</th><th>예</th></tr>
+<tr><td>모음</td><td>아, 이, 와</td></tr><tr><td>자음 + 모음</td><td>가, 도, 쥐</td></tr>
+<tr><td>모음 + 자음</td><td>악, 옷, 입</td></tr><tr><td>자음 + 모음 + 자음</td><td>각, 몸, 돌</td></tr></table>
+<ul><li>초성 자리에 올 수 있는 자음은 1개뿐이고, 초성의 'ㅇ'은 소리가 없어요(음운이 아님).</li>
+<li>종성(받침 소리)에는 <b>ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅇ</b> 7개만 올 수 있어요. 이 제약 때문에 '음절의 끝소리 규칙'과 '자음군 단순화'가 일어나요.</li>
+<li>'ㅇ[ŋ]'은 초성에 올 수 없어요.</li></ul>` },
+
+{ id: "eumun-5", title: "음운 변동 한눈에 보기", body: `
+<p>형태소와 형태소가 만나거나 특정 환경에 놓이면 소리가 바뀌어요. 이를 <b>음운 변동</b>이라고 하고, 결과에 따라 네 가지로 나눠요.</p>
+<div class="grid4">
+<div class="kcard"><b>교체(대치)</b><span>한 음운이 다른 음운으로</span><em>음운 개수 그대로</em></div>
+<div class="kcard"><b>탈락</b><span>있던 음운이 없어짐</span><em>−1</em></div>
+<div class="kcard"><b>첨가</b><span>없던 음운이 생김</span><em>+1</em></div>
+<div class="kcard"><b>축약</b><span>두 음운이 하나로 합쳐짐</span><em>−1</em></div></div>
+<p>변동의 이유로 나누면 <b>동화</b>(주변 소리를 닮음: 비음화, 유음화, 구개음화)와 <b>이화</b>(주변 소리와 달라짐)가 있어요. 동화는 방향에 따라 <b>순행 동화</b>(앞 소리가 뒤 소리를 바꿈: 칼날→[칼랄])와 <b>역행 동화</b>(뒤 소리가 앞 소리를 바꿈: 신라→[실라])로 나눠요.</p>
+<div class="tip">교재에 따라 '보아→[봐]'를 <b>반모음화(교체)</b>로 보기도 하고 <b>모음 축약</b>으로 보기도 해요. 시험에서는 문제의 &lt;보기&gt; 설명을 기준으로 판단하세요.</div>` },
+
+{ id: "eumun-6", title: "교체(대치)", body: `
+<h4>① 음절의 끝소리 규칙 (평파열음화)</h4>
+<p>받침 자리의 장애음이 대표음 'ㅂ, ㄷ, ㄱ' 중 하나로 바뀌어요.</p>
+<table class="tbl"><tr><th>받침</th><th>소리</th><th>예</th></tr>
+<tr><td>ㅍ</td><td>[ㅂ]</td><td><w>잎</w>[입], <w>덮개</w>[덥깨]</td></tr>
+<tr><td>ㅅ, ㅆ, ㅈ, ㅊ, ㅌ, ㅎ</td><td>[ㄷ]</td><td><w>옷</w>[옫], <w>낮</w>[낟], <w>꽃</w>[꼳], <w>밭</w>[받], <w>히읗</w>[히읃]</td></tr>
+<tr><td>ㄲ, ㅋ</td><td>[ㄱ]</td><td><w>밖</w>[박], <w>부엌</w>[부억]</td></tr></table>
+<div class="tip">모음으로 시작하는 <b>형식 형태소</b>(조사, 어미, 접미사) 앞에서는 받침이 그대로 넘어가요: 옷이[오시]. <b>실질 형태소</b> 앞에서는 끝소리 규칙 후 넘어가요: 옷 안[오단], <w>겉옷</w>[거돋].</div>
+<h4>② 비음화</h4>
+<p>파열음 'ㅂ, ㄷ, ㄱ'이 비음 'ㄴ, ㅁ' 앞에서 비음 'ㅁ, ㄴ, ㅇ'으로 바뀌어요. (역행 동화)</p>
+<div class="ex"><w>국물</w>[궁물], <w>밥물</w>[밤물], 닫는[단는], <w>앞날</w>[암날], 흙만[흥만]</div>
+<p><b>'ㄹ'의 비음화</b>: 'ㅁ, ㅇ' 뒤의 'ㄹ'이 [ㄴ]으로 바뀌어요: <w>침략</w>[침냑], <w>종로</w>[종노]. 'ㄱ, ㅂ' 뒤에서는 ㄹ→ㄴ 뒤에 다시 비음화가 일어나요: <w>협력</w>[혐녁], <w>국립</w>[궁닙].</p>
+<h4>③ 유음화</h4>
+<p>'ㄴ'이 'ㄹ'의 앞이나 뒤에서 [ㄹ]로 바뀌어요.</p>
+<div class="ex">역행: <w>신라</w>[실라], <w>난로</w>[날ː로] &nbsp;|&nbsp; 순행: <w>칼날</w>[칼랄], <w>물난리</w>[물랄리]</div>
+<div class="tip">예외: <w>의견란</w>[의ː견난], <w>생산량</w>[생산냥]처럼 'ㄹ'이 [ㄴ]으로 바뀌는 단어도 있어요.</div>
+<h4>④ 구개음화</h4>
+<p>받침 'ㄷ, ㅌ'이 모음 'ㅣ'로 시작하는 <b>형식 형태소</b>를 만나 [ㅈ, ㅊ]이 돼요.</p>
+<div class="ex"><w>굳이</w>[구지], <w>같이</w>[가치], 밭이[바치], <w>닫히다</w>[다치다] (ㄷ+ㅎ→ㅌ 축약 후 구개음화)</div>
+<div class="tip">한 형태소 안(<w>잔디</w>, <w>느티나무</w>)이나 실질 형태소 앞에서는 일어나지 않아요.</div>
+<h4>⑤ 된소리되기 (경음화)</h4>
+<ul>
+<li>받침 [ㄱ, ㄷ, ㅂ] 뒤의 예사소리: <w>국밥</w>[국빱], <w>옷고름</w>[옫꼬름], 덮개[덥깨]</li>
+<li>용언 어간 받침 'ㄴ(ㄵ), ㅁ(ㄻ)' 뒤 어미: 신고[신ː꼬], 삼고[삼ː꼬], 앉고[안꼬] — 피동·사동 접미사 앞은 예외(안기다[안기다])</li>
+<li>관형사형 어미 '-(으)ㄹ' 뒤: 할 것을[할꺼슬], 갈 데가[갈떼가]</li>
+<li>한자어 'ㄹ' 받침 뒤 'ㄷ, ㅅ, ㅈ': <w>갈등</w>[갈뜽], <w>발전</w>[발쩐], <w>일시</w>[일씨]</li></ul>
+<h4>⑥ 반모음화</h4>
+<p>'ㅣ, ㅗ, ㅜ'가 뒤 모음과 만나 반모음으로 바뀌어요: 기-+-어→[겨], 보-+-아→[봐], 주-+-어→[줘].</p>` },
+
+{ id: "eumun-7", title: "탈락", body: `
+<h4>① 자음군 단순화</h4>
+<p>겹받침 뒤에 자음이 오거나 말이 끝나면 두 자음 중 하나만 발음해요.</p>
+<table class="tbl"><tr><th>남는 소리</th><th>겹받침</th><th>예</th></tr>
+<tr><td>앞 자음</td><td>ㄳ ㄵ ㄼ ㄽ ㄾ ㅄ</td><td><w>넋</w>[넉], 앉다[안따], <w>여덟</w>[여덜], <w>외곬</w>[외골], 핥다[할따], <w>값</w>[갑]</td></tr>
+<tr><td>뒤 자음</td><td>ㄺ ㄻ ㄿ</td><td><w>닭</w>[닥], <w>삶</w>[삼ː], 읊다[읍따]</td></tr></table>
+<div class="tip">예외: '밟-'은 자음 앞에서 [밥]: 밟다[밥ː따], 밟는[밤ː는]. '넓-'은 '넓죽하다[넙쭈카다], 넓둥글다[넙뚱글다]'에서 [넙]. 용언의 'ㄺ'은 'ㄱ' 앞에서 [ㄹ]: 맑고[말꼬], 읽거나[일꺼나].</div>
+<h4>② 'ㄹ' 탈락</h4>
+<div class="ex">용언: 울-+-는→우는, 살-+-니→사니, 알-+-ㅂ니다→압니다, 놀-+-시-+-고→노시고<br>
+단어 형성: 딸+님→<w>따님</w>, 솔+나무→<w>소나무</w>, 바늘+질→<w>바느질</w></div>
+<h4>③ 'ㅎ' 탈락</h4>
+<p>어간 끝 'ㅎ(ㄶ, ㅀ)'이 모음으로 시작하는 어미·접미사 앞에서 사라져요: 좋은[조ː은], 놓아[노아], 많이[마ː니], 싫어[시러].</p>
+<h4>④ 'ㅡ' 탈락</h4>
+<p>어간의 'ㅡ'가 '-아/-어' 앞에서 사라지고 표기에도 반영돼요: 쓰-+-어→써, 끄-+-어→꺼, 담그-+-아→담가, 바쁘-+-아→바빠.</p>
+<h4>⑤ 동음 탈락 ('ㅏ/ㅓ' 탈락)</h4>
+<p>같은 모음이 이어지면 하나가 빠져요: 가-+-아서→가서, 서-+-어→서, 건너-+-어도→건너도.</p>
+<h4>⑥ 반모음 탈락</h4>
+<p>'ㅈ, ㅉ, ㅊ' 뒤의 '져, 쪄, 쳐'는 [저, 쩌, 처]로 발음해요: 지-+-어→져[저], 다치-+-어→다쳐[다처].</p>` },
+
+{ id: "eumun-8", title: "첨가", body: `
+<h4>① 'ㄴ' 첨가</h4>
+<p>합성어나 파생어에서 앞말이 자음으로 끝나고 뒷말이 '이, 야, 여, 요, 유'로 시작하면 [ㄴ]이 덧나요.</p>
+<div class="ex"><w>솜이불</w>[솜ː니불], <w>맨입</w>[맨닙], <w>색연필</w>[생년필], <w>한여름</w>[한녀름], <w>꽃잎</w>[꼰닙]<br>
+'ㄹ' 뒤에서는 첨가된 ㄴ이 [ㄹ]로: <w>들일</w>[들ː릴], <w>솔잎</w>[솔립], <w>물엿</w>[물렫]</div>
+<div class="tip">늘 일어나지는 않아요. 둘 다 표준인 경우: <w>금융</w>[금늉/그뮹], <w>검열</w>[검ː녈/거ː멸]. 일어나지 않는 경우: <w>송별연</w>[송ː벼련], <w>등용문</w>[등용문], 6·25[유기오].</div>
+<h4>② 'ㅅ' 첨가 (사잇소리 현상)</h4>
+<p>두 말이 합쳐져 합성 명사가 될 때 원래 없던 소리가 덧나는 현상이에요.</p>
+<ul><li>뒷말 첫소리가 된소리로: <w>냇가</w>[내ː까/낻ː까], <w>콧등</w>[코뚱/콛뚱]</li>
+<li>뒷말 'ㄴ, ㅁ' 앞에서 [ㄴ]: <w>콧날</w>[콘날], <w>아랫니</w>[아랜니]</li>
+<li>뒷말 '이'나 반모음 앞에서 [ㄴㄴ]: <w>깻잎</w>[깬닙], <w>나뭇잎</w>[나문닙]</li></ul>
+<div class="tip">사이시옷 표기 조건: 고유어가 하나 이상 들어간 합성어 + 앞말이 모음으로 끝남 + 사잇소리가 남. 두 음절 한자어는 <b>곳간, 셋방, 숫자, 찻간, 툇간, 횟수</b> 6개만 사이시옷을 적어요.</div>
+<h4>③ 반모음 첨가</h4>
+<p>'ㅣ, ㅚ, ㅟ'로 끝난 어간 뒤 '-어'가 오면 [j]가 덧날 수 있어요: 피어[피어/피여], 되어[되어/되여]. '이오, 아니오'도 [이요, 아니요]로 발음할 수 있어요.</p>` },
+
+{ id: "eumun-9", title: "축약", body: `
+<h4>① 자음 축약 (거센소리되기)</h4>
+<p>'ㅎ'과 'ㄱ, ㄷ, ㅂ, ㅈ'이 만나 거센소리 'ㅋ, ㅌ, ㅍ, ㅊ' 하나가 돼요. 순서는 상관없어요.</p>
+<div class="ex">ㅎ이 앞: 놓고[노코], 좋던[조ː턴], 많지[만ː치]<br>ㅎ이 뒤: <w>국화</w>[구콰], <w>맏형</w>[마텽], 좁히다[조피다], 앉히다[안치다]</div>
+<h4>② 모음 축약</h4>
+<p>두 모음이 하나의 모음으로 합쳐져요: 보-+-이-+-다→뵈다(ㅗ+ㅣ→ㅚ), 사이→새(ㅏ+ㅣ→ㅐ), 아이→애.</p>` },
+
+{ id: "eumun-10", title: "음운 변동 체험기", body: `
+<p>단어를 고르면 변동이 일어나는 순서와 종류, 음운 개수의 변화를 단계별로 보여 줘요.</p>
+<div data-widget="phon"></div>
+<div class="tip">음운 개수는 초성 'ㅇ'은 빼고, 겹받침은 2개, 이중 모음은 2개(반모음+단모음)로 세었어요. 긴소리 'ː'는 세지 않아요.</div>` },
+
+{ id: "eumun-11", title: "그 밖의 현상: 모음조화·두음 법칙", body: `
+<h4>모음조화</h4>
+<p>양성 모음(ㅏ, ㅗ)은 양성 모음끼리, 음성 모음(ㅓ, ㅜ, ㅡ …)은 음성 모음끼리 어울리려는 현상이에요.</p>
+<div class="ex">의성어·의태어: <w>졸졸</w>/<w>줄줄</w>, <w>알록달록</w>/<w>얼룩덜룩</w>, <w>반짝반짝</w>/<w>번쩍번쩍</w><br>어미: 막아/먹어, 보아/주어</div>
+<p>현대 국어에서는 많이 약해졌어요(예: <w>깡충깡충</w>은 표준어로 인정).</p>
+<h4>두음 법칙</h4>
+<p>단어 첫머리에 'ㄹ, 녀·뇨·뉴·니'가 오는 것을 피하는 현상이에요.</p>
+<div class="ex">녀자→<w>여자</w>, 력사→<w>역사</w>, 로인→<w>노인</w>, 래일→<w>내일</w></div>` }
+  ]
+});
+
+UNITS.push({
+  id: "danei", name: "단어 · 어휘 · 의미", sub: "형태소에서 의미 관계까지", color: "var(--u2)",
+  ch: "교재 4·5·7장",
+  blurb: "형태소와 단어의 형성, 9품사, 어휘의 체계와 양상, 단어와 문장의 의미를 다룹니다.",
+  topics: [
+{ id: "danei-1", title: "형태소", body: `
+<p><b>형태소</b>는 뜻을 가진 가장 작은 말의 단위예요. 더 쪼개면 뜻이 없어져요.</p>
+<table class="tbl"><tr><th>기준</th><th>종류</th><th>설명</th></tr>
+<tr><td rowspan="2">자립성</td><td>자립 형태소</td><td>혼자 쓰일 수 있음: 명사, 대명사, 수사, 관형사, 부사, 감탄사</td></tr>
+<tr><td>의존 형태소</td><td>다른 말에 기대어 쓰임: 조사, 어간, 어미, 접사</td></tr>
+<tr><td rowspan="2">의미</td><td>실질 형태소</td><td>구체적 대상·동작·상태를 나타냄: 자립 형태소 + 용언의 어간</td></tr>
+<tr><td>형식 형태소</td><td>문법적 관계를 나타냄: 조사, 어미, 접사</td></tr></table>
+<div data-widget="morph"></div>
+<p><b>이형태</b>: 같은 형태소가 환경에 따라 모양을 달리하는 것.</p>
+<ul><li>음운론적 이형태: 주격 '이/가', 목적격 '을/를', 선어말 '-았-/-었-' (앞 소리에 따라 결정)</li>
+<li>형태론적 이형태: '하-' 뒤의 '-여'(하여), '-였-'(하였다) (특정 단어 때문에 결정)</li></ul>` },
+
+{ id: "danei-2", title: "단어와 단어의 형성", body: `
+<p><b>단어</b>는 자립할 수 있는 말이나, 자립할 수 있는 말에 쉽게 분리되는 말(조사)이에요. 학교 문법은 <b>조사는 단어로 인정</b>하지만 <b>어미는 단어로 보지 않아요</b>.</p>
+<p>단어를 이루는 요소는 중심 의미를 가진 <b>어근</b>과, 어근에 붙어 뜻을 더하는 <b>접사</b>예요.</p>
+<table class="tbl"><tr><th colspan="2">구조</th><th>예</th></tr>
+<tr><td colspan="2">단일어 (어근 하나)</td><td><w>하늘</w>, <w>나무</w>, <w>먹다</w></td></tr>
+<tr><td rowspan="2">복합어</td><td>파생어 (어근 + 접사)</td><td><w>풋사과</w>, <w>먹이</w>, <w>높이다</w></td></tr>
+<tr><td>합성어 (어근 + 어근)</td><td><w>밤낮</w>, <w>돌다리</w>, <w>오가다</w></td></tr></table>
+<h4>파생어</h4>
+<ul><li><b>접두사</b>: 어근 앞에 붙어 뜻을 더함. 대체로 품사를 바꾸지 않아요. <w>풋사과</w>, <w>맨발</w>, <w>헛디디다</w>, <w>짓밟다</w>, <w>드높다</w></li>
+<li><b>접미사</b>: 어근 뒤에 붙음.
+<br>· 뜻만 더하는 것(한정적): <w>잠꾸러기</w>, <w>선생님</w>, <w>밀치다</w>
+<br>· 품사까지 바꾸는 것(지배적): 먹-+-이→<w>먹이</w>(명사), 높-+-이-→<w>높이다</w>(동사), 슬기+-롭-→<w>슬기롭다</w>(형용사), 많-+-이→<w>많이</w>(부사)</li></ul>
+<h4>합성어</h4>
+<table class="tbl"><tr><th>배열 방식</th><th>설명</th><th>예</th></tr>
+<tr><td>통사적 합성어</td><td>국어 문장의 단어 배열과 같음</td><td><w>작은형</w>(관형사형+명사), <w>돌아가다</w>(연결 어미 사용), <w>힘들다</w>(주어+서술어 관계), <w>새해</w>(관형사+명사)</td></tr>
+<tr><td>비통사적 합성어</td><td>국어 문장에서는 나타나지 않는 배열</td><td><w>늦잠</w>·<w>덮밥</w>(어간이 바로 명사 앞), <w>오가다</w>·<w>검붉다</w>(연결 어미 없이 어간+어간), <w>부슬비</w>(부사+명사)</td></tr></table>
+<p>의미 관계로는 <b>대등</b>(<w>손발</w>, <w>오가다</w>), <b>종속</b>(<w>돌다리</w>, <w>책가방</w>), <b>융합</b>(<w>밤낮</w> '늘', <w>춘추</w> '나이', <w>피땀</w> '노력') 합성어로 나눠요.</p>
+<div class="tip">합성어와 구 구별: <w>큰집</w>(큰아버지 댁, 합성어) / 큰 집(크기가 큰 집, 구). 합성어는 사이에 다른 말을 넣을 수 없고 의미가 특수해지는 경우가 많아요.</div>` },
+
+{ id: "danei-3", title: "품사 한눈에 보기", body: `
+<p>단어를 <b>형태</b>(모양이 바뀌는가), <b>기능</b>(문장에서 하는 일), <b>의미</b>(무엇을 나타내는가)에 따라 9품사로 나눠요.</p>
+<div class="scroll"><table class="tbl center"><tr><th>형태</th><th>기능</th><th>의미</th></tr>
+<tr><td rowspan="8">불변어</td><td rowspan="3">체언</td><td>명사</td></tr><tr><td>대명사</td></tr><tr><td>수사</td></tr>
+<tr><td>관계언</td><td>조사 <small>(서술격 조사 '이다'는 활용함)</small></td></tr>
+<tr><td rowspan="2">수식언</td><td>관형사</td></tr><tr><td>부사</td></tr>
+<tr><td>독립언</td><td>감탄사</td></tr>
+<tr><td colspan="2" style="text-align:left"><small>위 7개는 형태가 변하지 않음</small></td></tr>
+<tr><td rowspan="2">가변어</td><td rowspan="2">용언</td><td>동사</td></tr><tr><td>형용사</td></tr></table></div>` },
+
+{ id: "danei-4", title: "체언: 명사 · 대명사 · 수사", body: `
+<h4>명사</h4>
+<ul><li>쓰이는 범위: 보통 명사(<w>사람</w>, <w>도시</w>) / 고유 명사(<w>세종</w>, <w>한강</w>)</li>
+<li>자립성: 자립 명사 / <b>의존 명사</b> — 앞에 꾸미는 말이 꼭 있어야 함</li></ul>
+<table class="tbl"><tr><th>의존 명사</th><th>예</th></tr>
+<tr><td>보편성</td><td>먹을 <b>것</b>, 아는 <b>바</b>, 갈 <b>데</b></td></tr>
+<tr><td>주어성</td><td>떠난 <b>지</b> 오래다, 할 <b>수</b> 있다</td></tr>
+<tr><td>서술성</td><td>최선을 다할 <b>따름</b>이다, 웃을 <b>뿐</b>이다</td></tr>
+<tr><td>부사성</td><td>시키는 <b>대로</b>, 먹을 <b>만큼</b></td></tr>
+<tr><td>단위성</td><td>사과 한 <b>개</b>, 소 두 <b>마리</b>, 신발 한 <b>켤레</b></td></tr></table>
+<h4>대명사</h4>
+<ul><li>인칭 대명사: 1인칭(나, 저, 우리), 2인칭(너, 당신), 3인칭(그, 그녀), 미지칭(누구), 부정칭(아무), 재귀칭(자기, 저, 당신)</li>
+<li>지시 대명사: 사물(이것, 그것, 저것, 무엇), 처소(여기, 거기, 저기, 어디)</li></ul>
+<div class="tip">'당신'은 2인칭(당신은 누구세요?)과 재귀칭(할아버지께서는 당신의 책을 아끼셨다)으로 모두 쓰여요.</div>
+<h4>수사</h4>
+<p>양수사(하나, 둘, 일, 이) / 서수사(첫째, 둘째, 제일).</p>
+<div class="tip">수사와 수 관형사 구별: 사과 <b>다섯</b>을 샀다(조사가 붙음 → 수사) / <b>다섯</b> 개(명사를 꾸밈 → 관형사).</div>` },
+
+{ id: "danei-5", title: "관계언: 조사", body: `
+<table class="tbl"><tr><th colspan="2">종류</th><th>예</th></tr>
+<tr><td rowspan="7">격 조사<br><small>앞말의 문장 성분 자격을 정함</small></td><td>주격</td><td>이/가, 께서, 에서(단체): 학교<b>에서</b> 상을 주었다</td></tr>
+<tr><td>서술격</td><td>이다 (활용함: 학생이다, 학생이고, 학생이니)</td></tr>
+<tr><td>목적격</td><td>을/를</td></tr>
+<tr><td>보격</td><td>이/가 ('되다, 아니다' 앞): 물이 얼음<b>이</b> 되었다</td></tr>
+<tr><td>관형격</td><td>의</td></tr>
+<tr><td>부사격</td><td>에, 에서, 에게, 께, (으)로, 와/과(비교·동반), 보다, 처럼 …</td></tr>
+<tr><td>호격</td><td>아/야, (이)여, (이)시여</td></tr>
+<tr><td colspan="2">접속 조사</td><td>와/과, 하고, (이)며, (이)랑: 철수<b>와</b> 영희는 친구다</td></tr>
+<tr><td colspan="2">보조사 <small>특별한 뜻을 더함</small></td><td>은/는(대조·화제), 도(역시), 만(단독), 까지·조차·마저, 부터, 요(높임)</td></tr></table>
+<div class="tip">'와/과' 구별: 나는 철수<b>와</b> 영희를 만났다(둘을 이음 → 접속 조사) / 나는 철수<b>와</b> 싸웠다(서술어의 상대 → 부사격 조사).</div>` },
+
+{ id: "danei-6", title: "용언: 동사 · 형용사와 활용", body: `
+<h4>동사와 형용사 구별</h4>
+<table class="tbl"><tr><th>확인 방법</th><th>동사</th><th>형용사</th></tr>
+<tr><td>현재 '-는다/-ㄴ다'</td><td>먹<b>는다</b> (O)</td><td>예쁜다 (X)</td></tr>
+<tr><td>관형사형 '-는'</td><td>먹<b>는</b> 사람 (O)</td><td>예쁘는 (X)</td></tr>
+<tr><td>명령형·청유형</td><td>먹어라, 먹자 (O)</td><td>예뻐라(명령), 예쁘자 (X)</td></tr></table>
+<div class="tip">'있다'는 둘 다예요: 집에 있어라(동사) / 돈이 있다(형용사). '크다'도 키가 쑥쑥 큰다(동사) / 키가 크다(형용사).</div>
+<h4>본용언과 보조 용언</h4>
+<p>보조 용언은 본용언 뒤에서 의미를 더해요: 먹어 <b>보다</b>(시도), 먹고 <b>싶다</b>(희망), 다 먹어 <b>버렸다</b>(완료).</p>
+<h4>활용: 어간 + 어미</h4>
+<table class="tbl"><tr><th colspan="2">어미</th><th>예</th></tr>
+<tr><td rowspan="3">어말 어미</td><td>종결 어미</td><td>-다, -냐, -어라, -자, -구나</td></tr>
+<tr><td>연결 어미</td><td>대등적(-고, -며, -지만), 종속적(-어서, -면, -니), 보조적(-아/어, -게, -지, -고)</td></tr>
+<tr><td>전성 어미</td><td>명사형(-(으)ㅁ, -기), 관형사형(-(으)ㄴ, -는, -(으)ㄹ, -던), 부사형(-게, -도록)</td></tr>
+<tr><td colspan="2">선어말 어미</td><td>-시-(높임), -었-(과거), -겠-(추측·의지), -더-(회상)</td></tr></table>
+<h4>규칙 활용과 불규칙 활용</h4>
+<div class="scroll"><table class="tbl"><tr><th>바뀌는 곳</th><th>종류</th><th>예</th><th>비교: 규칙</th></tr>
+<tr><td rowspan="5">어간</td><td>'ㅅ' 불규칙</td><td><w>짓다</w>→지어</td><td>벗다→벗어</td></tr>
+<tr><td>'ㄷ' 불규칙</td><td><w>듣다</w>→들어</td><td>묻다(埋)→묻어</td></tr>
+<tr><td>'ㅂ' 불규칙</td><td><w>돕다</w>→도와, 덥다→더워</td><td>잡다→잡아</td></tr>
+<tr><td>'르' 불규칙</td><td><w>흐르다</w>→흘러</td><td>치르다→치러 (ㅡ 탈락)</td></tr>
+<tr><td>'우' 불규칙</td><td><w>푸다</w>→퍼 (유일)</td><td>주다→줘</td></tr>
+<tr><td rowspan="2">어미</td><td>'여' 불규칙</td><td>하다→하여</td><td>파다→파</td></tr>
+<tr><td>'러' 불규칙</td><td>이르다(至)→이르러, <w>푸르다</w>→푸르러</td><td>치르다→치러</td></tr>
+<tr><td>어간+어미</td><td>'ㅎ' 불규칙</td><td><w>파랗다</w>→파래, 하얗다→하얘</td><td>좋다→좋아</td></tr></table></div>
+<div class="tip">'ㄹ' 탈락(울다→우는)과 'ㅡ' 탈락(쓰다→써)은 예외 없이 일어나므로 <b>규칙 활용</b>으로 봐요.</div>` },
+
+{ id: "danei-7", title: "수식언 · 독립언 · 품사 통용", body: `
+<h4>관형사: 체언을 꾸밈, 조사가 붙지 않음</h4>
+<p>성상 관형사(<w>새</w> 옷, <w>헌</w> 책, <w>옛</w> 친구), 지시 관형사(<b>이</b> 책, <b>그</b> 사람), 수 관형사(<b>한</b> 사람, <b>첫</b> 만남)</p>
+<h4>부사: 주로 용언을 꾸밈, 보조사가 붙을 수 있음</h4>
+<ul><li>성분 부사: 성상(잘, 매우), 지시(이리, 그리), 부정(안, 못)</li>
+<li>문장 부사: 양태(과연, 설마, 아마, 제발), 접속(그리고, 그러나, 및)</li></ul>
+<h4>감탄사</h4><p>놀람, 부름, 대답 등: 아, 어머, 여보세요, 네, 아니요</p>
+<h4>품사 통용: 한 단어가 둘 이상의 품사로 쓰임</h4>
+<table class="tbl"><tr><th>단어</th><th>쓰임</th></tr>
+<tr><td><w>비교적</w></td><td>비교적인 방법(명사) / 비교적 관점(관형사) / 비교적 쉽다(부사)</td></tr>
+<tr><td><w>만큼</w></td><td>너<b>만큼</b>(조사) / 먹을 <b>만큼</b>(의존 명사)</td></tr>
+<tr><td><w>대로</w></td><td>법<b>대로</b>(조사) / 아는 <b>대로</b>(의존 명사)</td></tr>
+<tr><td><w>아니</w></td><td>아니 먹다(부사) / 아니, 벌써 왔어?(감탄사)</td></tr>
+<tr><td><w>오늘</w></td><td>오늘이 생일이다(명사) / 오늘 떠난다(부사)</td></tr></table>` },
+
+{ id: "danei-8", title: "어휘의 체계와 양상", body: `
+<p><b>어휘</b>는 일정한 범위 안에서 쓰이는 단어들의 집합이에요.</p>
+<h4>어종에 따른 분류</h4>
+<table class="tbl"><tr><th>종류</th><th>특징</th><th>예</th></tr>
+<tr><td>고유어</td><td>본래부터 있던 말, 감각어·친족어가 풍부</td><td><w>하늘</w>, <w>노르스름하다</w></td></tr>
+<tr><td>한자어</td><td>한자에 기반, 개념을 세분해 표현</td><td>생각 → <w>사고</w>, <w>사색</w>, <w>상상</w></td></tr>
+<tr><td>외래어</td><td>다른 언어에서 들어와 국어처럼 쓰임</td><td><w>버스</w>, <w>컴퓨터</w></td></tr>
+<tr><td>혼종어</td><td>어종이 섞여 만들어짐</td><td><w>밥상</w>(고유어+한자어), 가스관</td></tr></table>
+<h4>어휘의 양상</h4>
+<table class="tbl"><tr><th>종류</th><th>설명과 예</th></tr>
+<tr><td>지역 방언</td><td>지역에 따라 다른 말 (부추 → 정구지, 솔)</td></tr>
+<tr><td>사회 방언</td><td>세대·성별·직업·계층 등에 따라 다른 말</td></tr>
+<tr><td>은어</td><td>특정 집단이 내부 결속이나 비밀 유지를 위해 쓰는 말</td></tr>
+<tr><td>속어</td><td>비속하고 천한 느낌의 말, 친근감을 주기도 함</td></tr>
+<tr><td>금기어 · 완곡어</td><td>꺼리는 말(금기어)을 대신하는 부드러운 말(완곡어): 죽다 → <w>돌아가시다</w>, 천연두 → <w>마마</w></td></tr>
+<tr><td>관용어 · 속담</td><td>둘 이상의 단어가 굳어져 새 의미: <w>발이 넓다</w>, <w>미역국을 먹다</w></td></tr>
+<tr><td>새말(신어)</td><td>새로 생긴 개념·사물을 위해 만들어지거나 들어온 말</td></tr>
+<tr><td>전문어</td><td>특정 분야에서 쓰는 말 (의학, 법률 용어 등)</td></tr></table>` },
+
+{ id: "danei-9", title: "단어의 의미와 의미 관계", body: `
+<h4>의미의 종류</h4>
+<ul><li><b>중심적 의미</b>(가장 기본): 밥을 <b>먹다</b> / <b>주변적 의미</b>(확장): 나이를 <b>먹다</b>, 겁을 <b>먹다</b></li>
+<li><b>사전적(개념적) 의미</b>: 어머니 = '자기를 낳아 준 여자' / <b>함축적 의미</b>: 사랑, 희생 등 연상되는 의미</li></ul>
+<h4>유의 관계</h4>
+<p>소리는 다르지만 의미가 비슷한 관계. 완전히 같은 경우는 드물고 쓰임이 조금씩 달라요: <w>가끔</w>/<w>이따금</w>, <w>책방</w>/<w>서점</w>.</p>
+<h4>반의 관계</h4>
+<p>다른 의미 요소는 모두 같고 <b>하나만</b> 달라요.</p>
+<table class="tbl"><tr><th>종류</th><th>특징</th><th>예</th></tr>
+<tr><td>상보 반의어</td><td>중간이 없음, 한쪽을 부정하면 다른 쪽이 됨</td><td>살다/죽다, 남자/여자</td></tr>
+<tr><td>정도(등급) 반의어</td><td>중간이 있음, 둘 다 부정 가능, 비교 표현 가능</td><td>크다/작다, 덥다/춥다</td></tr>
+<tr><td>방향(관계) 반의어</td><td>방향·관계상 대립</td><td>위/아래, 오다/가다, 부모/자식</td></tr></table>
+<div class="tip">다의어는 반의어가 여러 개일 수 있어요: <w>벗다</w> ↔ (옷을) 입다, (모자를) 쓰다, (신발을) 신다.</div>
+<h4>상하 관계</h4>
+<p>한 단어가 다른 단어를 포함하는 관계. 하의어는 상의어의 의미를 모두 가지면서 의미 요소가 더 많아요: <w>꽃</w> ⊃ <w>장미</w>, 동물 ⊃ 포유류 ⊃ 개.</p>
+<h4>다의어와 동음이의어</h4>
+<p><b>다의어</b>는 중심 의미에서 뜻이 넓어진 한 단어이고, <b>동음이의어</b>는 소리만 같은 별개의 단어예요. 사전에서 다의어는 한 표제어 아래 ①②로, 동음이의어는 <b>다리¹, 다리²</b>처럼 서로 다른 표제어로 실려요.</p>
+<div class="ex"><w q="다리">다리</w>: 사람의 다리 → 책상 다리 (다의어) / 강을 건너는 다리 (동음이의어) — 사전에서 직접 확인해 보세요.</div>` },
+
+{ id: "danei-10", title: "문장의 의미: 중의성 · 전제 · 함의", body: `
+<h4>중의성: 하나의 표현이 두 가지 이상으로 해석됨</h4>
+<table class="tbl"><tr><th>종류</th><th>예</th><th>해석</th></tr>
+<tr><td>어휘적</td><td><w>배</w>가 좋다</td><td>먹는 배? 타는 배? 신체의 배?</td></tr>
+<tr><td>구조적</td><td>아름다운 그녀의 목소리</td><td>그녀가 아름다운가, 목소리가 아름다운가</td></tr>
+<tr><td>비교 구문</td><td>남편은 나보다 축구를 더 좋아한다</td><td>나를 좋아하는 것보다? 내가 축구를 좋아하는 것보다?</td></tr>
+<tr><td>부정 범위</td><td>학생들이 다 오지 않았다</td><td>전부 안 옴 / 일부만 옴</td></tr></table>
+<p>해소 방법: 쉼표 넣기, 어순 바꾸기, 보조사(는, 도) 쓰기, 단어 보충하기.</p>
+<h4>전제와 함의</h4>
+<table class="tbl"><tr><th></th><th>전제</th><th>함의</th></tr>
+<tr><td>뜻</td><td>문장이 성립하려면 미리 참이어야 하는 내용</td><td>문장이 참이면 반드시 참이 되는 내용</td></tr>
+<tr><td>부정했을 때</td><td>그대로 유지됨</td><td>유지되지 않음</td></tr>
+<tr><td>예</td><td>"철수가 담배를 끊었다" → 철수는 담배를 피웠다</td><td>"철수가 유리창을 깼다" → 유리창이 깨졌다</td></tr></table>` }
+  ]
+});
+
+UNITS.push({
+  id: "munjang", name: "문장", sub: "성분 · 짜임 · 문법 요소", color: "var(--u3)",
+  ch: "교재 6장",
+  blurb: "문장 성분과 서술어의 자릿수, 홑문장과 겹문장, 높임·시간·피동·사동·부정 표현을 다룹니다.",
+  topics: [
+{ id: "munjang-1", title: "문법 단위와 문장 성분", body: `
+<p>문법 단위: <b>형태소 &lt; 단어 &lt; 어절 &lt; 구 &lt; 절 &lt; 문장</b>. <b>어절</b>은 띄어 쓰는 단위이고 문장 성분을 따지는 기본 단위예요. <b>구</b>는 주어-서술어 관계가 없는 묶음, <b>절</b>은 주어-서술어 관계가 있지만 독립된 문장으로 쓰이지 않는 묶음이에요.</p>
+<table class="tbl"><tr><th colspan="2">성분</th><th>설명</th><th>예</th></tr>
+<tr><td rowspan="4">주성분</td><td>주어</td><td>동작·상태의 주체 (이/가, 께서, 에서)</td><td><b>할머니께서</b> 오셨다</td></tr>
+<tr><td>서술어</td><td>주어를 설명 (어찌하다, 어떠하다, 무엇이다)</td><td>꽃이 <b>피었다</b></td></tr>
+<tr><td>목적어</td><td>동작의 대상 (을/를)</td><td>나는 <b>책을</b> 읽었다</td></tr>
+<tr><td>보어</td><td>'되다, 아니다' 앞에서 보충 (이/가)</td><td>그는 <b>학생이</b> 아니다</td></tr>
+<tr><td rowspan="2">부속 성분</td><td>관형어</td><td>체언을 꾸밈</td><td><b>새</b> 옷, <b>나의</b> 꿈, <b>예쁜</b> 꽃</td></tr>
+<tr><td>부사어</td><td>용언·문장 등을 꾸밈</td><td><b>빨리</b> 와라, <b>학교에</b> 간다</td></tr>
+<tr><td>독립 성분</td><td>독립어</td><td>다른 성분과 직접 관계없음</td><td><b>아</b>, 날씨 좋다. <b>철수야</b>, 가자.</td></tr></table>
+<div data-widget="sent"></div>` },
+
+{ id: "munjang-2", title: "서술어의 자릿수", body: `
+<p>서술어가 문장을 완성하기 위해 꼭 필요로 하는 성분의 수예요. 이때 <b>필수적 부사어</b>도 셉니다.</p>
+<table class="tbl"><tr><th>자릿수</th><th>필요한 성분</th><th>예</th></tr>
+<tr><td>한 자리</td><td>주어</td><td>꽃이 <b>피었다</b>. 하늘이 <b>푸르다</b>.</td></tr>
+<tr><td rowspan="3">두 자리</td><td>주어 + 목적어</td><td>철수가 밥을 <b>먹었다</b>.</td></tr>
+<tr><td>주어 + 보어</td><td>물이 얼음이 <b>되었다</b>.</td></tr>
+<tr><td>주어 + 필수적 부사어</td><td>영희는 엄마와 <b>닮았다</b>. 이 옷은 나에게 <b>맞다</b>.</td></tr>
+<tr><td>세 자리</td><td>주어 + 목적어 + 필수적 부사어</td><td>나는 동생에게 선물을 <b>주었다</b>. 그는 책을 책상 위에 <b>놓았다</b>.</td></tr></table>
+<div class="tip">같은 단어라도 뜻에 따라 자릿수가 달라요: 해가 <w>뜨다</w>(한 자리) / 눈을 뜨다(두 자리).</div>` },
+
+{ id: "munjang-3", title: "홑문장과 겹문장: 안은문장", body: `
+<p>주어-서술어 관계가 한 번이면 <b>홑문장</b>, 두 번 이상이면 <b>겹문장</b>이에요. 겹문장은 <b>안은문장</b>과 <b>이어진문장</b>으로 나뉘어요.</p>
+<table class="tbl"><tr><th>안긴문장(절)</th><th>만드는 방법</th><th>예</th></tr>
+<tr><td>명사절</td><td>-(으)ㅁ, -기</td><td>[그가 범인<b>임</b>]이 밝혀졌다. 나는 [봄이 오<b>기</b>]를 기다린다.</td></tr>
+<tr><td>관형절</td><td>-(으)ㄴ, -는, -(으)ㄹ, -던</td><td>[내가 읽<b>은</b>] 책, [그가 합격했다<b>는</b>] 소식</td></tr>
+<tr><td>부사절</td><td>-이, -게, -도록 …</td><td>눈이 [소리도 없<b>이</b>] 내린다. 꽃이 [아름답<b>게</b>] 피었다.</td></tr>
+<tr><td>서술절</td><td>표지 없음</td><td>코끼리는 [코가 길다]. 토끼는 [앞발이 짧다].</td></tr>
+<tr><td>인용절</td><td>직접 '라고', 간접 '고'</td><td>그는 ["내일 갈게."<b>라고</b>] 말했다. 그는 [다음 날 오겠다<b>고</b>] 말했다.</td></tr></table>
+<h4>관형절의 두 종류</h4>
+<ul><li><b>관계 관형절</b>: 꾸밈을 받는 말이 관형절의 성분으로 빠져 있음 — [내가 ( ) 읽은] <u>책</u> (목적어 '책을'이 빠짐)</li>
+<li><b>동격 관형절</b>: 관형절이 꾸밈을 받는 말의 내용 자체, 빠진 성분 없음 — [그가 합격했다는] <u>소식</u></li></ul>
+<div class="tip">직접 인용 → 간접 인용으로 바꿀 때 인칭(나→자기), 시간 표현(내일→다음 날), 종결 어미(-ㄹ게→-겠다고)가 함께 바뀌어요.</div>` },
+
+{ id: "munjang-4", title: "이어진문장", body: `
+<table class="tbl"><tr><th>종류</th><th>연결 어미와 의미</th><th>예</th></tr>
+<tr><td>대등하게 이어진문장</td><td>-고(나열), -며, -지만·-나(대조), -거나·-든지(선택)</td><td>봄이 오고 꽃이 핀다. 형은 크지만 동생은 작다.</td></tr>
+<tr><td>종속적으로 이어진문장</td><td>-어서·-니(원인), -면(조건), -(으)려고(의도), -더라도(양보), -는데(배경)</td><td>비가 와서 길이 미끄럽다. 열심히 하면 잘될 것이다.</td></tr></table>
+<div class="tip">대등하게 이어진문장은 앞뒤를 바꿔도 의미가 거의 같지만, 종속적으로 이어진문장은 바꾸면 의미가 달라지거나 어색해져요. 또 종속절은 뒤 절 안으로 옮길 수 있어서(길이 비가 와서 미끄럽다) 부사절을 안은문장과 비슷한 성격을 가져요.</div>` },
+
+{ id: "munjang-5", title: "종결 표현", body: `
+<table class="tbl"><tr><th>문장 종류</th><th>특징</th><th>예</th></tr>
+<tr><td>평서문</td><td>특별한 요구 없이 전달</td><td>비가 온다.</td></tr>
+<tr><td>의문문</td><td><b>설명</b> 의문문(의문사, 구체적 대답) / <b>판정</b> 의문문(예·아니요) / <b>수사</b> 의문문(대답 요구 없이 강조·명령)</td><td>어디 가니? / 밥 먹었니? / 내가 그걸 모를까?</td></tr>
+<tr><td>명령문</td><td>행동 요구. 직접 명령(-아라/-어라), 간접 명령(-(으)라: 매체·시험지)</td><td>빨리 와라. 알맞은 것을 고르라.</td></tr>
+<tr><td>청유문</td><td>함께 하자고 요청</td><td>같이 가자.</td></tr>
+<tr><td>감탄문</td><td>느낌을 표현</td><td>정말 아름답구나!</td></tr></table>` },
+
+{ id: "munjang-6", title: "높임 표현", body: `
+<h4>주체 높임: 문장의 주어를 높임</h4>
+<ul><li>선어말 어미 '-(으)시-', 조사 '께서'</li>
+<li>특수 어휘: <w>계시다</w>, <w>주무시다</w>, <w>잡수시다</w>, <w>편찮으시다</w></li>
+<li><b>간접 높임</b>: 높일 대상의 신체·소유물·관련 사물을 높여 주체를 간접적으로 높임 — 할머니께서는 귀가 밝<b>으시</b>다. 선생님께서는 걱정이 <b>있으시</b>다.</li></ul>
+<div class="tip">'계시다'는 주체를 직접 높일 때, '있으시다'는 간접 높일 때 써요. "말씀하신 상품은 품절이세요"처럼 사물을 높이는 것은 잘못이에요.</div>
+<h4>객체 높임: 목적어·부사어가 가리키는 대상을 높임</h4>
+<p>조사 '께', 특수 어휘 <w>드리다</w>, <w>모시다</w>, <w>여쭈다</w>(여쭙다), <w>뵈다</w>(뵙다): 나는 할머니<b>께</b> 선물을 <b>드렸다</b>.</p>
+<h4>상대 높임: 듣는 사람을 높이거나 낮춤 (종결 어미)</h4>
+<table class="tbl"><tr><th colspan="2">등급</th><th>예</th></tr>
+<tr><td rowspan="4">격식체</td><td>하십시오체</td><td>갑니다, 가십시오</td></tr>
+<tr><td>하오체</td><td>가오, 가시오</td></tr><tr><td>하게체</td><td>가네, 가게</td></tr><tr><td>해라체</td><td>간다, 가라</td></tr>
+<tr><td rowspan="2">비격식체</td><td>해요체</td><td>가요</td></tr><tr><td>해체</td><td>가, 가지</td></tr></table>
+<div class="tip">압존법: 높여야 할 대상이지만 듣는 이가 더 높을 때 높임을 줄이는 것. 표준 언어 예절에서는 직장에서는 압존법을 쓰지 않는 것을 원칙으로 해요.</div>` },
+
+{ id: "munjang-7", title: "시간 표현", body: `
+<p><b>발화시</b>(말하는 때)와 <b>사건시</b>(일이 일어난 때)의 앞뒤 관계로 시제를 정해요.</p>
+<table class="tbl"><tr><th>시제</th><th>관계</th><th>실현 방법</th></tr>
+<tr><td>과거</td><td>사건시 &lt; 발화시</td><td>-았/었-, -았었-(단절), -더-(회상), 관형사형 동사 -(으)ㄴ·-던, 부사 '어제'</td></tr>
+<tr><td>현재</td><td>사건시 = 발화시</td><td>동사 -는/ㄴ-(먹는다), 형용사·'이다'는 기본형(예쁘다), 관형사형 동사 -는·형용사 -(으)ㄴ, 부사 '지금'</td></tr>
+<tr><td>미래</td><td>사건시 &gt; 발화시</td><td>-겠-, -(으)리-, -(으)ㄹ 것이다, 관형사형 -(으)ㄹ, 부사 '내일'</td></tr></table>
+<p><b>절대 시제</b>는 발화시 기준, <b>상대 시제</b>는 안은문장의 사건시 기준이에요: 어제 [공부하<b>는</b>] 동생을 보았다 → 절대 시제는 과거, '공부하는'의 상대 시제는 현재.</p>
+<h4>동작상</h4>
+<ul><li>진행상: -고 있다, -는 중이다 (책을 읽고 있다)</li>
+<li>완료상: -어 있다, -어 버리다 (꽃이 피어 있다)</li></ul>
+<div class="tip">"옷을 입고 있다"는 입는 중(진행)인지, 입은 상태(완료)인지 중의적이에요.</div>` },
+
+{ id: "munjang-8", title: "피동 표현과 사동 표현", body: `
+<h4>피동: 주어가 남의 행동을 당함</h4>
+<table class="tbl"><tr><th>방법</th><th>예</th></tr>
+<tr><td>파생적 피동 (-이-, -히-, -리-, -기-)</td><td>보이다, 잡히다, 물리다, 안기다</td></tr>
+<tr><td>통사적 피동 (-아/어지다, -게 되다)</td><td>만들어지다, 알게 되다</td></tr></table>
+<div class="ex">능동: 경찰이 도둑을 <b>잡았다</b>. → 피동: 도둑이 경찰에게 <b>잡혔다</b>.<br>(능동문의 목적어 → 피동문의 주어, 능동문의 주어 → 부사어)</div>
+<div class="tip">이중 피동은 피해요: <w>잊혀지다</w> → 잊히다, 보여지다 → 보이다.</div>
+<h4>사동: 주어가 남에게 행동을 하게 함</h4>
+<table class="tbl"><tr><th>방법</th><th>예</th></tr>
+<tr><td>파생적 사동 (-이-, -히-, -리-, -기-, -우-, -구-, -추-)</td><td>먹이다, 앉히다, 울리다, 웃기다, 깨우다, 솟구다, 낮추다</td></tr>
+<tr><td>통사적 사동 (-게 하다)</td><td>먹게 하다, 읽게 하다</td></tr></table>
+<div class="ex">주동: 아이가 옷을 입었다. → 사동: 엄마가 아이에게 옷을 <b>입혔다</b>.</div>
+<div class="tip">파생적 사동은 직접 행동(직접 입혀 줌)과 간접 행동(입도록 시킴)으로 모두 해석되지만, '-게 하다'는 주로 간접 사동으로 해석돼요. '소개시키다'처럼 '-시키다'를 지나치게 쓰는 것도 주의해요(→ 소개하다).</div>` },
+
+{ id: "munjang-9", title: "부정 표현", body: `
+<table class="tbl"><tr><th></th><th>'안' 부정</th><th>'못' 부정</th></tr>
+<tr><td>의미</td><td>단순 부정, 의지 부정</td><td>능력 부정, 외부 원인에 의한 부정</td></tr>
+<tr><td>짧은 부정</td><td>안 먹었다</td><td>못 먹었다</td></tr>
+<tr><td>긴 부정</td><td>먹지 않았다</td><td>먹지 못했다</td></tr></table>
+<ul><li>명령문·청유문은 '-지 말다': 먹지 <b>마라</b>, 먹지 <b>말자</b></li>
+<li>형용사는 짧은 '못' 부정이 어색해요: *못 예쁘다. 긴 부정 '예쁘지 못하다'는 기대에 미치지 못함을 나타내요.</li></ul>
+<div class="tip">부정문의 중의성: "모든 학생이 안 왔다" → 한 명도 안 옴 / 일부만 옴. 보조사로 해소: "모든 학생이 오지는 않았다"(일부만 옴).</div>` }
+  ]
+});
+
+UNITS.push({
+  id: "damhwa", name: "담화", sub: "발화 · 맥락 · 담화의 짜임", color: "var(--u4)",
+  ch: "교재 8장",
+  blurb: "발화와 담화의 개념, 담화의 구성 요소, 응집성과 통일성, 담화의 구조와 기능을 다룹니다.",
+  topics: [
+{ id: "damhwa-1", title: "발화와 담화", body: `
+<p><b>문장</b>이 맥락과 상관없이 문법적으로 완결된 단위라면, <b>발화</b>는 실제 상황에서 말하는 이가 특정한 의도를 가지고 쓴 문장이에요. 그래서 발화는 문법적으로 불완전해도 돼요("어디 가?" "학교.").</p>
+<p><b>담화</b>는 하나 이상의 발화가 모여 <b>하나의 의미 있는 덩어리</b>를 이룬 것이에요. 입말(대화)과 글말(텍스트)을 모두 포함해요.</p>
+<div class="ex">A: 지금 몇 시야?<br>B: 방금 3교시 끝나는 종 쳤어.<br>→ B의 발화는 시각을 직접 말하지 않았지만, 맥락 속에서 질문에 대한 답이 돼요.</div>` },
+
+{ id: "damhwa-2", title: "담화의 구성 요소", body: `
+<table class="tbl"><tr><th>요소</th><th>설명</th></tr>
+<tr><td>참여자</td><td>발신자(화자·필자)와 수신자(청자·독자). 둘의 관계(나이, 지위, 친밀도)에 따라 표현이 달라져요.</td></tr>
+<tr><td>내용</td><td>담화가 전하는 메시지</td></tr>
+<tr><td>맥락</td><td><b>상황 맥락</b>: 시간, 장소, 참여자, 앞뒤 발화 등 / <b>사회·문화적 맥락</b>: 공동체의 가치, 관습, 역사적 배경</td></tr></table>
+<div class="ex">"잘~ 한다." → 칭찬일 수도, 실수에 대한 비꼼일 수도 있어요. 같은 문장도 맥락에 따라 의미가 달라져요.</div>` },
+
+{ id: "damhwa-3", title: "응집성과 통일성", body: `
+<p>발화의 연속이 담화가 되려면 '담화다움(담화성)'을 갖춰야 해요. 대표 기준은 <b>응집성, 통일성, 의도성, 수용 가능성(용인성), 상황성, 정보성, 상호 텍스트성</b> 일곱 가지예요.</p>
+<table class="tbl"><tr><th></th><th>응집성</th><th>통일성</th></tr>
+<tr><td>뜻</td><td>발화들이 <b>형식적·문법적 장치</b>로 긴밀하게 연결된 성질 (표면)</td><td>담화 전체가 <b>하나의 주제</b>로 일관되게 묶이는 성질 (의미)</td></tr>
+<tr><td>확인</td><td>지시·대용·접속 표현, 반복, 생략이 있는가</td><td>주제에서 벗어난 내용이 없는가</td></tr></table>
+<h4>응집성을 만드는 장치</h4>
+<table class="tbl"><tr><th>장치</th><th>예</th></tr>
+<tr><td>반복</td><td>같은 말이나 의미가 관련된 말을 되풀이</td></tr>
+<tr><td>지시 표현</td><td>이, 그, 저 / 이것, 거기: 어제 영화를 봤어. <b>그</b> 영화 진짜 재밌더라.</td></tr>
+<tr><td>대용 표현</td><td>앞의 말을 대신함: 그렇게, 그리하다, 것: 나도 <b>그래</b>.</td></tr>
+<tr><td>접속 표현</td><td>그리고, 그러나, 왜냐하면, 따라서, 요컨대</td></tr>
+<tr><td>생략</td><td>A: 누가 왔어? B: (온 사람은) 민수.</td></tr></table>
+<div class="tip">'이'는 말하는 이에게 가깝거나 방금 말한 것, '그'는 듣는 이에게 가깝거나 앞서 말한 것, '저'는 둘 모두에게서 먼 것을 가리켜요.</div>` },
+
+{ id: "damhwa-4", title: "담화의 구조", body: `
+<p>문장을 설명의 대상(<b>주제부</b>)과 설명 내용(<b>설명부</b>)으로 나누면 담화에서 주제가 어떻게 이어지는지 보여요.</p>
+<table class="tbl"><tr><th>전개 유형</th><th>방식</th><th>예</th></tr>
+<tr><td>단순 선형식</td><td>앞 문장의 설명부가 다음 문장의 주제부가 됨</td><td>우리 반에 전학생이 왔다. 그 친구는 부산에서 왔다. 부산은 바다가 아름다운 도시다.</td></tr>
+<tr><td>주제 순환식</td><td>주제부는 같고 새 설명부가 이어짐</td><td>고양이는 밤에 활발하다. 고양이는 혼자 있는 것을 좋아한다. 또 고양이는 …</td></tr>
+<tr><td>상위 주제 파생식</td><td>상위 주제에서 하위 주제들이 갈라져 나옴</td><td>우리 학교는 시설이 좋다. 도서관은 … 체육관은 … 급식실은 …</td></tr></table>
+<p><b>거시 구조</b>는 담화 전체의 핵심 의미를 요약한 구조예요. 세부 내용을 삭제·일반화·재구성하면 드러나요.</p>` },
+
+{ id: "damhwa-5", title: "발화의 기능: 직접 발화와 간접 발화", body: `
+<p>말은 곧 행위예요. 발화로 진술, 질문, 명령, 요청, 약속, 경고, 사과, 축하 같은 행위를 해요.</p>
+<table class="tbl"><tr><th>종류</th><th>특징</th><th>예 (창문을 닫아 달라는 의도)</th></tr>
+<tr><td>직접 발화</td><td>문장 유형과 의도가 일치</td><td>창문 좀 닫아 줘. (명령문 → 명령)</td></tr>
+<tr><td>간접 발화</td><td>문장 유형과 의도가 다름, 맥락으로 의도 파악</td><td>창문 좀 닫아 줄 수 있니? (의문문 → 요청)<br>좀 춥지 않니? (의문문 → 요청)</td></tr></table>
+<div class="tip">간접 발화는 상대에게 선택의 여지를 주어 더 공손하게 들리는 효과가 있어요.</div>
+<h4>발화의 세 측면</h4>
+<ul><li>발화 행위: 무언가를 말하는 행위 자체</li>
+<li>발화 수반 행위: 말을 함으로써 함께 이루어지는 행위(요청, 약속 등)</li>
+<li>발화 효과 행위: 그 말로 인해 일어나는 결과(듣는 이가 창문을 닫음)</li></ul>` },
+
+{ id: "damhwa-6", title: "담화의 기능", body: `
+<table class="tbl"><tr><th>기능</th><th>설명</th><th>대표 담화</th></tr>
+<tr><td>제보</td><td>정보나 지식을 전달</td><td>뉴스, 보고서, 안내문</td></tr>
+<tr><td>호소</td><td>상대가 어떤 행동을 하도록 마음을 움직임</td><td>광고, 연설문, 법규</td></tr>
+<tr><td>약속</td><td>어떤 행위를 하겠다고 약속</td><td>서약서, 계약서, 합의서</td></tr>
+<tr><td>사교</td><td>친근감·감사·미안함 등 관계를 맺고 유지</td><td>인사말, 안부 편지, 조문</td></tr>
+<tr><td>선언</td><td>새로운 사태를 만들어 냄</td><td>임명장, 판결문, 선전 포고문</td></tr></table>
+<p>같은 발화도 상황에 따라 다른 기능을 할 수 있어서, 담화의 기능은 주제만이 아니라 <b>맥락과 참여자 관계</b>까지 함께 보고 판단해야 해요.</p>` }
+  ]
+});
+
+UNITS.push({
+  id: "guksa", name: "국어사", sub: "훈민정음과 국어의 변화", color: "var(--u5)",
+  ch: "교재 2·9·10장",
+  blurb: "국어사의 시대 구분, 차자 표기, 훈민정음의 제자 원리, 중세 국어의 특징, 근대 이후의 변화를 다룹니다.",
+  topics: [
+{ id: "guksa-1", title: "국어사의 시대 구분", body: `
+<p>국어사는 국어 자체의 <b>체계적인 큰 변화</b>를 기준으로 시대를 나눠요.</p>
+<div class="timeline">
+<div><b>고대 국어</b><span>삼국 시대 ~ 통일 신라 (10세기 초까지)</span><small>신라어 중심으로 언어 통일, 차자 표기 자료</small></div>
+<div><b>전기 중세 국어</b><span>10세기 초 ~ 14세기 말 (고려)</span><small>중심지가 경주에서 개성으로 이동</small></div>
+<div><b>후기 중세 국어</b><span>15세기 ~ 16세기 말</span><small>훈민정음 창제, 한글 문헌 등장</small></div>
+<div><b>근대 국어</b><span>17세기 초 ~ 19세기 말</span><small>방점·ㆍ·ㅿ 소멸, 된소리 확대, 구개음화</small></div>
+<div><b>현대 국어</b><span>20세기 초 ~ 현재</span><small>맞춤법 제정, 표준어 정립</small></div></div>` },
+
+{ id: "guksa-2", title: "차자 표기", body: `
+<p>훈민정음 이전에는 한자의 <b>음(소리)</b>이나 <b>훈(뜻)</b>을 빌려 우리말을 적었어요.</p>
+<table class="tbl"><tr><th>방법</th><th>설명</th></tr>
+<tr><td>음차</td><td>한자의 소리만 빌림</td></tr>
+<tr><td>훈차</td><td>한자의 뜻(새김)을 빌림</td></tr>
+<tr><td>고유 명사 표기</td><td>사람 이름, 땅 이름, 벼슬 이름을 한자로 적음</td></tr>
+<tr><td>이두</td><td>한문을 우리말 어순으로 바꾸고 조사·어미를 덧붙여 적음 (주로 관청 문서)</td></tr>
+<tr><td>구결</td><td>한문 원문은 그대로 두고 구절 끝에 토(조사·어미)를 달아 읽기 쉽게 함</td></tr>
+<tr><td>향찰</td><td>우리말 문장 전체를 적음. 대체로 실질 형태소는 훈차, 형식 형태소는 음차 (향가)</td></tr></table>` },
+
+{ id: "guksa-3", title: "훈민정음의 창제와 제자 원리", body: `
+<p>세종이 1443년에 창제하고 1446년에 반포했어요. 반포할 때 낸 해설서 『훈민정음』(해례본)에 원리가 자세히 실려 있어요.</p>
+<div class="ex old-quote"><span class="old"><span class="old">나랏</span> <span class="old">말ᄊᆞ미</span> 듕귁에 달아</span> → 우리나라 말이 중국과 달라 (『훈민정음』 언해본 서문)</div>
+<h4>초성(자음) 17자: 발음 기관을 본뜸</h4>
+<table class="tbl center"><tr><th>소리</th><th>기본자</th><th>본뜬 모양</th><th>가획자</th><th>이체자</th></tr>
+<tr><td>아음(어금닛소리)</td><td>ㄱ</td><td>혀뿌리가 목구멍을 막는 모양</td><td>ㅋ</td><td><span class="old">ㆁ</span></td></tr>
+<tr><td>설음(혓소리)</td><td>ㄴ</td><td>혀끝이 윗잇몸에 닿는 모양</td><td>ㄷ ㅌ</td><td>ㄹ</td></tr>
+<tr><td>순음(입술소리)</td><td>ㅁ</td><td>입 모양</td><td>ㅂ ㅍ</td><td></td></tr>
+<tr><td>치음(잇소리)</td><td>ㅅ</td><td>이 모양</td><td>ㅈ ㅊ</td><td><span class="old">ㅿ</span></td></tr>
+<tr><td>후음(목소리)</td><td>ㅇ</td><td>목구멍 모양</td><td><span class="old">ㆆ</span> ㅎ</td><td></td></tr></table>
+<p><b>가획</b>: 소리가 세지는 데 따라 획을 더함(ㄱ→ㅋ). <b>이체</b>: 획을 더했지만 소리가 세지는 것과 관계없음.</p>
+<h4>중성(모음) 11자: 천·지·인을 본뜸</h4>
+<table class="tbl center"><tr><th>기본자</th><th>초출자 (기본자 + ㆍ 하나)</th><th>재출자 (ㆍ 둘)</th></tr>
+<tr><td><span class="old">ㆍ</span>(하늘) ㅡ(땅) ㅣ(사람)</td><td>ㅗ ㅏ ㅜ ㅓ</td><td>ㅛ ㅑ ㅠ ㅕ</td></tr></table>
+<h4>종성과 운용 규정</h4>
+<ul><li><b>종성부용초성</b>: 종성(받침)은 초성 글자를 다시 씀</li>
+<li><b>연서</b>: 순음 아래 ㅇ을 이어 씀 → 순경음 <span class="old">ㅸ</span></li>
+<li><b>병서</b>: 나란히 씀. 같은 글자(각자 병서: ㄲ, ㄸ, ㅃ, ㅆ, ㅉ, <span class="old">ㆅ</span>), 다른 글자(합용 병서: <span class="old">ㅺ ㅼ ㅳ ㅄ ㅶ ㅴ</span>)</li>
+<li><b>부서</b>: 모음을 자음의 아래(ㅗ, ㅜ…)나 오른쪽(ㅏ, ㅓ…)에 붙여 씀</li>
+<li><b>성음법</b>: 초성·중성·종성이 합쳐져야 소리(음절)를 이룸</li>
+<li><b>방점</b>: 글자 왼쪽 점으로 성조 표시 — 평성(점 없음), 거성(1점), 상성(2점), 입성(점과 무관, 빨리 끝남)</li></ul>` },
+
+{ id: "guksa-4", title: "중세 국어의 표기와 음운", body: `
+<h4>표기법</h4>
+<ul><li><b>이어 적기(연철)</b>: 받침을 다음 음절 초성으로 넘겨 소리 나는 대로 적음 — <span class="old"><span class="old">사ᄅᆞ미</span></span>(사람이)</li>
+<li><b>8종성법</b>: 받침에 <span class="old">ㄱ ㆁ ㄷ ㄴ ㅂ ㅁ ㅅ ㄹ</span> 8자만 씀 (예외: 『용비어천가』, 『월인천강지곡』 일부)</li>
+<li><b>동국정운식 한자음</b>: 현실 한자음과 다른 이상적 한자음을 표기 (15세기에만)</li>
+<li>사잇소리 표기 글자가 다양했음 (ㅅ, ㄱ, ㄷ, ㅂ, <span class="old">ㆆ ㅿ</span> 등)</li></ul>
+<h4>음운</h4>
+<ul><li>지금은 없는 음운: <span class="old">ㆍ</span>(아래아), <span class="old">ㅸ</span>(순경음 비읍), <span class="old">ㅿ</span>(반치음), <span class="old">ㆆ</span>(여린히읗), <span class="old">ㆁ</span>(옛이응) — 예: <span class="old"><span class="old">ᄆᆞᅀᆞᆷ</span></span>(마음)</li>
+<li><b>어두 자음군</b>: 단어 첫머리에 서로 다른 자음이 함께 옴 — <span class="old"><span class="old">ᄠᅳᆮ</span></span>(뜻), <span class="old"><span class="old">ᄯᆞᆯ</span></span>(딸)</li>
+<li><b>성조</b>가 있어 방점으로 표시</li>
+<li><b>모음조화</b>가 현대보다 엄격하게 지켜짐</li>
+<li>'ㅐ, ㅔ, ㅚ, ㅟ'는 이중 모음이었음 (예: ㅐ = ㅏ + 반모음 j)</li></ul>` },
+
+{ id: "guksa-5", title: "중세 국어의 문법", body: `
+<h4>주격 조사</h4>
+<table class="tbl"><tr><th>앞말</th><th>형태</th><th>예</th></tr>
+<tr><td>자음으로 끝남</td><td>이</td><td><span class="old"><span class="old">사ᄅᆞ미</span></span> (사람 + 이)</td></tr>
+<tr><td>'ㅣ', 반모음 j 외의 모음</td><td>ㅣ</td><td>부텨 + ㅣ → 부톄, 공자 + ㅣ → 공재</td></tr>
+<tr><td>'ㅣ'나 반모음 j로 끝남</td><td>∅ (형태 없음)</td><td>불휘 + ∅ → 불휘 (뿌리가)</td></tr></table>
+<div class="tip">주격 조사 '가'는 근대 국어 시기(17세기 무렵)에 널리 쓰이기 시작했어요.</div>
+<h4>목적격·관형격 조사</h4>
+<ul><li>목적격: 모음조화에 따라 <span class="old"><span class="old">ᄋᆞᆯ</span></span>/을, <span class="old"><span class="old">ᄅᆞᆯ</span></span>/를, ㄹ</li>
+<li>관형격: 유정 명사(사람·동물) 평칭 뒤 <span class="old"><span class="old">ᄋᆡ</span></span>/의, 무정 명사나 높임 대상 뒤 'ㅅ' — <span class="old"><span class="old">나랏</span></span> 말(나라의 말)</li></ul>
+<h4>의문문</h4>
+<table class="tbl"><tr><th>종류</th><th>어미</th><th>예</th></tr>
+<tr><td>판정 의문문</td><td>-가, -아(-어)</td><td>이 <span class="old"><span class="old">ᄯᆞ리</span></span> 너희 <span class="old"><span class="old">ᄯᆞᆯ가</span></span> (이 딸이 너희 딸이냐?)</td></tr>
+<tr><td>설명 의문문</td><td>-고, -오</td><td>얻논 약이 므스것고 (얻는 약이 무엇이냐?)</td></tr>
+<tr><td>2인칭 주어</td><td>-ㄴ다</td><td>네 엇뎨 안다 (네가 어찌 아느냐?)</td></tr></table>
+<h4>높임 표현</h4>
+<table class="tbl"><tr><th>종류</th><th>선어말 어미</th></tr>
+<tr><td>주체 높임</td><td>-시-, -샤- (모음 어미 앞)</td></tr>
+<tr><td>객체 높임</td><td><span class="old">-<span class="old">ᄉᆞᆸ</span>-, -<span class="old">ᄌᆞᆸ</span>-, -<span class="old">ᅀᆞᆸ</span>-</span> (앞 소리에 따라)</td></tr>
+<tr><td>상대 높임</td><td><span class="old">-<span class="old">ᅌᅵ</span>-</span>(평서), -<span class="old">ᅌᅵᆺ</span>-(의문) — 예: <span class="old"><span class="old">ᄒᆞᄂᆞ니ᅌᅵ다</span></span>(합니다)</td></tr></table>` },
+
+{ id: "guksa-6", title: "근대 국어의 변화", body: `
+<table class="tbl"><tr><th>영역</th><th>변화</th></tr>
+<tr><td>표기</td><td>방점 표기 소멸, <span class="old">ㅿ ㆁ</span> 글자가 쓰이지 않게 됨, 끊어 적기(분철)·거듭 적기(중철) 증가, 받침 'ㄷ'을 'ㅅ'으로 적는 7종성 표기</td></tr>
+<tr><td>음운</td><td>성조 소멸(일부는 소리의 길이로 남음), <span class="old">ㆍ</span>의 소실(둘째 음절 이하 16세기 → 첫째 음절 18세기), 어두 자음군이 된소리로, 'ㅐ, ㅔ'의 단모음화(18세기 말)</td></tr>
+<tr><td>음운 현상</td><td><b>구개음화</b>: 텬디 → 천지, 디다 → 지다<br><b>원순 모음화</b>(ㅁ, ㅂ, ㅍ 뒤 ㅡ → ㅜ): 믈 → 물, 블 → 불, 플 → 풀<br><b>전설 모음화</b>(ㅅ, ㅈ, ㅊ 뒤 ㅡ → ㅣ): 즛 → 짓, 츩 → 칡</td></tr>
+<tr><td>문법</td><td>주격 조사 '가' 확산, 과거 '-었-'과 미래 '-겠-' 확립, 객체 높임 <span class="old">'-<span class="old">ᄉᆞᆸ</span>-'</span>이 공손의 의미로 바뀜, 의문문의 '-가/-고' 구별 약화</td></tr></table>` },
+
+{ id: "guksa-7", title: "어휘와 의미의 변화", body: `
+<table class="tbl"><tr><th>종류</th><th>예</th></tr>
+<tr><td>의미의 확대</td><td><w>다리</w>: 사람·짐승의 다리 → 책상 다리까지<br><w>먹다</w>: 음식 → 마음, 겁, 나이까지<br><w>영감</w>: 높은 벼슬아치 → 나이 든 남자</td></tr>
+<tr><td>의미의 축소</td><td><w>짐승</w>: 살아 있는 모든 존재(중생) → 사람을 뺀 동물<br><w>여위다</w>: '마르다'와 '수척하다' → '수척하다'만<br><w>놈</w>: 보통의 남자 → 남자를 낮잡는 말</td></tr>
+<tr><td>의미의 이동</td><td><w>어리다</w>: 어리석다 → 나이가 적다<br>어엿브다: 불쌍하다 → 예쁘다<br><span class="old"><span class="old">싁싁ᄒᆞ다</span></span>: 엄하다·장엄하다 → 씩씩하다</td></tr></table>
+<p>그 밖에 한자어·외래어 유입, 사라진 고유어(<span class="old"><span class="old">미르</span></span> '용' 등)도 어휘 변화예요.</p>` }
+  ]
+});
+
+const MORE = {};
+/* ===== 음운 ===== */
+MORE["eumun-1"] = `
+<h4>음운은 언어마다 다르다</h4>
+<p>어떤 소리 차이가 음운이 되는지는 언어마다 달라요. 영어에서는 /r/과 /l/이 다른 음운이라 'right'와 'light'의 뜻이 다르지만, 국어에서는 둘을 구별하지 않고 모두 /ㄹ/로 받아들여요. 반대로 국어의 /ㅂ/, /ㅍ/, /ㅃ/은 서로 다른 음운이지만, 영어 화자에게는 이 차이가 뜻을 가르지 않아요.</p>
+<h4>변이음의 예</h4>
+<table class="tbl"><tr><th>음운</th><th>환경</th><th>실제 소리</th><th>예</th></tr>
+<tr><td rowspan="2">/ㄹ/</td><td>모음 사이 (초성)</td><td>혀끝을 한 번 튀기는 소리 [ɾ]</td><td><w>노래</w>, <w>다리</w></td></tr>
+<tr><td>받침, ㄹ 뒤</td><td>혀 옆으로 흘리는 소리 [l]</td><td><w>달</w>, <w>빨래</w></td></tr>
+<tr><td rowspan="2">/ㄱ/</td><td>단어 첫머리</td><td>안울림소리 [k]</td><td>'<w>감기</w>'의 첫 ㄱ</td></tr>
+<tr><td>울림소리 사이</td><td>울림소리 [g]</td><td>'감기'의 둘째 ㄱ</td></tr></table>
+<p>국어 화자는 이 차이를 의식하지 못해요. 이렇게 <b>환경에 따라 정해진 자리에서만 나타나는 소리</b>라는 점이 변이음의 특징이에요.</p>
+<h4>소리의 길이(장단)</h4>
+<ul><li>긴소리는 원칙적으로 <b>단어의 첫음절</b>에서만 나요: <w>눈보라</w>[눈ː보라] / <w>첫눈</w>[천눈], <w>말씨</w>[말ː씨] / <w>참말</w>[참말]</li>
+<li>긴소리를 가진 용언 어간이 모음 어미를 만나면 짧아져요: 감다[감ː따] → 감으니[가므니], 밟다[밥ː따] → 밟으면[발브면]</li>
+<li>오늘날에는 장단 구별이 많이 약해졌지만, 표준 발음법은 여전히 장단을 인정해요.</li></ul>`;
+
+MORE["eumun-2"] = `
+<h4>조음 위치 자세히</h4>
+<table class="tbl"><tr><th>조음 위치</th><th>소리 내는 방법</th><th>자음</th></tr>
+<tr><td>입술소리(양순음)</td><td>두 입술이 닿았다 떨어짐</td><td>ㅂ ㅃ ㅍ ㅁ</td></tr>
+<tr><td>잇몸소리(치조음)</td><td>혀끝이 윗잇몸에 닿거나 가까워짐</td><td>ㄷ ㄸ ㅌ ㅅ ㅆ ㄴ ㄹ</td></tr>
+<tr><td>센입천장소리(경구개음)</td><td>혓바닥이 딱딱한 입천장에 닿음</td><td>ㅈ ㅉ ㅊ</td></tr>
+<tr><td>여린입천장소리(연구개음)</td><td>혀 뒷부분이 부드러운 입천장에 닿음</td><td>ㄱ ㄲ ㅋ ㅇ</td></tr>
+<tr><td>목청소리(후음)</td><td>목청 사이에서 마찰</td><td>ㅎ</td></tr></table>
+<h4>국어 자음의 특징: 세 갈래 대립</h4>
+<p>국어의 파열음과 파찰음은 <b>예사소리-된소리-거센소리</b>가 셋씩 짝을 이뤄요(ㅂ-ㅃ-ㅍ, ㄷ-ㄸ-ㅌ, ㄱ-ㄲ-ㅋ, ㅈ-ㅉ-ㅊ). 이런 세 갈래 대립은 다른 언어에서 드문 국어 자음 체계의 특징이에요. 덕분에 <w>감감하다</w> / <w>깜깜하다</w> / <w>캄캄하다</w>처럼 느낌을 섬세하게 구별하는 말이 발달했어요.</p>
+<h4>시험에 자주 나오는 정리</h4>
+<ul><li>마찰음 'ㅅ, ㅆ'에는 거센소리 짝이 없어요.</li>
+<li>'ㅇ'은 초성에서는 소리가 없고, 받침에서만 [ŋ] 소리를 내요.</li>
+<li>받침에서 나는 7개 소리(ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ) 가운데 <b>ㄴ, ㄹ, ㅁ, ㅇ</b>은 공명음이고 <b>ㄱ, ㄷ, ㅂ</b>은 예사소리 파열음이에요. 그래서 받침의 장애음은 모두 ㄱ, ㄷ, ㅂ 중 하나로 바뀌어요.</li>
+<li>비음화는 '파열음 → 비음'으로, 조음 위치는 그대로 두고 <b>조음 방법만</b> 바뀌어요(ㅂ→ㅁ, ㄷ→ㄴ, ㄱ→ㅇ).</li></ul>`;
+
+MORE["eumun-3"] = `
+<h4>상향 이중 모음과 하향 이중 모음</h4>
+<p>반모음이 단모음 <b>앞</b>에 오면 상향 이중 모음(ㅑ = [j]+ㅏ), <b>뒤</b>에 오면 하향 이중 모음이에요. 현대 국어의 이중 모음은 대부분 상향 이중 모음이고, 'ㅢ'를 어떻게 볼지는 학자마다 의견이 달라요. 중세 국어에서는 'ㅐ, ㅔ, ㅚ, ㅟ'가 하향 이중 모음이었다는 점도 국어사에서 중요해요.</p>
+<h4>이중 모음의 표준 발음</h4>
+<table class="tbl"><tr><th>규정</th><th>예</th></tr>
+<tr><td>'져, 쪄, 쳐'는 [저, 쩌, 처]로</td><td>가져[가저], 다쳐[다처]</td></tr>
+<tr><td>'예, 례' 이외의 'ㅖ'는 [ㅔ]도 허용</td><td><w>시계</w>[시계/시게], <w>혜택</w>[혜ː택/헤ː택]</td></tr>
+<tr><td>자음을 첫소리로 가진 'ㅢ'는 [ㅣ]</td><td><w>희망</w>[히망], <w>무늬</w>[무니], 띄어[띠어]</td></tr>
+<tr><td>첫음절 이외의 '의'는 [ㅣ]도 허용</td><td><w>주의</w>[주의/주이], <w>강의</w>[강ː의/강ː이]</td></tr>
+<tr><td>조사 '의'는 [ㅔ]도 허용</td><td>우리의[우리의/우리에]</td></tr></table>
+<h4>현실 발음의 변화</h4>
+<p>오늘날 많은 사람이 'ㅐ'와 'ㅔ'를 구별하지 않고, 'ㅚ, ㅟ'도 이중 모음으로 발음해요. 그래서 실제로 쓰는 단모음은 7개 정도라고 보기도 해요. 하지만 시험에서는 <b>표준 발음법의 10개 단모음 체계</b>를 기준으로 해요.</p>`;
+
+MORE["eumun-4"] = `
+<h4>음절 수 세기</h4>
+<p>국어에서는 <b>모음의 수 = 음절의 수</b>예요. 이중 모음도 모음 하나로 음절 하나를 이뤄요. 영어 'strike'는 모음이 하나라 1음절이지만, 국어에서는 자음을 연달아 발음할 수 없어서 '스트라이크'(5음절)가 돼요.</p>
+<h4>연음: 받침이 다음 음절로 넘어가는 현상</h4>
+<table class="tbl"><tr><th>환경</th><th>방식</th><th>예</th></tr>
+<tr><td>모음으로 시작하는 형식 형태소 앞</td><td>받침을 그대로 옮겨 발음</td><td>옷이[오시], 꽃을[꼬츨], 밭에[바테]</td></tr>
+<tr><td>겹받침 + 형식 형태소</td><td>뒤 자음만 옮김</td><td>넋이[넉씨], 닭을[달글], 앉아[안자], 값을[갑쓸]</td></tr>
+<tr><td>모음으로 시작하는 실질 형태소 앞</td><td>대표음으로 바꾼 뒤 옮김</td><td><w>옷 안</w>[오단], <w>겉옷</w>[거돋], <w>헛웃음</w>[허두슴]</td></tr></table>
+<div class="tip">'넋이[넉씨]'는 받침 ㅅ이 넘어가면서 된소리로 나요. 시험에서 '연음'과 '된소리되기'가 함께 묻히는 단골 예예요.</div>`;
+
+MORE["eumun-5"] = `
+<h4>동화의 정도와 방향</h4>
+<table class="tbl"><tr><th>기준</th><th>종류</th><th>예</th></tr>
+<tr><td rowspan="2">닮는 정도</td><td>완전 동화: 같은 소리가 됨</td><td>신라[실라] (ㄴ→ㄹ)</td></tr>
+<tr><td>부분 동화: 일부 성질만 닮음</td><td>국물[궁물] (ㄱ이 비음성만 닮아 ㅇ)</td></tr>
+<tr><td rowspan="3">방향</td><td>순행 동화: 앞 소리가 뒤 소리를 바꿈</td><td>칼날[칼랄], 종로[종노]</td></tr>
+<tr><td>역행 동화: 뒤 소리가 앞 소리를 바꿈</td><td>신라[실라], 국물[궁물]</td></tr>
+<tr><td>상호 동화: 서로 영향을 줌</td><td>독립[동닙], 섭리[섬니]</td></tr></table>
+<h4>음운 변동이 일어나는 이유</h4>
+<ul><li><b>발음을 쉽게 하려고</b>: 동화, 탈락, 축약 (국물 → [궁물]이 훨씬 편함)</li>
+<li><b>음절 구조의 제약 때문에</b>: 받침에 7개 자음만 올 수 있어 음절의 끝소리 규칙과 자음군 단순화가 일어남</li>
+<li><b>뜻을 분명히 하거나 표현을 강하게 하려고</b>: 된소리되기 일부</li></ul>
+<h4>표기에 반영되는 변동, 반영되지 않는 변동</h4>
+<table class="tbl"><tr><th>표기에 반영됨</th><th>표기에 반영되지 않음</th></tr>
+<tr><td>'ㅡ' 탈락(써), 동음 탈락(가서), 'ㄹ' 탈락(우는, 소나무), 모음 축약·준말(돼, 봐, 뵈다), 사잇소리(사이시옷)</td><td>음절의 끝소리 규칙, 비음화, 유음화, 구개음화, 된소리되기, 자음군 단순화, 'ㅎ' 탈락, 'ㄴ' 첨가, 거센소리되기</td></tr></table>
+<div class="tip">한글 맞춤법은 '소리대로 적되, 어법에 맞도록' 적는 것이 원칙이라, 대부분의 변동은 표기에 반영하지 않고 형태를 밝혀 적어요.</div>`;
+
+MORE["eumun-6"] = `
+<h4>비음화가 일어나는 받침</h4>
+<p>비음화는 <b>발음상</b> 받침이 [ㄱ, ㄷ, ㅂ]일 때 일어나요. 그래서 음절의 끝소리 규칙을 먼저 적용하고 나서 비음화를 따져요.</p>
+<div class="ex"><w>꽃망울</w> → 꼳망울 → [꼰망울] &nbsp;|&nbsp; <w>옷맵시</w> → 옫맵시 → [온맵씨] &nbsp;|&nbsp; <w>앞마당</w> → 압마당 → [암마당] &nbsp;|&nbsp; 부엌문 → 부억문 → [부엉문]</div>
+<h4>'ㄹ'의 비음화와 유음화 구별</h4>
+<p>'ㄴ'과 'ㄹ'이 만나면 대개 유음화가 일어나지만, 'ㄴ'으로 끝나는 2음절 한자어 뒤에 'ㄹ'로 시작하는 한자가 붙은 말은 'ㄹ'이 [ㄴ]으로 바뀌어요.</p>
+<div class="ex">유음화: 신라[실라], 대관령[대ː괄령] / 'ㄹ'의 비음화: 의견란[의ː견난], 생산량[생산냥], <w>입원료</w>[이붠뇨], <w>상견례</w>[상견녜]</div>
+<h4>구개음화 더 보기</h4>
+<ul><li>'ㄷ' 뒤에 접미사 '히'가 오면 'ㅌ'으로 축약된 뒤 구개음화가 일어나요: <w>굳히다</w>[구치다], <w>묻히다</w>[무치다]</li>
+<li>구개음화는 원래 근대 국어 시기에 단어 안에서도 활발히 일어났어요(텬디→천지). 현대 국어에서는 형태소 경계에서만 일어나요.</li></ul>
+<h4>표준 발음이 아닌 교체</h4>
+<table class="tbl"><tr><th>현상</th><th>예 (비표준)</th><th>표준 발음</th></tr>
+<tr><td>연구개음화</td><td>감기[강기], 옷감[옥깜]</td><td>[감ː기], [옫깜]</td></tr>
+<tr><td>양순음화</td><td>신문[심문], 꽃밭[꼽빧]</td><td>[신문], [꼳빧]</td></tr>
+<tr><td>'ㅣ' 모음 역행 동화</td><td>아기[애기], 고기[괴기]</td><td>[아기], [고기]</td></tr></table>
+<div class="tip">'ㅣ' 모음 역행 동화가 굳어 표준어가 된 말도 있어요: <w>냄비</w>, <w>서울내기</w>, <w>멋쟁이</w>.</div>
+<h4>된소리되기 주의할 점</h4>
+<ul><li>같은 한자어라도 'ㄹ' 받침 뒤 'ㄱ, ㅂ'은 된소리가 되지 않아요: <w>발견</w>[발견], <w>출발</w>[출발]</li>
+<li>관형사형 '-(으)ㄹ' 뒤에서도, 띄어 쓰더라도 한 마디로 이어 발음하면 된소리가 나요: 만날 사람[만날싸람]</li></ul>`;
+
+MORE["eumun-7"] = `
+<h4>자음군 단순화와 연음 구별</h4>
+<p>겹받침 뒤에 <b>모음으로 시작하는 형식 형태소</b>가 오면 자음군 단순화가 일어나지 않고 뒤 자음이 연음돼요.</p>
+<div class="ex">닭[닥] / 닭이[달기], 닭을[달글] &nbsp;|&nbsp; 값[갑] / 값이[갑씨] &nbsp;|&nbsp; 흙[흑] / 흙이[흘기]<br>
+하지만 실질 형태소 앞에서는 단순화 후 연음: 닭 앞에[다가페], 값어치[가버치]</div>
+<h4>겹받침별 예외 정리</h4>
+<table class="tbl"><tr><th>겹받침</th><th>원칙</th><th>예외</th></tr>
+<tr><td>ㄼ</td><td>[ㄹ]: 여덟[여덜], 넓다[널따], 짧다[짤따]</td><td>밟-[밥]: 밟다[밥ː따], 밟고[밥ː꼬] / 넓-: 넓죽하다[넙쭈카다], 넓둥글다[넙뚱글다]</td></tr>
+<tr><td>ㄺ</td><td>[ㄱ]: 닭[닥], 흙과[흑꽈], 맑다[막따]</td><td>용언 어간이 'ㄱ' 앞일 때 [ㄹ]: 맑게[말께], 읽고[일꼬]</td></tr></table>
+<h4>'ㄹ' 탈락 더 보기</h4>
+<ul><li>현대 국어 용언에서는 'ㄴ, ㅂ, ㅅ'과 '-오', '-(으)ㄹ' 앞에서 일어나요: 날다 → 나는, 납니다, 나시고, 나오, 날</li>
+<li>'ㄹ' 탈락은 예외가 없어서 <b>규칙 활용</b>으로 다뤄요.</li>
+<li>단어 형성에서는 'ㄴ, ㄷ, ㅅ, ㅈ' 앞에서 일어나는 경우가 많아요: <w>따님</w>, <w>소나무</w>, <w>다달이</w>, <w>마소</w>, <w>부삽</w></li></ul>
+<h4>'ㅎ' 탈락의 특징</h4>
+<p>'ㅎ' 탈락은 발음에서만 일어나고 표기에는 반영하지 않아요(좋아, 놓아). 또 'ㄶ, ㅀ' 받침 뒤 'ㄴ'이 오면 'ㅎ'을 발음하지 않아요: 않네[안네], 뚫네[뚤레].</p>`;
+
+MORE["eumun-8"] = `
+<h4>'ㄴ' 첨가가 두 단어 사이에서 일어날 때</h4>
+<p>두 단어를 이어서 한 마디로 발음할 때도 'ㄴ'이 첨가될 수 있어요.</p>
+<div class="ex">한 일[한닐], 옷 입다[온닙따], 먹은 엿[머근녇], 할 일[할릴], 잘 입다[잘립따]</div>
+<h4>'ㄴ' 첨가 판단 순서</h4>
+<ol style="padding-left:20px"><li>합성어나 파생어인가? (또는 두 단어를 이어 발음하는가?)</li>
+<li>앞말이 자음으로 끝나는가?</li>
+<li>뒷말 첫음절이 '이, 야, 여, 요, 유'인가?</li>
+<li>세 조건을 갖추었다면 [ㄴ] 첨가 → 앞말 받침이 [ㄹ]이면 유음화로 [ㄹ], 앞말 받침이 [ㄱ, ㄷ, ㅂ]이면 비음화까지 이어짐</li></ol>
+<h4>사이시옷을 적지 않는 경우</h4>
+<ul><li>뒷말 첫소리가 원래 된소리나 거센소리: <w>위쪽</w>, <w>뒤풀이</w>, <w>위층</w></li>
+<li>외래어가 들어간 합성어: <w>피자집</w>, 핑크빛</li>
+<li>두 음절 한자어(6개 제외): <w>개수</w>(個數), <w>내과</w>, <w>대가</w>(代價)</li>
+<li>앞말이 자음으로 끝남: <w>길가</w>[길까], <w>등불</w>[등뿔] (사잇소리는 나지만 적지 않음)</li></ul>
+<div class="tip">사이시옷 표기 예: <w>나뭇잎</w>, <w>햇볕</w>, <w>바닷가</w>, <w>귓병</w>(고유어+한자어), <w>훗날</w>, <w>제삿날</w>.</div>`;
+
+MORE["eumun-9"] = `
+<h4>겹받침과 'ㅎ'의 축약</h4>
+<p>겹받침의 뒤 자음이 'ㅎ'과 만나면 자음군 단순화 없이 바로 축약돼요.</p>
+<div class="ex"><w>밝히다</w>[발키다], <w>넓히다</w>[널피다], <w>앉히다</w>[안치다], 읽히다[일키다], 많고[만ː코], 싫던[실턴]</div>
+<h4>'ㅎ'과 'ㅅ'</h4>
+<p>'ㅎ(ㄶ, ㅀ)' 뒤에 'ㅅ'이 오면 'ㅅ'을 [ㅆ]으로 발음해요: 닿소[다ː쏘], 많소[만ː쏘], 싫소[실쏘]. 이 현상을 축약으로 볼지 교체로 볼지는 교재마다 달라요.</p>
+<h4>모음 축약과 준말 표기</h4>
+<table class="tbl"><tr><th>본말</th><th>준말</th><th>결합</th></tr>
+<tr><td>되어</td><td>돼</td><td>ㅚ + ㅓ → ㅙ</td></tr>
+<tr><td>뜨이다</td><td>띄다</td><td>ㅡ + ㅣ → ㅢ</td></tr>
+<tr><td>보이어</td><td>보여</td><td>ㅣ + ㅓ → ㅕ</td></tr>
+<tr><td>싸이다</td><td>쌔다</td><td>ㅏ + ㅣ → ㅐ</td></tr></table>
+<div class="tip">'되-+-어'는 '돼', '되-+-고'는 '되고'예요. '돼'를 '되어'로 바꾸어 말이 되면 '돼'가 맞아요(안 돼 → 안 되어 O, 안 되 X).</div>`;
+
+MORE["eumun-10"] = `
+<h4>여러 변동이 겹칠 때 순서 정하기</h4>
+<ol style="padding-left:20px"><li>'ㄴ' 첨가, 거센소리되기처럼 형태소가 만나면서 생기는 변동을 확인</li>
+<li>받침을 정리: 자음군 단순화 → 음절의 끝소리 규칙</li>
+<li>뒤 자음과의 관계: 비음화, 유음화, 된소리되기</li></ol>
+<p>순서가 헷갈리면 <b>결과에서 거꾸로</b> 생각해 보세요. 최종 발음과 원래 형태를 자음 하나하나 비교하면 바뀐 곳(교체), 사라진 곳(탈락), 생긴 곳(첨가), 합쳐진 곳(축약)을 찾을 수 있어요.</p>`;
+
+MORE["eumun-11"] = `
+<h4>모음조화의 예외</h4>
+<ul><li>표준어로 인정된 예외: <w>깡충깡충</w>, <w>오순도순</w>, <w>소꿉놀이</w></li>
+<li>'ㅂ' 불규칙 용언: 아름다워, 고마워 (예외로 '돕다, 곱다'만 '도와, 고와')</li></ul>
+<h4>두음 법칙 더 보기</h4>
+<table class="tbl"><tr><th>원래</th><th>바뀜</th><th>예</th></tr>
+<tr><td>녀, 뇨, 뉴, 니</td><td>여, 요, 유, 이</td><td>녀자→여자, 니토→<w>이토</w></td></tr>
+<tr><td>랴, 려, 례, 료, 류, 리</td><td>야, 여, 예, 요, 유, 이</td><td>량심→<w>양심</w>, 리발→<w>이발</w></td></tr>
+<tr><td>라, 래, 로, 뢰, 루, 르</td><td>나, 내, 노, 뇌, 누, 느</td><td>락원→<w>낙원</w>, 뢰성→<w>뇌성</w></td></tr></table>
+<ul><li>단어 첫머리가 아니면 본음대로: <w>남녀</w>, <w>선량</w>, <w>쾌락</w></li>
+<li>모음이나 'ㄴ' 받침 뒤의 '렬, 률'은 '열, 율': <w>비율</w>, <w>규율</w>, <w>분열</w> / 그 밖은 '률': <w>법률</w>, <w>능률</w></li>
+<li>의존 명사는 적용하지 않음: 몇 리(里), 그럴 리가</li>
+<li>합성어나 접두사가 붙은 말의 뒷말에는 적용: <w>신여성</w>, <w>남존여비</w>, <w>역이용</w></li></ul>`;
+
+/* ===== 단어·어휘·의미 ===== */
+MORE["danei-1"] = `
+<h4>형태소 분석 순서</h4>
+<ol style="padding-left:20px"><li>문장을 어절(띄어쓰기 단위)로 나눔</li>
+<li>체언과 조사를 나눔: 하늘이 → 하늘 / 이</li>
+<li>용언은 어간과 어미로, 어미는 선어말 어미와 어말 어미로 나눔: 읽으셨다 → 읽- / -으시- / -었- / -다</li>
+<li>복합어는 어근과 접사, 어근과 어근으로 나눔: 먹이 → 먹- / -이, 돌다리 → 돌 / 다리</li></ol>
+<div class="tip">용언의 어간은 혼자 쓰일 수 없으므로 <b>의존 형태소</b>지만 뜻이 있어서 <b>실질 형태소</b>예요. 시험에서 가장 자주 묻는 부분이에요.</div>
+<h4>특이한 형태소</h4>
+<ul><li><b>유일 형태소</b>: 단 하나의 단어에서만 쓰이는 형태소 — '<w>오솔길</w>'의 '오솔', '<w>아름답다</w>'의 '아름', '<w>착하다</w>'의 '착'</li>
+<li>한 단어 안에서 형태소를 나눌 때는 '나눈 부분이 다른 단어에서도 같은 뜻으로 쓰이는가'를 확인해요: '맨손'의 '맨-'은 '맨발, 맨주먹'에도 쓰이므로 형태소예요.</li></ul>`;
+
+MORE["danei-2"] = `
+<h4>직접 구성 성분으로 따지기</h4>
+<p>형태소가 셋 이상인 단어는 <b>처음 둘로 나눌 때</b>의 관계로 파생어인지 합성어인지 정해요.</p>
+<table class="tbl"><tr><th>단어</th><th>처음 나누기</th><th>결과</th></tr>
+<tr><td><w>해돋이</w></td><td>[해 + 돋-] + -이</td><td>파생어 (합성 어근 + 접미사)</td></tr>
+<tr><td><w>헛웃음</w></td><td>헛- + [웃음]</td><td>파생어</td></tr>
+<tr><td><w>손목시계</w></td><td>[손목] + [시계]</td><td>합성어</td></tr>
+<tr><td><w>코웃음</w></td><td>코 + [웃음]</td><td>합성어</td></tr>
+<tr><td><w>비웃음</w></td><td>[비웃-] + -음</td><td>파생어</td></tr></table>
+<h4>어근과 어간은 다르다</h4>
+<p><b>어근</b>은 단어를 만드는 관점(단어 형성)에서 중심 부분이고, <b>어간</b>은 활용하는 관점에서 바뀌지 않는 부분이에요. '<w>높이다</w>'의 어간은 '높이-', 어근은 '높-'이에요.</p>
+<h4>합성할 때 소리나 모양이 바뀌는 경우</h4>
+<div class="ex">'ㄹ' 탈락: 솔+나무→<w>소나무</w>, 바늘+질→바느질 &nbsp;|&nbsp; 'ㅂ'이 덧남: 조+쌀→<w>좁쌀</w>, 대+싸리→<w>댑싸리</w> &nbsp;|&nbsp; 'ㅎ'이 덧남: 안+밖→<w>안팎</w>, 살+고기→<w>살코기</w> &nbsp;|&nbsp; 'ㄹ'이 'ㄷ'으로: 이틀+날→<w>이튿날</w>, 술+가락→<w>숟가락</w></div>
+<h4>접미사가 붙어 생기는 품사 변화 정리</h4>
+<table class="tbl"><tr><th>접미사</th><th>예</th><th>품사</th></tr>
+<tr><td>-이, -음, -기, -개</td><td>먹이, 웃음, 달리기, 덮개</td><td>명사</td></tr>
+<tr><td>-이-, -히-, -리-, -기-, -우-, -추- (사동·피동)</td><td>높이다, 넓히다, 울리다, 맡기다</td><td>동사</td></tr>
+<tr><td>-답-, -롭-, -스럽-, -하-</td><td>정답다, 향기롭다, 자랑스럽다, 깨끗하다</td><td>형용사</td></tr>
+<tr><td>-이, -히</td><td>많이, 조용히</td><td>부사</td></tr></table>`;
+
+MORE["danei-3"] = `
+<h4>품사를 판단할 때 주의할 점</h4>
+<ul><li><b>의미만 보고 정하면 틀려요.</b> '빠르다'(형용사)와 '빨리'(부사)는 뜻이 비슷하지만 품사가 달라요. 문장에서 어떤 <b>기능</b>을 하고 <b>형태</b>가 어떻게 바뀌는지를 먼저 봐요.</li>
+<li>같은 단어도 문장에 따라 품사가 달라질 수 있어요(품사 통용). 반드시 <b>문장 속에서</b> 판단해요.</li>
+<li>조사는 형태가 변하지 않는 불변어지만, 서술격 조사 '이다'만은 활용해요(이고, 이니, 이어서).</li></ul>
+<h4>품사와 문장 성분은 다르다</h4>
+<p>품사는 <b>단어</b>의 갈래이고, 문장 성분은 <b>문장 속 역할</b>이에요. 명사 '학교'는 '학교가 크다'에서는 주어, '학교에 간다'에서는 부사어(학교에)가 돼요. 형용사 '예쁜'은 품사로는 형용사지만 문장 성분으로는 관형어예요.</p>`;
+
+MORE["danei-4"] = `
+<h4>유정 명사와 무정 명사</h4>
+<p>감정을 가진 사람·동물은 <b>유정 명사</b>, 그 밖은 <b>무정 명사</b>예요. 부사격 조사 선택이 달라져요: 친구<b>에게</b> 편지를 보냈다 / 학교<b>에</b> 편지를 보냈다.</p>
+<h4>의존 명사·조사·어미 구별 (띄어쓰기와 직결)</h4>
+<table class="tbl"><tr><th>형태</th><th>의존 명사 (띄어 씀)</th><th>조사·어미 (붙여 씀)</th></tr>
+<tr><td>데</td><td>지금 가는 <b>데</b>가 어디니? (곳)</td><td>밥을 먹는<b>데</b> 전화가 왔다 (어미 '-는데')</td></tr>
+<tr><td>지</td><td>떠난 <b>지</b> 3년이 되었다 (시간)</td><td>그가 올<b>지</b> 모르겠다 (어미 '-ㄹ지')</td></tr>
+<tr><td>뿐</td><td>웃을 <b>뿐</b>이다</td><td>너<b>뿐</b>이야 (조사)</td></tr>
+<tr><td>만큼</td><td>노력한 <b>만큼</b> 얻는다</td><td>너<b>만큼</b> 해라 (조사)</td></tr>
+<tr><td>바</td><td>내가 아는 <b>바</b>를 말하겠다</td><td>서류를 검토한<b>바</b> 문제가 없었다 (어미 '-ㄴ바')</td></tr></table>
+<div class="tip">판별 요령: 앞에 관형어(관형사형 '-ㄴ, -는, -ㄹ')가 있고 뒤에 조사를 붙일 수 있으면 의존 명사예요.</div>
+<h4>대명사 더 보기</h4>
+<ul><li>'우리'는 듣는 사람을 포함할 수도(우리 같이 가자), 포함하지 않을 수도(우리가 먼저 갈게) 있어요.</li>
+<li>'저'는 1인칭 낮춤말(저는 학생입니다)과 재귀칭(동생이 저만 안다)으로 쓰여요.</li>
+<li>'그'는 대명사(그는 학생이다)일 수도, 관형사(그 사람)일 수도 있어요.</li></ul>
+<h4>수사 vs 명사</h4>
+<p>'첫째'는 순서를 나타내면 수사(첫째로 도착했다)지만, '맏이'를 뜻하면 명사(우리 집 첫째는 대학생이다)예요.</p>`;
+
+MORE["danei-5"] = `
+<h4>조사의 특징</h4>
+<ul><li><b>생략</b>: 격 조사는 자주 생략돼요 — 나 (는) 밥 (을) 먹었어.</li>
+<li><b>결합</b>: 여러 조사가 겹칠 수 있어요 — 학교<b>에서부터</b>, 너<b>에게만은</b>. 보통 '격 조사 + 보조사' 순서예요.</li>
+<li>'이다'는 모음 뒤에서 '이'가 생략되기도 해요: 친구이다 → 친구다.</li></ul>
+<h4>'이/가'와 '은/는'</h4>
+<table class="tbl"><tr><th></th><th>이/가 (주격 조사)</th><th>은/는 (보조사)</th></tr>
+<tr><td>정보</td><td>새로운 정보를 소개: 옛날에 한 소년<b>이</b> 살았다</td><td>이미 아는 정보(화제): 그 소년<b>은</b> 착했다</td></tr>
+<tr><td>의미</td><td>여럿 중 하나를 지정: 철수<b>가</b> 범인이다</td><td>대조: 사과<b>는</b> 좋아하지만 배<b>는</b> 싫어</td></tr>
+<tr><td>성분</td><td>항상 주어(또는 보어)</td><td>주어, 목적어, 부사어 어디에든 붙음: 책<b>은</b> 읽었다(목적어)</td></tr></table>
+<h4>부사격 조사의 여러 의미</h4>
+<table class="tbl"><tr><th>조사</th><th>의미와 예</th></tr>
+<tr><td>에</td><td>장소(집에 있다), 시간(아침에), 원인(바람에 꺾였다), 대상(꽃에 물을 주다)</td></tr>
+<tr><td>에서</td><td>장소(교실에서 공부하다), 출발점(서울에서 왔다)</td></tr>
+<tr><td>(으)로</td><td>방향(학교로), 재료(나무로 만든), 수단(칼로), 자격(반장으로), 원인(병으로)</td></tr>
+<tr><td>와/과</td><td>동반(친구와 갔다), 비교(형과 닮았다)</td></tr></table>`;
+
+MORE["danei-6"] = `
+<h4>보조 용언 구별하기</h4>
+<ul><li>본용언은 자기 뜻을 그대로 갖고, 보조 용언은 원래 뜻이 약해지고 문법적 의미를 더해요: 사과를 깎아 <b>먹었다</b>(본용언: 실제로 먹음) / 책을 읽어 <b>보았다</b>(보조 용언: 시도).</li>
+<li>보조 용언은 혼자 서술어가 될 수 없어요: *책을 보았다(시도의 뜻으로는 불가).</li>
+<li>본용언과 보조 용언 사이에는 다른 말이 들어가기 어려워요.</li></ul>
+<table class="tbl"><tr><th>의미</th><th>보조 용언</th><th>예</th></tr>
+<tr><td>진행</td><td>-고 있다</td><td>먹고 있다</td></tr>
+<tr><td>완료</td><td>-어 버리다, -고 말다</td><td>다 써 버렸다</td></tr>
+<tr><td>시도</td><td>-어 보다</td><td>입어 보다</td></tr>
+<tr><td>희망</td><td>-고 싶다</td><td>가고 싶다</td></tr>
+<tr><td>부정</td><td>-지 않다, -지 못하다, -지 말다</td><td>가지 않다</td></tr>
+<tr><td>봉사</td><td>-어 주다, -어 드리다</td><td>도와 주다</td></tr></table>
+<div class="tip">'-지 않다, -지 못하다'는 본용언의 품사를 따라가요: 먹지 <b>않는다</b>(보조 동사) / 예쁘지 <b>않다</b>(보조 형용사).</div>
+<h4>어미의 종류 더 보기</h4>
+<ul><li>선어말 어미는 순서가 정해져 있어요: 어간 + <b>-시-</b> + <b>-었-</b> + <b>-겠-</b> + 어말 어미 → 가<b>시었겠</b>다(가셨겠다)</li>
+<li>전성 어미는 용언을 다른 품사처럼 쓰게 하지만 <b>품사 자체는 바뀌지 않아요</b>: '달리기'(명사, 파생)와 '빨리 달리기가 어렵다'의 '달리기'(동사의 명사형, 부사 '빨리'의 꾸밈을 받음)를 구별해요.</li></ul>
+<h4>불규칙 활용 판별 요령</h4>
+<p>같은 받침을 가진 규칙 용언과 짝지어 외우면 쉬워요.</p>
+<div class="ex">ㅅ: 짓다(지어) ↔ 웃다(웃어) &nbsp;|&nbsp; ㄷ: 걷다(걸어, 걸음) ↔ 걷다(걷어, 거두다의 뜻) &nbsp;|&nbsp; ㅂ: 덥다(더워) ↔ 좁다(좁아) &nbsp;|&nbsp; 르: 부르다(불러) ↔ 따르다(따라) &nbsp;|&nbsp; ㅎ: 노랗다(노래) ↔ 좋다(좋아)</div>`;
+
+MORE["danei-7"] = `
+<h4>관형사와 헷갈리는 것</h4>
+<table class="tbl"><tr><th>구별</th><th>예</th></tr>
+<tr><td>관형사 vs 접두사</td><td><b>새</b> 옷(관형사, 띄어 씀) / <w>새빨갛다</w>(접두사, 붙여 씀)</td></tr>
+<tr><td>관형사 vs 용언의 관형사형</td><td><b>다른</b> 사람(관형사 '다른': 그 밖의) / 나와 <b>다른</b> 생각(형용사 '다르다'의 활용: 같지 않은)</td></tr>
+<tr><td>관형사 vs 대명사</td><td><b>이</b> 책(관형사) / <b>이</b>는 내 책이다(대명사, 조사가 붙음)</td></tr></table>
+<p>관형사 여러 개가 함께 쓰일 때는 <b>지시 → 수 → 성상</b> 순서예요: 저 두 헌 책.</p>
+<h4>부사 더 보기</h4>
+<ul><li>부사는 보조사를 붙일 수 있어요: 빨리<b>도</b> 왔네, 잘<b>은</b> 모르겠다.</li>
+<li>부사가 체언을 꾸미기도 해요: <b>바로</b> 앞, <b>겨우</b> 하나, <b>아주</b> 부자</li>
+<li>부사가 다른 부사나 관형사를 꾸미기도 해요: <b>아주</b> 빨리, <b>아주</b> 새 차</li>
+<li>문장 부사는 문장 전체를 꾸며요: <b>다행히</b> 비가 그쳤다, <b>설마</b> 그가 왔겠어?</li></ul>
+<h4>감탄사의 특징</h4>
+<p>감탄사는 위치가 자유롭고, 문장의 다른 성분과 관계없이 독립어로 쓰여요. 혼자서 한 문장이 되기도 해요: "네." "어머나!"</p>`;
+
+MORE["danei-8"] = `
+<h4>고유어 · 한자어 · 외래어의 특징</h4>
+<ul><li><b>고유어</b>: 감각을 나타내는 말이 섬세해요 — <w>노랗다</w>, <w>샛노랗다</w>, <w>누렇다</w>, <w>노르스름하다</w>, <w>누르께하다</w></li>
+<li><b>한자어</b>: 고유어 하나에 여러 한자어가 대응해 뜻을 세밀하게 나눠요 — '고치다' → 수리하다(기계), 수정하다(글), 치료하다(병), 개정하다(법). 또 격식을 갖추거나 높이는 느낌을 줘요(이 → 치아, 나이 → 연세).</li>
+<li><b>외래어</b>: 우리말 체계에 들어와 국어처럼 쓰이는 말(버스, 라디오). 아직 국어로 자리 잡지 못하고 외국어 그대로 쓰는 말은 <b>외국어</b>예요. 오래전에 들어와 외래어라는 느낌이 거의 없어진 말을 <b>귀화어</b>라고 해요(<w>붓</w>, <w>담배</w>).</li></ul>
+<h4>어휘 양상의 쓰임과 문제점</h4>
+<table class="tbl"><tr><th>종류</th><th>긍정적 기능</th><th>주의할 점</th></tr>
+<tr><td>지역 방언</td><td>지역 정체성, 친근감, 국어의 옛 모습 간직</td><td>다른 지역 사람과 소통이 어려울 수 있음</td></tr>
+<tr><td>사회 방언 · 은어</td><td>집단 내 유대감, 효율적 소통</td><td>집단 밖 사람을 소외시킴</td></tr>
+<tr><td>전문어</td><td>개념을 정확하고 간결하게 전달</td><td>일반인이 이해하기 어려움</td></tr>
+<tr><td>새말 · 유행어</td><td>새 개념 표현, 시대 반영</td><td>세대 간 소통 단절, 금방 사라지기도 함</td></tr></table>
+<h4>새말이 만들어지는 방법</h4>
+<p>합성(누리꾼 = 누리 + 꾼), 파생, 줄임(문자 메시지 → 문자), 기존 단어에 새 뜻 더하기(창 → 컴퓨터 화면의 창), 외국어 차용 등이 있어요. 국립국어원은 어려운 외국어를 쉬운 우리말로 다듬은 말을 제안하기도 해요(스크린도어 → 안전문).</p>`;
+
+MORE["danei-9"] = `
+<h4>의미 성분 분석</h4>
+<p>단어의 의미를 더 작은 의미 요소로 나누어 나타내는 방법이에요. 반의어와 상하 관계를 설명할 때 유용해요.</p>
+<table class="tbl center"><tr><th></th><th>[사람]</th><th>[남성]</th><th>[성인]</th></tr>
+<tr><td>소년</td><td>+</td><td>+</td><td>−</td></tr><tr><td>소녀</td><td>+</td><td>−</td><td>−</td></tr>
+<tr><td>남자 어른</td><td>+</td><td>+</td><td>+</td></tr></table>
+<p>'소년'과 '소녀'는 [남성] 하나만 달라서 반의 관계예요. '소년'과 '남자 어른'도 [성인] 하나만 다르니 반의 관계로 볼 수 있어요.</p>
+<h4>유의어는 바꾸어 쓸 수 있을까?</h4>
+<p>유의어라도 문맥에 따라 바꿀 수 없는 경우가 많아요: 밥을 <b>먹다</b> → 식사를 하다 (O), 식사를 먹다 (X) / <b>틈</b>이 나다 = <b>겨를</b>이 나다 (O), 문에 <b>틈</b>이 있다 → 문에 <b>겨를</b>이 있다 (X).</p>
+<h4>다의어의 의미 확장 방향</h4>
+<ul><li>구체적인 것 → 추상적인 것: 손에 쥐다 → 권력을 <b>쥐다</b></li>
+<li>사람 → 사물: 사람의 <b>다리</b> → 책상 <b>다리</b></li>
+<li>공간 → 시간: <b>앞</b> 건물 → <b>앞</b>으로의 계획</li></ul>
+<h4>다의어와 동음이의어를 구별하는 요령</h4>
+<p>두 뜻 사이에 <b>의미상 연관성</b>이 있으면 다의어, 없으면 동음이의어예요. 사전에서 한 표제어 안에 ①, ②로 실렸는지, 표제어가 따로(¹, ²) 있는지로 확인할 수 있어요. 시험에 자주 나오는 예: <w>쓰다</w>(글을 쓰다 / 모자를 쓰다 / 맛이 쓰다), <w>차다</w>(공을 차다 / 물이 가득 차다 / 바람이 차다).</p>`;
+
+MORE["danei-10"] = `
+<h4>중의성의 종류 더 보기</h4>
+<table class="tbl"><tr><th>종류</th><th>예</th><th>해석</th></tr>
+<tr><td>수식 범위</td><td>키가 큰 철수의 동생</td><td>키가 큰 사람이 철수인가, 동생인가</td></tr>
+<tr><td>접속 범위</td><td>철수와 영희는 결혼했다</td><td>둘이 서로 결혼 / 각자 다른 사람과 결혼</td></tr>
+<tr><td>동작의 진행·완료</td><td>그는 넥타이를 매고 있다</td><td>매는 중 / 맨 상태</td></tr>
+<tr><td>은유</td><td>그는 여우다</td><td>실제 동물 / 꾀가 많은 사람</td></tr></table>
+<h4>중의성 해소 예시</h4>
+<div class="ex">키가 큰 철수의 동생 → 키가 큰, 철수의 동생 / 철수의 키가 큰 동생<br>
+학생들이 다 오지 않았다 → 학생들이 다 오지는 않았다(일부만 옴) / 학생들이 아무도 오지 않았다(전부 안 옴)</div>
+<h4>전제와 함의 판별 방법</h4>
+<p>문장을 <b>부정</b>해 봐요. "철수가 담배를 끊지 않았다"에서도 '철수는 담배를 피웠다'는 여전히 참이므로 전제예요. 반면 "철수가 유리창을 깨지 않았다"에서는 '유리창이 깨졌다'가 참인지 알 수 없으므로 함의예요.</p>
+<div class="tip">상하 관계도 함의를 만들어요: "이것은 장미다"가 참이면 "이것은 꽃이다"도 반드시 참이에요.</div>`;
+
+/* ===== 문장 ===== */
+MORE["munjang-1"] = `
+<h4>문장 성분은 조사가 아니라 '역할'로 정한다</h4>
+<table class="tbl"><tr><th>헷갈리는 경우</th><th>예</th><th>성분</th></tr>
+<tr><td>'에서'가 붙은 단체</td><td><b>학교에서</b> 상을 주었다</td><td>주어 (상을 준 주체)</td></tr>
+<tr><td>'에서'가 붙은 장소</td><td><b>학교에서</b> 공부했다</td><td>부사어</td></tr>
+<tr><td>보조사가 붙은 목적어</td><td><b>책도</b> 읽었다, <b>밥만</b> 먹었다</td><td>목적어</td></tr>
+<tr><td>조사 생략</td><td><b>나</b> 숙제 다 했어</td><td>주어(나), 목적어(숙제)</td></tr>
+<tr><td>'이/가'가 붙었지만 주어가 아님</td><td>물이 <b>얼음이</b> 되었다</td><td>보어</td></tr></table>
+<h4>관형어와 부사어 더 보기</h4>
+<ul><li>관형어는 혼자 쓰일 수 없고 반드시 체언 앞에 와요. 의존 명사 앞에서는 관형어가 꼭 필요해요: 먹을 <b>것</b>, 아는 <b>바</b>.</li>
+<li>관형어가 되는 방법: 관형사(새 옷), 체언(시골 풍경), 체언 + '의'(나의 꿈), 용언의 관형사형(예쁜 꽃), 관형절(내가 본 영화)</li>
+<li>부사어는 <b>성분 부사어</b>(특정 성분을 꾸밈: 아주 빠르다)와 <b>문장 부사어</b>(문장 전체를 꾸밈: 과연 그가 왔다)로 나뉘어요. 접속 부사(그리고, 그러나)도 부사어로 봐요.</li></ul>
+<h4>문장 성분 분석 순서</h4>
+<ol style="padding-left:20px"><li>서술어를 먼저 찾는다 (보통 문장 끝)</li>
+<li>서술어가 요구하는 성분(주어, 목적어, 보어, 필수적 부사어)을 찾는다</li>
+<li>남은 것 중 체언을 꾸미면 관형어, 용언이나 문장을 꾸미면 부사어, 홀로 떨어져 있으면 독립어</li></ol>`;
+
+MORE["munjang-2"] = `
+<h4>필수적 부사어를 요구하는 서술어</h4>
+<table class="tbl"><tr><th>서술어</th><th>요구하는 부사어</th><th>예</th></tr>
+<tr><td>같다, 다르다, 비슷하다, 닮다</td><td>~와/과</td><td>이것은 저것<b>과</b> 다르다</td></tr>
+<tr><td>넣다, 두다, 놓다</td><td>~에</td><td>책을 가방<b>에</b> 넣었다</td></tr>
+<tr><td>주다, 드리다, 보내다</td><td>~에게, ~께</td><td>할머니<b>께</b> 편지를 보냈다</td></tr>
+<tr><td>삼다, 여기다</td><td>~(으)로</td><td>그를 제자<b>로</b> 삼았다</td></tr>
+<tr><td>맞다, 알맞다, 적합하다</td><td>~에(게)</td><td>이 옷은 나<b>에게</b> 맞다</td></tr></table>
+<div class="tip">빼 보기 시험: 그 부사어를 빼면 문장이 불완전해지는가? "책을 넣었다"는 어디에 넣었는지 빠져 어색하므로 '가방에'는 필수적 부사어예요. "철수가 학교에서 공부했다"는 '학교에서'를 빼도 완전하므로 수의적 부사어예요.</div>
+<h4>의미에 따라 달라지는 자릿수</h4>
+<div class="ex"><w>먹다</w>: 밥을 먹다(두 자리) / 나이를 먹다(두 자리) &nbsp;|&nbsp; <w>되다</w>: 밥이 다 되었다(한 자리) / 물이 얼음이 되었다(두 자리) &nbsp;|&nbsp; <w>뜨다</w>: 해가 떴다(한 자리) / 눈을 떴다(두 자리)</div>`;
+
+MORE["munjang-3"] = `
+<h4>명사절 '-음'과 '-기'</h4>
+<p>'-(으)ㅁ'은 이미 일어났거나 확정된 일에, '-기'는 아직 일어나지 않은 일이나 과정에 자주 쓰여요: 그가 범인<b>임</b>을 알았다 / 내일 비가 오<b>기</b>를 바란다.</p>
+<p>명사절은 문장에서 여러 성분이 돼요: [그가 범인임]<b>이</b> 밝혀졌다(주어), [봄이 오기]<b>를</b> 기다린다(목적어), [집에 가기]<b>에</b> 바쁘다(부사어), [우리가 만나기] <b>전</b>(관형어).</p>
+<h4>관형절의 시제</h4>
+<table class="tbl"><tr><th>어미</th><th>동사</th><th>형용사</th></tr>
+<tr><td>-(으)ㄴ</td><td>과거: 내가 <b>읽은</b> 책</td><td>현재: <b>예쁜</b> 꽃</td></tr>
+<tr><td>-는</td><td>현재: 내가 <b>읽는</b> 책</td><td>(쓰지 않음)</td></tr>
+<tr><td>-(으)ㄹ</td><td>미래: 내가 <b>읽을</b> 책</td><td>추측: 예쁠 것 같다</td></tr>
+<tr><td>-던</td><td>과거 회상·미완: 내가 <b>읽던</b> 책</td><td>과거 회상: <b>예쁘던</b> 꽃</td></tr></table>
+<h4>긴 동격 관형절과 짧은 동격 관형절</h4>
+<ul><li>긴 동격 관형절: '-다는, -라는' 형태 — 그가 합격했<b>다는</b> 소식</li>
+<li>짧은 동격 관형절: 관형사형 어미만 — 그가 합격<b>한</b> 사실</li>
+<li>'소문, 소식, 주장' 같은 말은 긴 형태만, '사건, 경험' 같은 말은 짧은 형태만, '사실'은 둘 다 쓰여요.</li></ul>
+<h4>부사절 더 보기</h4>
+<p>'-이' 결합형: [돈도 없<b>이</b>], [소리도 없<b>이</b>], [형과 달<b>리</b>], [약속한 바와 같<b>이</b>]. '-게, -도록, -듯이'도 부사절을 만들어요: [발이 아프<b>도록</b>] 걸었다, [비가 오<b>듯이</b>] 땀이 흘렀다.</p>
+<h4>인용절 바꾸기 연습</h4>
+<div class="ex">직접: 동생이 "<b>내가</b> <b>내일</b> 숙제를 할게."라고 말했다.<br>간접: 동생이 <b>자기가</b> <b>다음 날</b> 숙제를 하겠다고 말했다.<br>→ 인칭(내가→자기가), 시간(내일→다음 날), 종결 어미(-ㄹ게→-겠다), 조사(라고→고)</div>`;
+
+MORE["munjang-4"] = `
+<h4>연결 어미와 의미 관계</h4>
+<table class="tbl"><tr><th>의미</th><th>어미</th><th>예</th></tr>
+<tr><td>나열</td><td>-고, -(으)며</td><td>바람이 불고 비가 온다</td></tr>
+<tr><td>대조</td><td>-(으)나, -지만</td><td>키는 크지만 힘은 약하다</td></tr>
+<tr><td>선택</td><td>-거나, -든지</td><td>산에 가거나 바다에 간다</td></tr>
+<tr><td>원인</td><td>-아서/-어서, -(으)니, -(으)므로</td><td>비가 와서 소풍이 취소되었다</td></tr>
+<tr><td>조건</td><td>-(으)면, -거든</td><td>봄이 오면 꽃이 핀다</td></tr>
+<tr><td>양보</td><td>-아도/-어도, -더라도</td><td>비가 오더라도 가겠다</td></tr>
+<tr><td>의도·목적</td><td>-(으)려고, -(으)러</td><td>책을 사러 서점에 갔다</td></tr>
+<tr><td>배경</td><td>-(으)ㄴ데, -는데</td><td>집에 가는데 비가 왔다</td></tr></table>
+<div class="tip">'-고'는 나열이면 대등, 시간 순서(밥을 먹고 학교에 갔다)면 종속으로 보기도 해요. 앞뒤를 바꿔 의미가 유지되는지 확인해요.</div>`;
+
+MORE["munjang-5"] = `
+<h4>의문문 더 보기</h4>
+<ul><li>설명 의문문은 '누구, 무엇, 어디, 언제, 왜' 같은 의문사가 있고, 판정 의문문은 '예/아니요'로 답해요. "어디 가니?"는 억양에 따라 두 가지 모두 될 수 있어요(어디에 가는지 물음 / 어딘가에 가는지 물음).</li>
+<li>수사 의문문은 대답을 바라지 않고 강조(그걸 누가 모르니?), 명령(빨리 못 가니?), 감탄(얼마나 아름다운가!)을 나타내요.</li></ul>
+<h4>명령문과 청유문의 제약</h4>
+<ul><li>주어가 2인칭(명령), 1·2인칭 함께(청유)여야 해요.</li>
+<li>서술어로 동사만 쓸 수 있어요: *예뻐라(명령), *착하자(청유)</li>
+<li>시제 선어말 어미 '-었-, -겠-'과 함께 쓰지 않아요: *먹었어라</li>
+<li>청유문이 실제로는 요청을 나타내기도 해요: (버스에서) 좀 내립시다 → 비켜 달라는 뜻</li></ul>
+<h4>종결 어미와 상대 높임의 결합</h4>
+<table class="tbl"><tr><th></th><th>하십시오체</th><th>해요체</th><th>해라체</th></tr>
+<tr><td>평서</td><td>갑니다</td><td>가요</td><td>간다</td></tr>
+<tr><td>의문</td><td>갑니까?</td><td>가요?</td><td>가니?/가냐?</td></tr>
+<tr><td>명령</td><td>가십시오</td><td>가세요</td><td>가라</td></tr>
+<tr><td>청유</td><td>가시지요</td><td>가요</td><td>가자</td></tr></table>`;
+
+MORE["munjang-6"] = `
+<h4>높임 어휘 모음</h4>
+<table class="tbl"><tr><th>보통 말</th><th>높임말</th><th>보통 말</th><th>높임말</th></tr>
+<tr><td>밥</td><td><w>진지</w></td><td>있다</td><td>계시다 / 있으시다</td></tr>
+<tr><td>나이</td><td><w>연세</w>, <w>춘추</w></td><td>자다</td><td>주무시다</td></tr>
+<tr><td>집</td><td><w>댁</w></td><td>먹다</td><td>잡수시다, 드시다</td></tr>
+<tr><td>이(치아)</td><td>치아</td><td>아프다</td><td>편찮으시다</td></tr>
+<tr><td>말</td><td>말씀</td><td>죽다</td><td>돌아가시다</td></tr></table>
+<h4>겸양 표현: 나를 낮추어 상대를 높임</h4>
+<p>나 → <b>저</b>, 우리 → <b>저희</b>, 말하다 → <b>말씀드리다</b>. '말씀'은 높임말(선생님의 말씀)과 겸양어(제가 말씀을 드리겠습니다)로 모두 쓰여요.</p>
+<h4>주체 높임에서 자주 틀리는 것</h4>
+<ul><li>사물 높임(X): 주문하신 커피 나오셨습니다 → 나왔습니다</li>
+<li>'있다'의 두 높임: 할아버지께서 방에 <b>계신다</b>(주체가 존재함) / 할아버지께서는 걱정거리가 <b>있으시다</b>(주체의 소유물)</li>
+<li>'-시-'는 주체를 높이는 표지라서, 듣는 사람을 높이는 상대 높임과 따로 작동해요: 할머니께서 오셨어(주체 높임 O, 상대 높임 해체)</li></ul>
+<h4>객체 높임의 역사</h4>
+<p>중세 국어에서는 객체 높임 선어말 어미 '-<span class="old">ᄉᆞᆸ</span>-'이 있었지만, 현대 국어에서는 사라지고 '께, 드리다, 모시다, 여쭙다, 뵙다' 같은 조사와 어휘로만 실현돼요.</p>`;
+
+MORE["munjang-7"] = `
+<h4>과거 시제 선어말 어미의 차이</h4>
+<table class="tbl"><tr><th>어미</th><th>의미</th><th>예</th></tr>
+<tr><td>-았/었-</td><td>과거, 완료된 상태</td><td>꽃이 피었다(지금 피어 있음)</td></tr>
+<tr><td>-았었/었었-</td><td>과거에 있던 일이 지금과 단절</td><td>작년에 서울에 살았었다(지금은 아님)</td></tr>
+<tr><td>-더-</td><td>말하는 이가 과거에 직접 보고 느낀 것을 회상</td><td>그가 노래를 잘하더라</td></tr></table>
+<div class="tip">'-더-'는 평서문에서 1인칭 주어와 어울리기 어려워요: *내가 학교에 가더라(꿈속처럼 자신을 객관적으로 볼 때만 가능).</div>
+<h4>'-겠-'의 여러 의미</h4>
+<p>미래(내일 비가 오겠다), 추측(지금쯤 도착했겠다 — 과거의 일 추측), 의지(제가 하겠습니다), 가능성(그 정도는 나도 하겠다), 완곡(처음 뵙겠습니다).</p>
+<h4>현재 시제가 미래를 나타낼 때</h4>
+<p>확정된 미래 일은 현재 시제로 말하기도 해요: 나는 내일 부산에 <b>간다</b>. 이때 시간 부사 '내일'이 미래를 알려 줘요.</p>`;
+
+MORE["munjang-8"] = `
+<h4>피동사와 사동사가 모양이 같을 때</h4>
+<p>'보이다, 잡히다, 업히다, 안기다, 물리다'처럼 피동사와 사동사의 형태가 같은 경우가 있어요. <b>목적어가 있으면 사동</b>, 없으면 피동으로 판단하는 경우가 많아요.</p>
+<div class="ex">피동: 아이가 엄마에게 <b>안겼다</b>. / 산이 <b>보인다</b>.<br>사동: 엄마가 아이를 아빠에게 <b>안겼다</b>. / 동생에게 사진을 <b>보였다</b>.</div>
+<h4>피동문을 쓰는 이유와 제약</h4>
+<ul><li>행위의 주체를 드러내지 않거나(창문이 깨졌다), 대상에 초점을 맞출 때(범인이 경찰에게 잡혔다) 써요.</li>
+<li>모든 능동사가 피동사를 갖지는 않아요: 주다, 받다, 만나다, 던지다, 배우다 등은 피동사가 없어요.</li>
+<li>능동문과 피동문의 의미가 달라지기도 해요: 포수 열 명이 사슴 한 마리를 잡았다 / 사슴 한 마리가 포수 열 명에게 잡혔다.</li></ul>
+<h4>사동문 더 보기</h4>
+<ul><li>사동 접미사가 둘 겹치기도 해요: 자다 → 재우다(자-+-이-+-우-), 서다 → 세우다</li>
+<li>파생적 사동은 주어가 직접 행동했는지(엄마가 직접 밥을 떠먹였다), 시키기만 했는지(밥을 먹도록 했다) 중의적이에요. '-게 하다'는 대체로 간접 사동이에요.</li>
+<li>주동문의 주어는 사동문에서 목적어(아이를 울렸다)나 부사어(아이에게 옷을 입혔다)가 되고, 새로운 주어(시키는 사람)가 생겨요.</li></ul>`;
+
+MORE["munjang-9"] = `
+<h4>부정 표현의 제약</h4>
+<ul><li>'안' 짧은 부정은 긴 동사와 잘 어울리지 않아요: *안 공부하다 → 공부 안 하다, 공부하지 않다</li>
+<li>'못'은 의지와 관계없는 동사와 어울리지 않아요: *못 걱정하다, *못 실망하다</li>
+<li>'알다, 견디다' 같은 동사는 '안' 부정이 어색해요: *안 알다 → 모르다</li></ul>
+<h4>'말다' 부정의 예외</h4>
+<p>'-지 말다'는 명령·청유에 쓰지만, 바람을 나타낼 때는 평서문에도 써요: 비가 오지 <b>말았으면</b> 좋겠다.</p>
+<h4>부정과 함께 쓰는 말</h4>
+<p>'결코, 전혀, 별로, 아무도, 조금도'는 부정 표현과 함께 쓰여요: 그는 <b>전혀</b> 모른다 (*전혀 안다).</p>
+<h4>이중 부정</h4>
+<p>부정을 두 번 하면 강한 긍정이 돼요: 가지 않을 수 없다(반드시 가야 한다), 모르지 않는다(안다).</p>`;
+
+/* ===== 담화 ===== */
+MORE["damhwa-1"] = `
+<h4>문장과 발화 비교</h4>
+<table class="tbl"><tr><th></th><th>문장</th><th>발화</th></tr>
+<tr><td>단위</td><td>문법 단위</td><td>의사소통 단위</td></tr>
+<tr><td>맥락</td><td>맥락과 상관없이 의미 파악</td><td>맥락 속에서 의도 파악</td></tr>
+<tr><td>형식</td><td>주어-서술어 등을 갖춰 완결</td><td>단어 하나도 발화가 될 수 있음 ("불이야!")</td></tr></table>
+<h4>담화의 종류</h4>
+<p>입말 담화(대화, 강연, 토론, 전화 통화)와 글말 담화(편지, 신문 기사, 논설문, 광고문)가 있어요. 문자 메시지나 댓글처럼 입말과 글말의 성격을 함께 가진 담화도 많아졌어요.</p>`;
+
+MORE["damhwa-2"] = `
+<h4>맥락에 따라 달라지는 의미</h4>
+<table class="tbl"><tr><th>발화</th><th>맥락</th><th>의도</th></tr>
+<tr><td rowspan="2">"벌써 열 시네."</td><td>친구 집에서 놀다가</td><td>이제 집에 가야겠다</td></tr>
+<tr><td>늦잠 잔 자녀에게</td><td>빨리 일어나라</td></tr>
+<tr><td rowspan="2">"밥 먹었어?"</td><td>점심시간에 친구가</td><td>같이 먹으러 가자 / 인사</td></tr>
+<tr><td>병원에서 의사가</td><td>검사 전 금식 여부 확인</td></tr></table>
+<h4>참여자 관계와 표현</h4>
+<p>같은 요청도 상대와의 관계에 따라 달라져요: (친구에게) "펜 좀 빌려줘." / (선생님께) "선생님, 혹시 펜 좀 빌려주실 수 있을까요?" 높임 표현과 간접 표현이 함께 쓰여요.</p>
+<h4>사회·문화적 맥락의 예</h4>
+<ul><li>"언제 밥 한번 먹자."는 우리 문화에서 실제 약속보다는 친근함을 나타내는 인사로 쓰이기도 해요.</li>
+<li>같은 단어도 시대에 따라 의미나 가치가 달라져요(예: '아가씨', '선생님'의 쓰임 변화).</li></ul>`;
+
+MORE["damhwa-3"] = `
+<h4>응집성은 있지만 통일성이 없는 담화</h4>
+<div class="ex">나는 어제 <b>서점</b>에 갔다. <b>그</b> 서점은 역 앞에 있다. <b>역</b>은 1900년에 생겼다. <b>그때</b> 우리나라는 큰 변화를 겪었다.<br>→ 지시·반복 표현으로 문장은 연결되지만 하나의 주제로 묶이지 않아요.</div>
+<h4>담화다움의 일곱 기준</h4>
+<table class="tbl"><tr><th>기준</th><th>뜻</th></tr>
+<tr><td>응집성</td><td>표면의 언어 형식들이 문법적으로 연결됨</td></tr>
+<tr><td>통일성</td><td>내용이 하나의 주제로 일관됨</td></tr>
+<tr><td>의도성</td><td>발신자가 목적을 이루려는 의도를 가짐</td></tr>
+<tr><td>수용 가능성(용인성)</td><td>수신자가 의미 있는 담화로 받아들임</td></tr>
+<tr><td>정보성</td><td>새롭거나 예상하지 못한 정보를 담음</td></tr>
+<tr><td>상황성</td><td>담화가 놓인 상황에 적절함</td></tr>
+<tr><td>상호 텍스트성</td><td>다른 담화와의 관계 속에서 의미가 만들어짐 (패러디, 인용)</td></tr></table>
+<h4>지시 표현과 대용 표현</h4>
+<ul><li><b>지시 표현</b>: 대상을 직접 가리킴 — 이, 그, 저, 여기, 거기, 저기. 말하는 이의 위치를 기준으로 '지금, 여기, 나'를 가리키는 표현은 발화 상황을 알아야 해석돼요.</li>
+<li><b>대용 표현</b>: 앞에 나온 말을 대신함 — "나는 사과를 좋아해." "나도 <b>그래</b>."</li></ul>`;
+
+MORE["damhwa-4"] = `
+<h4>주제부와 설명부, 구정보와 신정보</h4>
+<p>대개 주제부에는 이미 알려진 정보(구정보)가, 설명부에는 새로운 정보(신정보)가 와요. 그래서 국어에서는 주제부에 보조사 '은/는'이, 새로 소개되는 대상에는 '이/가'가 자주 붙어요: 옛날에 한 나무꾼<b>이</b> 살았다(신정보). 나무꾼<b>은</b> 매일 산에 갔다(구정보).</p>
+<h4>거시 구조 만들기 연습</h4>
+<ol style="padding-left:20px"><li><b>삭제</b>: 중요하지 않은 세부 내용을 지움</li>
+<li><b>일반화</b>: 구체적인 예를 상위 개념으로 묶음 (사과, 배, 포도 → 과일)</li>
+<li><b>재구성</b>: 여러 내용을 하나의 핵심 문장으로 다시 씀</li></ol>
+<p>이 과정을 거치면 담화의 중심 내용(요약)이 드러나요. 독서의 '요약하기'와 같은 원리예요.</p>`;
+
+MORE["damhwa-5"] = `
+<h4>발화의 종류 (발화 수반 행위)</h4>
+<table class="tbl"><tr><th>종류</th><th>예</th></tr>
+<tr><td>진술(단언)</td><td>내일 비가 온대.</td></tr>
+<tr><td>지시(요청·명령·질문)</td><td>문 좀 열어 줄래?</td></tr>
+<tr><td>약속</td><td>내일 꼭 갚을게.</td></tr>
+<tr><td>표현(감사·사과·축하)</td><td>도와줘서 고마워.</td></tr>
+<tr><td>선언</td><td>지금부터 회의를 시작하겠습니다.</td></tr></table>
+<h4>간접 발화를 쓰는 이유</h4>
+<ul><li><b>공손함</b>: 상대에게 거절할 여지를 줘서 부담을 줄여요.</li>
+<li><b>완곡함</b>: 직접 말하기 어려운 내용을 부드럽게 전해요. ("요즘 좀 바쁘신가 봐요?" → 연락이 없어 서운함)</li>
+<li>다만 의도가 정확히 전달되지 않을 위험도 있어요. 듣는 사람은 맥락을 살펴 숨은 의도를 파악해야 해요.</li></ul>`;
+
+MORE["damhwa-6"] = `
+<h4>하나의 담화가 여러 기능을 가질 때</h4>
+<p>광고문은 상품 정보를 알리는 <b>제보</b> 기능과 구매를 권하는 <b>호소</b> 기능을 함께 가져요. 이럴 때는 <b>중심이 되는 기능</b>을 찾아야 해요. 광고의 궁극적 목적은 구매 유도이므로 중심 기능은 호소예요.</p>
+<h4>기능을 판단하는 단서</h4>
+<ul><li>제보: '~이다, ~했다'처럼 사실을 전달하는 표현이 많음</li>
+<li>호소: '~하자, ~해야 한다', 질문을 던져 생각을 유도하는 표현</li>
+<li>약속: '~하겠다, ~할 것을 약속한다'</li>
+<li>사교: 인사, 안부, 감사 표현</li>
+<li>선언: '~을 임명한다, ~에 처한다'처럼 말하는 순간 새로운 상황이 생김</li></ul>`;
+
+/* ===== 국어사 ===== */
+MORE["guksa-1"] = `
+<h4>시대 구분의 기준</h4>
+<p>국어사의 시대는 왕조가 바뀐 것 같은 <b>외부의 역사적 사건</b>보다, 국어 자체에 일어난 <b>체계적인 큰 변화</b>를 기준으로 나눠야 해요. 다만 국어의 중심지가 바뀐 것(경주 → 개성 → 서울)처럼 외부 사건이 언어 변화에 영향을 준 경우도 있어요.</p>
+<table class="tbl"><tr><th>시기</th><th>대표 자료</th></tr>
+<tr><td>고대 국어</td><td>삼국사기·삼국유사의 지명·인명 표기, 향가, 이두 자료</td></tr>
+<tr><td>전기 중세 국어</td><td>『계림유사』(12세기), 『향약구급방』(13세기)</td></tr>
+<tr><td>후기 중세 국어</td><td>『훈민정음』, 『용비어천가』, 『석보상절』, 『월인석보』</td></tr>
+<tr><td>근대 국어</td><td>『노걸대언해』(1670), 각종 언해서, 한글 소설</td></tr>
+<tr><td>현대 국어</td><td>『독립신문』(1896)부터 이어지는 근대적 신문·잡지, 「한글 맞춤법 통일안」(1933)</td></tr></table>`;
+
+MORE["guksa-2"] = `
+<h4>향찰 읽기 예: 「서동요」 첫 구절</h4>
+<div class="ex">善化公主主隱 → 선화 공주님은<br>
+· 善化公主: 고유 명사, 소리대로 읽음<br>
+· 主: '님'이라는 <b>뜻</b>을 빌림(훈차)<br>
+· 隱: '은'이라는 <b>소리</b>를 빌림(음차)</div>
+<p>이처럼 향찰은 뜻을 나타내는 부분(실질 형태소)은 주로 훈차로, 문법적 부분(조사·어미)은 주로 음차로 적었어요.</p>
+<h4>차자 표기의 한계</h4>
+<p>한자는 우리말과 소리 체계·문법이 달라서 우리말을 정확히 적기 어려웠어요. 같은 말을 여러 방식으로 적기도 하고, 읽는 법이 분명하지 않은 경우도 많아 오늘날에도 해독이 학자마다 다른 부분이 있어요. 이런 불편이 훈민정음 창제의 배경이 되었어요.</p>
+<h4>고유 명사 표기의 예</h4>
+<p>『삼국사기』의 지리지에는 같은 땅을 고유어식 이름과 한자식 이름으로 함께 적은 기록이 있어요. 두 이름을 비교하면 당시 우리말 단어를 짐작할 수 있어서 고대 국어 어휘 연구에 중요한 자료가 돼요.</p>`;
+
+MORE["guksa-3"] = `
+<h4>창제 정신 (서문에 드러난 생각)</h4>
+<table class="tbl"><tr><th>정신</th><th>서문 내용 (현대어 풀이)</th></tr>
+<tr><td>자주 정신</td><td>우리말이 중국과 달라 한자로는 서로 통하지 않음</td></tr>
+<tr><td>애민 정신</td><td>어리석은 백성이 말하고자 하는 바가 있어도 뜻을 펴지 못하는 이가 많음</td></tr>
+<tr><td>실용 정신</td><td>사람마다 쉽게 익혀 날마다 쓰는 데 편하게 하고자 함</td></tr></table>
+<h4>『훈민정음』 해례본의 구성</h4>
+<ul><li><b>예의</b>: 세종이 직접 쓴 서문과 글자의 소리값, 운용법</li>
+<li><b>해례</b>: 제자해, 초성해, 중성해, 종성해, 합자해, 용자례</li>
+<li><b>정인지 서</b>: 집현전 학사들이 쓴 해설과 창제 경위</li></ul>
+<p>해례본은 국보이자 1997년 유네스코 세계 기록 유산으로 등재되었어요.</p>
+<h4>가획의 원리와 이체자</h4>
+<p>소리가 세질수록 획을 더했어요: ㄱ → ㅋ, ㄴ → ㄷ → ㅌ, ㅁ → ㅂ → ㅍ, ㅅ → ㅈ → ㅊ, ㅇ → <span class="old">ㆆ</span> → ㅎ. 이체자 <span class="old">ㆁ</span>, ㄹ, <span class="old">ㅿ</span>은 획을 더했지만 소리가 세지는 원리와 관계가 없어요.</p>
+<h4>중성의 합용</h4>
+<p>기본 11자를 합쳐 다른 모음도 만들었어요: ㅗ+ㅏ → ㅘ, ㅜ+ㅓ → ㅝ, ㅏ+ㅣ → ㅐ, ㅓ+ㅣ → ㅔ, ㅗ+ㅣ → ㅚ. 그래서 적은 글자로 많은 소리를 나타낼 수 있었어요.</p>
+<h4>한글의 우수성</h4>
+<ul><li>발음 기관을 본뜬 <b>과학적</b> 원리</li>
+<li>기본자에 획을 더해 체계적으로 만든 <b>자질 문자</b>적 성격 (같은 조음 위치의 소리가 비슷한 모양)</li>
+<li>초성·중성·종성을 모아 음절 단위로 쓰는 <b>모아쓰기</b></li>
+<li>창제자, 창제 시기, 창제 원리가 기록으로 남은 드문 문자</li></ul>`;
+
+MORE["guksa-4"] = `
+<h4>표기법의 예외와 변화</h4>
+<ul><li>『용비어천가』와 『월인천강지곡』에서는 형태를 밝혀 적거나 8종성 이외의 받침을 쓰기도 했어요(종성부용초성 원리 적용). 예: 『용비어천가』의 '곶'(꽃)</li>
+<li>15세기에는 이어 적기가 원칙이었지만, 16세기 이후 끊어 적기(분철)와 거듭 적기(중철, 예: '<span class="old">사ᄅᆞᆷ미</span>')가 점점 늘어났어요.</li></ul>
+<h4>사라진 글자의 소리와 운명</h4>
+<table class="tbl"><tr><th>글자</th><th>소리</th><th>변화</th></tr>
+<tr><td><span class="old">ㅸ</span></td><td>입술을 가볍게 하여 내는 소리 [β]</td><td>15세기 중엽 소멸, 반모음 w나 'ㅂ'으로 (더<span class="old">ᄫᅥ</span> → 더워)</td></tr>
+<tr><td><span class="old">ㆆ</span></td><td>성문 폐쇄음</td><td>주로 한자음 표기, 15세기 후반 소멸</td></tr>
+<tr><td><span class="old">ㅿ</span></td><td>[z]와 비슷한 소리</td><td>16세기 후반 소멸 (<span class="old">ᄆᆞᅀᆞᆷ</span> → 마음)</td></tr>
+<tr><td><span class="old">ㆁ</span></td><td>[ŋ]</td><td>모양이 'ㅇ'과 합쳐짐 (받침 'ㅇ' 소리로 남음)</td></tr>
+<tr><td><span class="old">ㆍ</span></td><td>[ʌ]와 비슷한 후설 모음</td><td>16세기 둘째 음절 이하, 18세기 첫음절에서 소실 → 1933년 표기에서 폐지</td></tr></table>
+<h4>방점 읽기</h4>
+<p>글자 왼쪽에 점이 없으면 낮은 소리(평성), 한 점이면 높은 소리(거성), 두 점이면 낮다가 높아지는 소리(상성)예요. 상성은 오늘날 경상도 방언의 성조나 표준어의 <b>긴소리</b>로 이어진 경우가 많아요.</p>`;
+
+MORE["guksa-5"] = `
+<h4>선어말 어미 '-오-/-우-'</h4>
+<p>중세 국어에는 현대에 없는 선어말 어미 '-오-/-우-'가 있었어요. 주어가 말하는 이 자신(1인칭)일 때 서술어에 붙거나, 관형절에서 꾸밈을 받는 말이 관형절의 목적어일 때 붙었어요. 근대 국어로 오면서 사라졌어요.</p>
+<h4>명사형 어미</h4>
+<p>중세 국어의 명사형 어미는 주로 '-옴/-움'이었어요(<span class="old">ᄒᆞ</span>+옴 → <span class="old">ᄒᆞ</span>욤). 현대의 '-음'과 모양이 달라요. '-기'는 드물게 쓰이다가 근대 이후 많이 쓰였어요.</p>
+<h4>현대 국어와 비교하기</h4>
+<table class="tbl"><tr><th>항목</th><th>중세 국어</th><th>현대 국어</th></tr>
+<tr><td>주격 조사</td><td>이, ㅣ, ∅</td><td>이, 가</td></tr>
+<tr><td>관형격 조사</td><td><span class="old">ᄋᆡ</span>/의, ㅅ</td><td>의</td></tr>
+<tr><td>의문문</td><td>판정 '-가', 설명 '-고' 구별</td><td>구별 없음 (-니, -냐)</td></tr>
+<tr><td>객체 높임</td><td>선어말 어미 -<span class="old">ᄉᆞᆸ</span>- 등</td><td>어휘(드리다, 뵙다)와 조사(께)</td></tr>
+<tr><td>상대 높임</td><td>선어말 어미 -<span class="old">ᅌᅵ</span>-</td><td>종결 어미 (-습니다)</td></tr>
+<tr><td>표기</td><td>이어 적기, 방점</td><td>끊어 적기, 방점 없음</td></tr></table>`;
+
+MORE["guksa-6"] = `
+<h4>근대 국어 음운 변화 예시 모음</h4>
+<table class="tbl"><tr><th>변화</th><th>조건</th><th>예</th></tr>
+<tr><td>구개음화</td><td>ㄷ, ㅌ + ㅣ, j</td><td>디다 → 지다, 뎔 → 절, 티다 → 치다</td></tr>
+<tr><td>원순 모음화</td><td>ㅁ, ㅂ, ㅍ, ㅃ + ㅡ → ㅜ</td><td>믈 → 물, 블 → 불, 플 → 풀, 브르다 → 부르다</td></tr>
+<tr><td>전설 모음화</td><td>ㅅ, ㅈ, ㅊ + ㅡ → ㅣ</td><td>즛 → 짓, 츩 → 칡, 슳다 → 싫다</td></tr>
+<tr><td>된소리화</td><td>어두 자음군</td><td><span class="old">ᄠᅳᆮ</span> → 뜻, <span class="old">ᄡᆞᆯ</span> → 쌀</td></tr></table>
+<div class="tip">구개음화가 퍼지면서 '김치'처럼 반대로 잘못 고친 말(과도 교정)이 생기기도 했어요. 원래 '딤치'가 구개음화로 '짐치'가 되었는데, 이를 'ㄱ' 구개음화로 착각해 '김치'로 되돌린 것으로 설명해요.</div>
+<h4>개화기와 현대 국어의 형성</h4>
+<ul><li>갑오개혁(1894) 이후 공문서에 국문(한글)을 쓰기 시작했어요.</li>
+<li>『독립신문』(1896)은 순 한글로 쓰고 띄어쓰기를 한 신문이에요.</li>
+<li>조선어 학회가 「한글 맞춤법 통일안」(1933)을 만들어 '<span class="old">ㆍ</span>'를 폐지하고 형태를 밝혀 적는 원칙을 세웠어요.</li>
+<li>현재의 「한글 맞춤법」과 「표준어 규정」은 1988년에 고시되었어요.</li></ul>`;
+
+MORE["guksa-7"] = `
+<h4>사라진 고유어와 한자어로의 교체</h4>
+<table class="tbl"><tr><th>옛말</th><th>지금 쓰는 말</th></tr>
+<tr><td>온</td><td>백(百)</td></tr>
+<tr><td>즈믄</td><td>천(千)</td></tr>
+<tr><td>뫼</td><td>산(山)</td></tr>
+<tr><td><span class="old">ᄀᆞᄅᆞᆷ</span></td><td>강(江)</td></tr>
+<tr><td>미르</td><td>용(龍)</td></tr></table>
+<p>'온, 즈믄'은 '온갖, 즈믄둥이' 같은 말에 흔적이 남아 있어요.</p>
+<h4>외래어의 유입</h4>
+<ul><li>고려 시대 몽골어: 말·매와 관련된 말(보라매, 송골매 등)과 벼슬 이름</li>
+<li>근대 이후: 중국을 거친 서양 문물 어휘, 개화기 이후 일본을 거친 어휘와 서양 외래어</li></ul>
+<h4>의미 변화의 원인</h4>
+<p>사회 제도나 사물이 바뀌어서(영감: 벼슬 제도의 소멸), 비슷한 말과 경쟁해서(어리다: '졈다'와의 경쟁), 비유적으로 쓰이다 굳어져서(다리: 사람 → 사물) 등 여러 이유로 의미가 바뀌어요.</p>`;
+
+/* 단원별 퀴즈: q 질문, c 선택지, a 정답 번호(0부터), e 해설 */
+const QUIZ = {
+eumun: [
+ {q:"'불, 풀, 뿔'이 서로 다른 뜻을 가진다는 사실이 보여 주는 것은?", c:["첫소리 'ㅂ, ㅍ, ㅃ'이 각각 다른 음운이다.","세 단어의 모음이 서로 다르다.","소리의 길이가 뜻을 구별한다.","'ㅂ, ㅍ, ㅃ'은 한 음운의 변이음이다.","받침 소리가 뜻을 구별한다."], a:0, e:"다른 소리는 모두 같고 첫 자음만 달라 뜻이 갈리므로 'ㅂ, ㅍ, ㅃ'은 각각 독립된 음운이에요. 이런 단어 쌍을 최소 대립쌍이라고 해요."},
+ {q:"조음 위치가 모두 같은 자음끼리 묶인 것은?", c:["ㄱ, ㅋ, ㅇ","ㄴ, ㅁ, ㅇ","ㅈ, ㅅ, ㅊ","ㅂ, ㄷ, ㄱ","ㅎ, ㅇ, ㄱ"], a:0, e:"ㄱ, ㅋ, ㅇ은 모두 여린입천장소리(연구개음)예요. ㅅ은 잇몸소리, ㅈ·ㅊ은 센입천장소리라 ③은 섞여 있어요."},
+ {q:"'전설 모음, 고모음, 원순 모음'의 특징을 모두 가진 단모음은?", c:["ㅣ","ㅟ","ㅜ","ㅚ","ㅡ"], a:1, e:"ㅟ는 혀의 앞쪽에서, 혀를 높여, 입술을 둥글게 하여 발음해요. ㅣ는 평순, ㅜ는 후설, ㅚ는 중모음이에요."},
+ {q:"음운 변동의 결과 음운의 개수가 줄어드는 것은?", c:["국물 → [궁물]","좋은 → [조ː은]","신라 → [실라]","솜이불 → [솜ː니불]","같이 → [가치]"], a:1, e:"'좋은'은 'ㅎ'이 탈락해 음운이 하나 줄어요. ①③⑤는 교체라 개수가 그대로이고, ④는 'ㄴ' 첨가로 하나 늘어요."},
+ {q:"구개음화가 일어나는 단어는?", c:["잔디","느티나무","굳이","마디","밭이랑(밭의 이랑)"], a:2, e:"'굳-+-이'는 받침 ㄷ이 형식 형태소 '이'를 만나 [구지]가 돼요. ①②④는 한 형태소 안이라 일어나지 않고, ⑤는 '이랑'이 실질 형태소라 'ㄴ' 첨가가 일어나 [반니랑]이 돼요."},
+ {q:"자음군 단순화에서 겹받침의 뒤 자음이 남는 것은?", c:["넋","앉다","값","닭","여덟"], a:3, e:"'ㄺ, ㄻ, ㄿ'은 뒤 자음이 남아요. 닭[닥]. 나머지는 앞 자음이 남아요: 넋[넉], 앉다[안따], 값[갑], 여덟[여덜]."},
+ {q:"'ㄴ' 첨가가 일어나는 단어는?", c:["색연필","송별연","등용문","국물","신라"], a:0, e:"'색+연필'은 합성어이고 앞말이 자음으로 끝나며 뒷말이 '여'로 시작해 [생년필]이 돼요. '송별연', '등용문'은 조건을 갖추었지만 'ㄴ' 첨가가 일어나지 않는 예외예요."},
+ {q:"음운 변동이 표기에도 반영되는 것은?", c:["쓰-+-어 → 써","국밥 → [국빱]","좋은 → [조ː은]","놓고 → [노코]","신라 → [실라]"], a:0, e:"'ㅡ' 탈락은 표기에 반영돼 '써'로 적어요. 나머지는 발음만 바뀌고 표기는 원래 형태를 밝혀 적어요."},
+ {q:"'협력[혐녁]'에서 일어난 음운 변동을 바르게 짝지은 것은?", c:["유음화","'ㄹ'의 비음화, 비음화","된소리되기, 비음화","구개음화, 유음화","'ㄴ' 첨가, 비음화"], a:1, e:"ㅂ 뒤의 ㄹ이 [ㄴ]으로 바뀌고('ㄹ'의 비음화: 협녁), 그 ㄴ 앞의 ㅂ이 [ㅁ]으로 바뀌어요(비음화: 혐녁)."},
+ {q:"'읊고[읍꼬]'에 대한 설명으로 적절한 것은?", c:["탈락과 교체가 일어났다.","첨가가 일어나 음운 개수가 늘었다.","축약이 일어났다.","구개음화가 일어났다.","음운 개수에 변화가 없다."], a:0, e:"자음군 단순화(ㄹ 탈락) → 음절의 끝소리 규칙(ㅍ→ㅂ, 교체) → 된소리되기(ㄱ→ㄲ, 교체)가 일어나 음운이 5개에서 4개로 줄어요."}
+],
+danei: [
+ {q:"'하늘이 매우 푸르다'를 형태소로 나누면 몇 개인가?", c:["3개","4개","5개","6개","7개"], a:2, e:"하늘 / 이 / 매우 / 푸르- / -다 → 5개예요. 단어로는 '하늘, 이, 매우, 푸르다' 4개예요."},
+ {q:"의존 형태소이면서 실질 형태소인 것은?", c:["-었-","을","읽-","책","매우"], a:2, e:"용언의 어간 '읽-'은 혼자 쓰일 수 없으니 의존 형태소이고, 구체적 의미가 있으니 실질 형태소예요."},
+ {q:"파생어가 아닌 것은?", c:["풋사과","먹이","높이다","돌다리","맨발"], a:3, e:"'돌다리'는 어근 '돌'과 어근 '다리'가 결합한 합성어예요. 나머지는 접사(풋-, -이, -이-, 맨-)가 붙은 파생어예요."},
+ {q:"비통사적 합성어는?", c:["작은형","돌아가다","덮밥","힘들다","새해"], a:2, e:"'덮밥'은 용언 어간 '덮-'이 관형사형 어미 없이 바로 명사 '밥'과 결합해 국어 문장의 배열 방식에 어긋나요."},
+ {q:"'다섯'이 수사로 쓰인 문장은?", c:["사과 다섯을 먹었다.","다섯 사람이 모였다.","책 다섯 권을 샀다.","다섯 살이 되었다.","연필 다섯 자루가 있다."], a:0, e:"①은 '다섯' 뒤에 조사 '을'이 붙어 체언(수사)으로 쓰였어요. 나머지는 뒤의 명사를 꾸미는 수 관형사예요."},
+ {q:"동사인 것은?", c:["예쁘다","푸르다","달리다","같다","없다"], a:2, e:"'달린다', '달리는', '달려라'가 모두 자연스러우므로 동사예요. 나머지는 형용사예요."},
+ {q:"불규칙 활용을 하는 것은?", c:["벗다 → 벗어","잡다 → 잡아","듣다 → 들어","쓰다 → 써","울다 → 우는"], a:2, e:"'듣다'는 모음 어미 앞에서 ㄷ이 ㄹ로 바뀌는 'ㄷ' 불규칙 활용이에요. ④ 'ㅡ' 탈락과 ⑤ 'ㄹ' 탈락은 규칙 활용으로 봐요."},
+ {q:"'와/과'가 접속 조사로 쓰인 것은?", c:["나는 사과와 배를 샀다.","나는 동생과 싸웠다.","그는 형과 닮았다.","너와 함께 가겠다.","이것은 저것과 다르다."], a:0, e:"①은 '사과'와 '배'를 대등하게 이어 줘요. 나머지는 서술어가 요구하는 상대나 비교 대상을 나타내는 부사격 조사예요."},
+ {q:"정도(등급) 반의어인 것은?", c:["살다 / 죽다","남자 / 여자","위 / 아래","크다 / 작다","오다 / 가다"], a:3, e:"'크다/작다'는 중간 단계가 있고 '더 크다'처럼 비교할 수 있어요. ①②는 상보 반의어, ③⑤는 방향 반의어예요."},
+ {q:"'철수가 담배를 끊었다'의 전제는?", c:["철수는 전에 담배를 피웠다.","철수는 건강하다.","철수는 담배를 판다.","철수는 담배 냄새를 싫어한다.","철수는 지금 담배를 피운다."], a:0, e:"'철수가 담배를 끊지 않았다'로 부정해도 '전에 담배를 피웠다'는 여전히 참이므로 전제예요."}
+],
+munjang: [
+ {q:"보어가 있는 문장은?", c:["물이 얼음이 되었다.","꽃이 피었다.","나는 책을 읽었다.","그는 학교에 갔다.","하늘이 푸르다."], a:0, e:"'되다' 앞에서 '이/가'가 붙어 서술어를 보충하는 '얼음이'가 보어예요."},
+ {q:"서술어의 자릿수가 세 자리인 문장은?", c:["꽃이 피었다.","철수가 밥을 먹었다.","나는 동생에게 선물을 주었다.","영희는 엄마와 닮았다.","물이 얼음이 되었다."], a:2, e:"'주다'는 주어(나는), 필수적 부사어(동생에게), 목적어(선물을)를 요구해요. ①은 한 자리, 나머지는 두 자리예요."},
+ {q:"서술절을 안은 문장은?", c:["코끼리는 코가 길다.","나는 그가 범인임을 알았다.","꽃이 아름답게 피었다.","내가 읽은 책이 재미있다.","그는 내일 온다고 말했다."], a:0, e:"'코가 길다'가 '코끼리는'의 서술어 역할을 하는 서술절이에요. ②명사절, ③부사절, ④관형절, ⑤인용절이에요."},
+ {q:"관계 관형절이 쓰인 것은?", c:["그가 합격했다는 소식","내가 어제 읽은 책","우리가 이겼다는 사실","그가 범인이라는 증거","친구가 전학 간다는 소문"], a:1, e:"'내가 어제 ( ) 읽은 책'은 꾸밈을 받는 '책'이 관형절의 목적어로 빠져 있으므로 관계 관형절이에요. 나머지는 관형절이 뒤 명사의 내용을 나타내는 동격 관형절이에요."},
+ {q:"종속적으로 이어진 문장은?", c:["봄이 오고 꽃이 핀다.","형은 크지만 동생은 작다.","비가 와서 길이 미끄럽다.","커피를 마시거나 차를 마신다.","하늘은 높고 바다는 넓다."], a:2, e:"'-아서/-어서'는 원인을 나타내는 종속적 연결 어미예요. 앞뒤를 바꾸면 의미가 달라져요."},
+ {q:"주체를 간접적으로 높인 문장은?", c:["할머니께서는 귀가 밝으시다.","선생님께서 오셨다.","나는 할머니께 선물을 드렸다.","할아버지께서 주무신다.","어머니를 모시고 갔다."], a:0, e:"높일 대상(할머니)의 신체 일부인 '귀'를 높여 주체를 간접적으로 높였어요. ③⑤는 객체 높임이에요."},
+ {q:"객체 높임이 실현된 문장은?", c:["아버지께서 신문을 읽으신다.","나는 선생님께 여쭈어 보았다.","할머니께서 진지를 잡수신다.","손님, 이쪽으로 오십시오.","사장님께서는 걱정이 있으시다."], a:1, e:"말을 듣는 대상(선생님)을 조사 '께'와 특수 어휘 '여쭈다'로 높였어요. ①③⑤는 주체 높임, ④는 상대 높임이에요."},
+ {q:"'어제 [공부하는] 동생을 보았다'에서 '공부하는'의 상대 시제는?", c:["과거","현재","미래","시제 없음","대과거"], a:1, e:"'공부하는'은 안은문장의 사건시(보았을 때)를 기준으로 하면 현재예요. 발화시 기준의 절대 시제로는 과거예요."},
+ {q:"사동 표현이 쓰인 문장은?", c:["엄마가 아이에게 밥을 먹였다.","도둑이 경찰에게 잡혔다.","멀리 산이 보인다.","모기에게 팔을 물렸다.","책이 새로 만들어졌다."], a:0, e:"'먹이다'는 주어가 남에게 먹는 행동을 하게 하는 사동사예요. 나머지는 모두 피동 표현이에요."},
+ {q:"능력 부정을 나타내는 문장은?", c:["나는 그 영화를 안 봤다.","나는 수영을 못 한다.","오늘은 비가 오지 않는다.","떠들지 마라.","가지 말자."], a:1, e:"'못'은 능력이 없거나 외부 원인 때문에 할 수 없음을 나타내요. ①③은 '안' 부정, ④⑤는 명령·청유의 '말다' 부정이에요."}
+],
+damhwa: [
+ {q:"발화에 대한 설명으로 적절한 것은?", c:["실제 맥락에서 말하는 이의 의도를 담아 쓰인 문장 단위이다.","반드시 주어와 서술어를 갖추어야 한다.","맥락과 관계없이 의미가 하나로 정해진다.","글말에는 발화가 없다.","하나의 발화는 하나의 의도만 가진다."], a:0, e:"발화는 맥락 속에서 쓰인 의사소통 단위예요. '불이야!'처럼 단어 하나도 발화가 될 수 있고, 같은 발화도 맥락에 따라 의도가 달라져요."},
+ {q:"창문을 닫아 달라는 의도로 쓴 간접 발화는?", c:["창문 좀 닫아 줘.","좀 춥지 않니?","창문을 닫아라.","창문을 닫자.","창문을 닫아 주세요."], a:1, e:"의문문 형식이지만 실제 의도는 요청이에요. 문장 유형과 의도가 다르면 간접 발화예요."},
+ {q:"응집성을 높이는 장치 중 '접속 표현'은?", c:["그러나","이것","그렇게","(앞말 생략)","같은 단어의 반복"], a:0, e:"'그러나, 그리고, 따라서'처럼 앞뒤 발화의 논리적 관계를 이어 주는 말이 접속 표현이에요. ②는 지시, ③은 대용 표현이에요."},
+ {q:"통일성에 대한 설명으로 적절한 것은?", c:["담화 전체 내용이 하나의 주제로 일관되게 묶이는 성질","지시어와 접속어가 많이 쓰이는 성질","새로운 정보가 많이 담기는 성질","다른 글을 인용하는 성질","문장이 짧고 간결한 성질"], a:0, e:"통일성은 내용(의미) 차원의 일관성이에요. 형식적 연결 장치로 이어지는 성질은 응집성이에요."},
+ {q:"'선언' 기능이 중심인 담화는?", c:["판결문","광고문","서약서","뉴스","안부 편지"], a:0, e:"판결문은 말(글)하는 순간 새로운 사태(형의 확정)를 만들어 내요. ②호소, ③약속, ④제보, ⑤사교 기능이 중심이에요."},
+ {q:"'호소' 기능이 중심인 담화는?", c:["일기 예보","선거 연설문","임명장","계약서","조문"], a:1, e:"연설문은 듣는 이의 마음을 움직여 행동(투표)하도록 유도하는 호소 기능이 중심이에요."},
+ {q:"'앞 문장의 설명부가 다음 문장의 주제부가 되는' 주제 전개 유형은?", c:["단순 선형식","주제 순환식","상위 주제 파생식","거시 구조","병렬식"], a:0, e:"예: 우리 반에 전학생이 왔다. 그 친구는 부산에서 왔다. 부산은 … → 앞 설명부의 내용이 다음 주제부가 돼요."},
+ {q:"상황 맥락에 해당하지 않는 것은?", c:["발화 시간","발화 장소","참여자 사이의 관계","공동체의 역사적 배경","앞뒤 발화의 내용"], a:3, e:"공동체의 역사, 가치, 관습은 사회·문화적 맥락이에요."},
+ {q:"지시 표현 '저'에 대한 설명으로 적절한 것은?", c:["말하는 이와 듣는 이 모두에게서 먼 대상을 가리킨다.","말하는 이에게 가까운 대상을 가리킨다.","듣는 이에게만 가까운 대상을 가리킨다.","앞 문장 전체를 대신한다.","두 문장을 논리적으로 잇는다."], a:0, e:"'이'는 말하는 이에게 가까운 것, '그'는 듣는 이에게 가깝거나 앞서 말한 것, '저'는 둘 모두에게서 먼 것을 가리켜요."},
+ {q:"'바람이 많이 들어오네.'라는 말을 듣고 동생이 창문을 닫았다. 창문을 닫은 결과는 무엇에 해당하는가?", c:["발화 효과 행위","발화 행위","발화 수반 행위","직접 발화","응집성"], a:0, e:"말을 한 결과로 듣는 이에게 일어난 변화(창문을 닫음)는 발화 효과 행위예요. 말 자체는 발화 행위, 그 말로 요청한 것은 발화 수반 행위예요."}
+],
+guksa: [
+ {q:"훈민정음의 창제와 반포 연도를 바르게 짝지은 것은?", c:["창제 1443년, 반포 1446년","창제 1446년, 반포 1443년","창제 1418년, 반포 1443년","창제 1443년, 반포 1450년","창제 1392년, 반포 1446년"], a:0, e:"세종 25년(1443)에 창제하고, 세종 28년(1446)에 『훈민정음』 해례본과 함께 반포했어요."},
+ {q:"훈민정음 초성의 기본자가 아닌 것은?", c:["ㄱ","ㄴ","ㅋ","ㅅ","ㅇ"], a:2, e:"초성 기본자는 ㄱ, ㄴ, ㅁ, ㅅ, ㅇ이에요. 'ㅋ'은 'ㄱ'에 획을 더한 가획자예요."},
+ {q:"훈민정음 초성 가운데 이체자는?", c:["ㅋ","ㄷ","ㅂ","ㄹ","ㅈ"], a:3, e:"이체자는 ㆁ, ㄹ, ㅿ이에요. 획을 더했지만 소리가 세지는 원리와는 관계가 없어요."},
+ {q:"중성 기본자 'ㆍ, ㅡ, ㅣ'가 본뜬 것은?", c:["하늘, 땅, 사람","입, 이, 목구멍","해, 달, 별","혀, 입술, 이","산, 물, 나무"], a:0, e:"ㆍ는 둥근 하늘, ㅡ는 평평한 땅, ㅣ는 서 있는 사람을 본떴어요."},
+ {q:"15세기 중세 국어의 특징으로 적절하지 않은 것은?", c:["받침을 다음 음절 초성으로 넘겨 적는 이어 적기가 일반적이었다.","받침에 8개 자음만 쓰는 8종성법이 원칙이었다.","방점으로 성조를 표시했다.","띄어쓰기 규정이 확립되어 있었다.","단어 첫머리에 서로 다른 자음이 함께 오는 어두 자음군이 있었다."], a:3, e:"띄어쓰기는 개화기(『독립신문』, 1896)에 본격적으로 쓰이기 시작했고, 규정으로 정해진 것은 「한글 맞춤법 통일안」(1933) 무렵이에요."},
+ {q:"중세 국어에서 '부텨'에 주격 조사가 결합한 형태는?", c:["부텨이","부톄","부텨가","부텨는","부텨의"], a:1, e:"'ㅣ'나 반모음 j 이외의 모음으로 끝난 체언 뒤에서는 주격 조사 'ㅣ'가 앞 음절과 합쳐져요: 부텨 + ㅣ → 부톄."},
+ {q:"중세 국어에서 '예/아니요'로 답하는 판정 의문문에 쓰인 형태는?", c:["-가","-고","-오","-ㄴ다","-뇨"], a:0, e:"판정 의문문은 '-가/-아', 설명 의문문은 '-고/-오'로 구별했어요. '-ㄴ다'는 2인칭 주어 의문문에 쓰였어요."},
+ {q:"근대 국어 시기의 변화가 아닌 것은?", c:["방점 표기가 사라졌다.","'믈'이 '물'로 바뀌는 원순 모음화가 일어났다.","'텬디'가 '천지'로 바뀌는 구개음화가 일어났다.","주격 조사 '가'가 널리 쓰였다.","훈민정음이 창제되었다."], a:4, e:"훈민정음 창제(1443)는 후기 중세 국어 시기의 일이에요."},
+ {q:"의미가 축소된 단어는?", c:["다리","짐승","어리다","영감","어엿브다"], a:1, e:"'짐승'은 살아 있는 모든 존재(중생)를 가리키다가 사람을 제외한 동물만 가리키게 되었어요. ①④는 확대, ③⑤는 이동이에요."},
+ {q:"실질 형태소는 주로 훈차, 형식 형태소는 주로 음차하여 우리말 문장 전체를 적은 표기로, 향가에 쓰인 것은?", c:["이두","구결","향찰","고유 명사 표기","훈민정음"], a:2, e:"향찰은 우리말 문장 전체를 적은 차자 표기예요. 이두는 한문을 우리말 어순으로 바꾸고 토를 단 것, 구결은 한문 원문에 토만 단 것이에요."}
+]
+};
+
+/* ===== 예시 보강 (2차) ===== */
+const EX_HEAD = t => `<div class="more-h" style="margin-top:22px">${t}</div>`;
+
+MORE["eumun-6"] += EX_HEAD("예시 모음") + `
+<table class="tbl"><tr><th>변동</th><th>예시</th></tr>
+<tr><td>음절의 끝소리 규칙</td><td><w>낫</w>·<w>낮</w>·<w>낯</w>·<w>낱</w>[낟] (받침은 달라도 소리는 모두 [낟]), <w>솥</w>[솓], <w>부엌</w>[부억], <w>밖</w>[박], <w>잎</w>[입], <w>히읗</w>[히읃]</td></tr>
+<tr><td>비음화</td><td><w>국민</w>[궁민], 먹는[멍는], 깎는[깡는], 닫는[단는], 있는[인는], 짓는[진ː는], 쫓는[쫀는], <w>꽃눈</w>[꼰눈], <w>겉멋</w>[건먿], <w>밥물</w>[밤물], 잡는[잠는], <w>앞니</w>[암니], <w>흙냄새</w>[흥냄새], 값만[감만]</td></tr>
+<tr><td>'ㄹ'의 비음화</td><td><w>담력</w>[담ː녁], <w>강릉</w>[강능], <w>침략</w>[침냑], <w>대통령</w>[대ː통녕], <w>백로</w>[뱅노], <w>막론</w>[망논], <w>십리</w>[심니], <w>석류</w>[성뉴], <w>협력</w>[혐녁], <w>국립</w>[궁닙]</td></tr>
+<tr><td>유음화</td><td>역행: <w>천리</w>[철리], <w>광한루</w>[광ː할루], <w>대관령</w>[대ː괄령], <w>난로</w>[날ː로] / 순행: <w>칼날</w>[칼랄], <w>달님</w>[달림], <w>설날</w>[설ː랄], <w>줄넘기</w>[줄럼끼], 핥네[할레], 뚫는[뚤른]</td></tr>
+<tr><td>구개음화</td><td><w>해돋이</w>[해도지], <w>맏이</w>[마지], <w>미닫이</w>[미ː다지], 끝이[끄치], 밭이[바치], <w>붙이다</w>[부치다], <w>걷히다</w>[거치다], <w>굳히다</w>[구치다], <w>벼훑이</w>[벼훌치]</td></tr>
+<tr><td>된소리되기<br><small>받침 ㄱ·ㄷ·ㅂ 뒤</small></td><td><w>국수</w>[국쑤], 깎다[깍따], 꽂고[꼳꼬], <w>꽃다발</w>[꼳따발], <w>옆집</w>[엽찝], <w>낯설다</w>[낟썰다], <w>값지다</w>[갑찌다]</td></tr>
+<tr><td>된소리되기<br><small>어간 받침 ㄴ·ㅁ 뒤</small></td><td>신다[신ː따], 껴안다[껴안따], 앉고[안꼬], 닮고[담ː꼬], 젊지[점ː찌], 삼고[삼ː꼬]</td></tr>
+<tr><td>된소리되기<br><small>한자어 ㄹ 뒤</small></td><td><w>발동</w>[발똥], <w>절도</w>[절또], <w>말살</w>[말쌀], <w>갈증</w>[갈쯩], <w>물질</w>[물찔], <w>일시</w>[일씨]</td></tr>
+<tr><td>된소리되기<br><small>관형사형 -(으)ㄹ 뒤</small></td><td>할 것을[할꺼슬], 갈 곳[갈꼳], 할 수는[할쑤는], 만날 사람[만날싸람]</td></tr>
+<tr><td>반모음화</td><td>오-+-아서→와서, 그리-+-어→그려, 꾸-+-어→꿔, 두-+-었다→뒀다, 마시-+-어→마셔</td></tr></table>`;
+
+MORE["eumun-7"] += EX_HEAD("예시 모음") + `
+<table class="tbl"><tr><th>변동</th><th>예시</th></tr>
+<tr><td>자음군 단순화<br><small>앞 자음이 남음</small></td><td><w>몫</w>[목], <w>넋</w>[넉], 앉다[안따], 얹다[언따], <w>여덟</w>[여덜], 넓다[널따], 짧다[짤따], <w>외곬</w>[외골], 핥다[할따], <w>값</w>[갑], 없다[업ː따]</td></tr>
+<tr><td>자음군 단순화<br><small>뒤 자음이 남음</small></td><td><w>닭</w>[닥], <w>흙</w>[흑], 맑다[막따], 늙지[늑찌], <w>삶</w>[삼ː], 젊다[점ː따], 굶다[굼ː따], 읊다[읍따]</td></tr>
+<tr><td>'ㄹ' 탈락 (활용)</td><td>갈-+-니→가니, 알-+-는→아는, 만들-+-ㅂ니다→만듭니다, 살-+-시-+-고→사시고, 둥글-+-ㄴ→둥근</td></tr>
+<tr><td>'ㄹ' 탈락 (단어 형성)</td><td>활+살→<w>화살</w>, 불+삽→<w>부삽</w>, 말+소→<w>마소</w>, 버들+나무→<w>버드나무</w>, 바늘+질→<w>바느질</w></td></tr>
+<tr><td>'ㅎ' 탈락</td><td>낳은[나은], 쌓이다[싸이다], 많아[마ː나], 끓이다[끄리다], 놓이다[노이다], 싫어도[시러도]</td></tr>
+<tr><td>'ㅡ' 탈락</td><td>크-+-어→커, 기쁘-+-어→기뻐, 잠그-+-아→잠가, 따르-+-아→따라, 치르-+-어→치러, 끄-+-었다→껐다</td></tr>
+<tr><td>동음 탈락</td><td>타-+-아→타, 켜-+-어→켜, 자-+-아라→자라, 건너-+-었다→건넜다</td></tr>
+<tr><td>반모음 탈락</td><td>찌-+-어→쪄[쩌], 치-+-어→쳐[처], 가지-+-어→가져[가저], 다치-+-었다→다쳤다[다첟따]</td></tr></table>`;
+
+MORE["eumun-8"] += EX_HEAD("예시 모음") + `
+<table class="tbl"><tr><th>변동</th><th>예시</th></tr>
+<tr><td>'ㄴ' 첨가</td><td><w>맨입</w>[맨닙], <w>한여름</w>[한녀름], <w>담요</w>[담ː뇨], <w>눈요기</w>[눈뇨기], <w>내복약</w>[내ː봉냑], <w>영업용</w>[영엄뇽], <w>식용유</w>[시굥뉴], <w>밤윷</w>[밤ː뉻], <w>콩엿</w>[콩녇], <w>신여성</w>[신녀성], <w>늑막염</w>[능망념]</td></tr>
+<tr><td>'ㄴ' 첨가 후 유음화</td><td><w>솔잎</w>[솔립], <w>설익다</w>[설릭따], <w>물약</w>[물략], <w>불여우</w>[불려우], <w>서울역</w>[서울력], <w>휘발유</w>[휘발류], <w>물엿</w>[물렫]</td></tr>
+<tr><td>사잇소리: 된소리</td><td><w>촛불</w>[초뿔/촏뿔], <w>깃발</w>[기빨/긷빨], <w>뱃전</w>[배쩐/밷쩐], <w>햇살</w>[해쌀/핻쌀], <w>냇가</w>[내ː까/낻ː까]</td></tr>
+<tr><td>사잇소리: ㄴ 소리</td><td><w>콧날</w>[콘날], <w>잇몸</w>[인몸], <w>아랫니</w>[아랜니], <w>뱃머리</w>[밴머리], <w>빗물</w>[빈물]</td></tr>
+<tr><td>사잇소리: ㄴㄴ 소리</td><td><w>나뭇잎</w>[나문닙], <w>깻잎</w>[깬닙], <w>베갯잇</w>[베갠닏], <w>뒷윷</w>[뒨ː뉻]</td></tr>
+<tr><td>반모음 첨가</td><td>피어[피어/피여], 되어[되어/되여], 이오[이오/이요], 아니오[아니오/아니요]</td></tr></table>`;
+
+MORE["eumun-9"] += EX_HEAD("예시 모음") + `
+<table class="tbl"><tr><th>변동</th><th>예시</th></tr>
+<tr><td>거센소리되기 (ㅎ이 앞)</td><td>좋고[조ː코], 쌓지[싸치], 많고[만ː코], 닳지[달치], 놓다[노타]</td></tr>
+<tr><td>거센소리되기 (ㅎ이 뒤)</td><td><w>각하</w>[가카], 먹히다[머키다], 밝히다[발키다], <w>맏형</w>[마텽], 좁히다[조피다], 넓히다[널피다], 꽂히다[꼬치다], 앉히다[안치다], <w>입학</w>[이팍]</td></tr>
+<tr><td>모음 축약</td><td>보-+-이-→뵈-, 누-+-이-→뉘-, 쓰-+-이-→씌-, 사이→새, 아이→애, 되-+-어→돼</td></tr></table>`;
+
+MORE["danei-2"] += EX_HEAD("파생어 예시 모음") + `
+<h4>자주 나오는 접두사</h4>
+<table class="tbl"><tr><th>접두사</th><th>뜻</th><th>예</th></tr>
+<tr><td>군-</td><td>쓸데없는, 덧붙은</td><td><w>군소리</w>, <w>군살</w>, <w>군침</w></td></tr>
+<tr><td>날-</td><td>익히지 않은, 지독한</td><td><w>날고기</w>, <w>날강도</w></td></tr>
+<tr><td>덧-</td><td>거듭된, 겹쳐 신거나 입는</td><td><w>덧니</w>, <w>덧신</w>, <w>덧붙이다</w></td></tr>
+<tr><td>맨-</td><td>다른 것이 없는</td><td><w>맨손</w>, <w>맨발</w>, <w>맨주먹</w></td></tr>
+<tr><td>풋-</td><td>덜 익은, 미숙한</td><td><w>풋사과</w>, <w>풋고추</w>, <w>풋사랑</w></td></tr>
+<tr><td>헛-</td><td>보람 없는, 잘못</td><td><w>헛기침</w>, <w>헛소문</w>, <w>헛디디다</w></td></tr>
+<tr><td>짓-</td><td>마구, 함부로</td><td><w>짓밟다</w>, <w>짓누르다</w></td></tr>
+<tr><td>치-</td><td>위로 향하게</td><td><w>치솟다</w>, <w>치받다</w></td></tr>
+<tr><td>들-</td><td>몹시, 마구</td><td><w>들볶다</w>, <w>들끓다</w></td></tr>
+<tr><td>새-/시-, 샛-/싯-</td><td>매우 짙고 선명하게</td><td><w>새파랗다</w>, <w>시퍼렇다</w>, <w>샛노랗다</w>, <w>싯누렇다</w></td></tr>
+<tr><td>홀-</td><td>짝이 없는</td><td><w>홀아비</w>, <w>홀몸</w></td></tr>
+<tr><td>엿-</td><td>몰래</td><td><w>엿듣다</w>, <w>엿보다</w></td></tr></table>
+<h4>자주 나오는 접미사</h4>
+<table class="tbl"><tr><th>접미사</th><th>품사 변화</th><th>예</th></tr>
+<tr><td>-꾼, -쟁이, -보, -질</td><td>명사 → 명사 (뜻만 더함)</td><td><w>낚시꾼</w>, <w>욕심쟁이</w>, <w>꾀보</w>, <w>가위질</w></td></tr>
+<tr><td>-이, -음, -기, -개</td><td>동사·형용사 → 명사</td><td><w>먹이</w>, <w>놀이</w>, <w>믿음</w>, <w>웃음</w>, <w>크기</w>, <w>지우개</w>, <w>덮개</w></td></tr>
+<tr><td>-이-, -히-, -리-, -기-, -우-, -구-, -추-</td><td>동사(사동·피동)</td><td><w>먹이다</w>, <w>잡히다</w>, <w>울리다</w>, <w>안기다</w>, <w>깨우다</w>, <w>돋구다</w>, <w>낮추다</w></td></tr>
+<tr><td>-거리-, -대-, -이-</td><td>(흉내 말) → 동사</td><td><w>출렁거리다</w>, <w>출렁대다</w>, <w>출렁이다</w></td></tr>
+<tr><td>-뜨리-, -트리-</td><td>동사 → 동사 (강조)</td><td><w>깨뜨리다</w>, <w>넘어뜨리다</w></td></tr>
+<tr><td>-스럽-, -롭-, -답-, -하-</td><td>명사·어근 → 형용사</td><td><w>사랑스럽다</w>, <w>평화롭다</w>, <w>정답다</w>, <w>깨끗하다</w></td></tr>
+<tr><td>-이, -히, -오, -우</td><td>형용사·동사 → 부사</td><td><w>깨끗이</w>, <w>조용히</w>, <w>도로</w>, <w>너무</w></td></tr></table>
+<div class="tip">'높이'는 명사(높이가 10미터)와 부사(높이 날다)로 모두 쓰이는 파생어예요. '아름답다'처럼 어근이 혼자 쓰이지 못하는 말(아름)도 접사 '-답-'이 붙은 파생어로 봐요.</div>`
++ EX_HEAD("합성어 예시 모음") + `
+<table class="tbl"><tr><th>구성</th><th>통사적/비통사적</th><th>예</th></tr>
+<tr><td>명사 + 명사</td><td>통사적</td><td><w>손발</w>, <w>밤낮</w>, <w>돌다리</w>, <w>눈물</w>, <w>책가방</w>, <w>집안</w></td></tr>
+<tr><td>관형사 + 명사</td><td>통사적</td><td><w>새해</w>, <w>첫사랑</w>, <w>온종일</w>, <w>이것</w></td></tr>
+<tr><td>관형사형 + 명사</td><td>통사적</td><td><w>큰집</w>, <w>작은형</w>, <w>건널목</w>, <w>어린이</w>, <w>군밤</w></td></tr>
+<tr><td>어간 + 명사 (관형사형 어미 없이)</td><td>비통사적</td><td><w>늦잠</w>, <w>덮밥</w>, <w>접칼</w>, <w>꺾쇠</w></td></tr>
+<tr><td>부사 + 명사</td><td>비통사적</td><td><w>부슬비</w>, <w>산들바람</w>, <w>척척박사</w></td></tr>
+<tr><td>어간 + 연결 어미 + 용언</td><td>통사적</td><td><w>돌아가다</w>, <w>뛰어가다</w>, <w>알아보다</w>, <w>찾아오다</w></td></tr>
+<tr><td>어간 + 어간 (연결 어미 없이)</td><td>비통사적</td><td><w>오가다</w>, <w>오르내리다</w>, <w>굳세다</w>, <w>검붉다</w>, <w>높푸르다</w>, <w>뛰놀다</w></td></tr>
+<tr><td>주어 + 서술어 관계</td><td>통사적</td><td><w>힘들다</w>, <w>겁나다</w>, <w>값싸다</w>, <w>빛나다</w></td></tr>
+<tr><td>목적어 + 서술어 관계</td><td>통사적</td><td><w>본받다</w>, <w>힘쓰다</w>, <w>애쓰다</w>, <w>장가들다</w></td></tr>
+<tr><td>부사 + 용언</td><td>통사적</td><td><w>잘생기다</w>, <w>바로잡다</w>, <w>그만두다</w></td></tr></table>
+<div class="tip">'군밤'은 '굽-+-(으)ㄴ+밤'으로 관형사형 어미가 있는 통사적 합성어예요. 접두사 '군-'(군소리)과 헷갈리지 않도록 주의하세요.</div>
+<div data-widget="wordtype"></div>`;
+
+</script>
+<script>
+/* ---------- 개념 애니메이션 ---------- */
+// 각 장면은 build(stage)가 첫 화면을 그리고 [함수, 다음까지 기다릴 ms] 목록을 돌려줘요.
+// 끝까지 재생하면 잠시 멈췄다가 처음부터 다시 돌아요.
+const SYL = (i, m, f) => String.fromCharCode(0xAC00 + ("ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ".indexOf(i) * 21 + "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ".indexOf(m)) * 28 + ["","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"].indexOf(f));
+const tile = (t, cls = "") => `<span class="tl ${cls}">${t}</span>`;
+const q = (root, s) => root.querySelector(s), qa = (root, s) => [...root.querySelectorAll(s)];
+function setStatus(root, html){ const s = q(root, ".an-st"); if (s){ s.classList.remove("in"); void s.offsetWidth; s.innerHTML = html; s.classList.add("in"); } }
+
+const SCENES = {
+/* 음운: 소리 하나가 뜻을 바꾼다 */
+"u-eumun": { cap: "<b>음운</b> · 소리 하나만 바뀌어도 뜻이 달라져요", build(r){
+  r.innerHTML = `<div class="an-st">첫소리를 바꿔 볼까요?</div>
+  <div class="an-row" style="gap:18px;align-items:center;justify-content:center">
+    <span class="an-row">${tile("ㅂ","a0")}${tile("ㅜ","a1")}${tile("ㄹ","a2")}</span>
+    <span class="an-eq">→</span>
+    <span class="an-big">불</span>
+    <span class="an-gloss">타는 불</span></div>`;
+  const set = (i, m, gloss, which) => () => {
+    q(r, ".a0").textContent = i; q(r, ".a1").textContent = m;
+    qa(r, ".tl").forEach(t => t.classList.remove("hi")); q(r, which).classList.add("hi");
+    q(r, ".an-big").textContent = SYL(i, m, "ㄹ"); q(r, ".an-gloss").textContent = gloss;
+    q(r, ".an-big").classList.remove("pop"); void q(r, ".an-big").offsetWidth; q(r, ".an-big").classList.add("pop");
+  };
+  return [
+    [set("ㅍ","ㅜ","초록 풀",".a0"), 1500], [set("ㅃ","ㅜ","동물의 뿔",".a0"), 1500],
+    [() => { setStatus(r, "이번엔 모음을 바꿔요"); set("ㅂ","ㅗ","얼굴의 볼",".a1")(); }, 1600],
+    [() => { qa(r, ".tl").forEach(t => t.classList.add("hi")); setStatus(r, "뜻을 구별하는 가장 작은 소리 단위 = <b>음운</b>"); }, 2200]
+  ];
+}},
+
+/* 음운 변동 4유형 */
+"t-change": { cap: "<b>교체 · 탈락 · 첨가 · 축약</b> · 음운이 바뀌고, 사라지고, 생기고, 합쳐져요", build(r){
+  const lane = (k, name, tiles, before, word) => `<div class="an-lane" data-k="${k}"><span class="an-lab">${name}</span><span class="an-row">${tiles}</span><span class="an-res"><b>${word}</b> <small>음운 ${before}개</small></span></div>`;
+  const sp = `<span class="tl-sp"></span>`;
+  r.innerHTML =
+    lane("a","교체", tile("ㄱ")+tile("ㅜ")+tile("ㄱ","x")+sp+tile("ㅁ")+tile("ㅜ")+tile("ㄹ"), 6, "국물") +
+    lane("b","탈락", tile("ㄷ")+tile("ㅏ")+tile("ㄹ","x")+tile("ㄱ"), 4, "닭") +
+    lane("c","첨가", tile("ㅅ")+tile("ㅗ")+tile("ㅁ")+sp+tile("ㄴ","x gone")+tile("ㅣ")+sp+tile("ㅂ")+tile("ㅜ")+tile("ㄹ"), 7, "솜이불") +
+    lane("d","축약", tile("ㄴ")+tile("ㅗ")+tile("ㅎ","x")+sp+tile("ㄱ","y")+tile("ㅗ"), 5, "놓고");
+  const L = k => q(r, `[data-k="${k}"]`);
+  const res = (k, w, n) => () => { const e = q(L(k), ".an-res"); e.innerHTML = `<b>[${w}]</b> <small>음운 ${n}개</small>`; e.classList.add("done"); };
+  return [
+    [() => q(L("a"), ".x").classList.add("hi"), 800],
+    [() => { const t = q(L("a"), ".x"); t.textContent = "ㅇ"; t.classList.add("swap"); res("a","궁물",6)(); }, 1300],
+    [() => q(L("b"), ".x").classList.add("del"), 800],
+    [() => { q(L("b"), ".x").classList.add("gone"); res("b","닥",3)(); }, 1300],
+    [() => { q(L("c"), ".x").classList.remove("gone"); q(L("c"), ".x").classList.add("add"); res("c","솜ː니불",8)(); }, 1500],
+    [() => { q(L("d"), ".x").classList.add("hi"); q(L("d"), ".y").classList.add("hi"); }, 800],
+    [() => { q(L("d"), ".x").classList.add("gone"); const y = q(L("d"), ".y"); y.textContent = "ㅋ"; y.classList.add("swap"); res("d","노코",4)(); }, 2400]
+  ];
+}},
+
+/* 단어: 문장 → 어절 → 형태소 → 단어 */
+"u-danei": { cap: "<b>형태소와 단어</b> · 뜻을 가진 가장 작은 조각으로 나누고, 다시 단어로 묶어요", build(r){
+  r.innerHTML = `<div class="an-st">문장 하나를 쪼개 볼게요</div><div class="an-stage"><span class="an-sent">철수가 책을 읽었다</span></div>`;
+  const stage = q(r, ".an-stage");
+  const show = html => { stage.classList.add("fade"); setTimeout(() => { stage.innerHTML = html; stage.classList.remove("fade"); }, 250); };
+  const M = (t, s) => `<span class="mt ${s ? "sil" : "hyeong"}">${t}</span>`;
+  return [
+    [() => { setStatus(r, "① 띄어 쓴 덩어리: <b>어절 3개</b>"); show(`<span class="an-row" style="gap:14px">${["철수가","책을","읽었다"].map(x => `<span class="mt">${x}</span>`).join("")}</span>`); }, 1700],
+    [() => { setStatus(r, "② 뜻을 가진 가장 작은 조각: <b>형태소 7개</b> <span class='lg sil'>실질</span> <span class='lg hyeong'>형식</span>"); show(`<span class="an-row" style="gap:14px"><span class="an-row">${M("철수",1)+M("가")}</span><span class="an-row">${M("책",1)+M("을")}</span><span class="an-row">${M("읽-",1)+M("-었-")+M("-다")}</span></span>`); }, 2600],
+    [() => { setStatus(r, "③ 다시 묶으면 <b>단어 5개</b> · 조사는 단어, 어미는 앞말에 붙어요"); show(`<span class="an-row" style="gap:10px">${["철수","가","책","을","읽었다"].map(x => `<span class="mt w">${x}</span>`).join("")}</span>`); }, 2600]
+  ];
+}},
+
+/* 단어 형성: 파생어와 합성어 */
+"t-form": { cap: "<b>파생어 = 어근 + 접사</b>, <b>합성어 = 어근 + 어근</b>", build(r){
+  const lane = (k, a, ak, b, bk, word, kind) => `<div class="an-lane f" data-k="${k}"><span class="an-row join"><span class="mt ${ak}">${a}</span><span class="an-plus">+</span><span class="mt ${bk}">${b}</span></span><span class="an-res"><b>${word}</b> <small>${kind}</small></span></div>`;
+  r.innerHTML = lane("a","풋-","jeop","사과","geun","풋사과","파생어") + lane("b","먹-","geun","-이","jeop","먹이","파생어") + lane("c","돌","geun","다리","geun","돌다리","합성어") +
+    `<div class="an-legend"><span class="lg geun">어근</span><span class="lg jeop">접사</span></div>`;
+  const go = k => () => { const l = q(r, `[data-k="${k}"]`); q(l, ".join").classList.add("on"); q(l, ".an-res").classList.add("done"); };
+  return [[go("a"), 1300], [go("b"), 1300], [go("c"), 2400]];
+}},
+
+/* 문장 성분 */
+"u-munjang": { cap: "<b>문장 성분</b> · 서술어부터 찾고, 서술어가 필요로 하는 성분을 찾아요", build(r){
+  const W = [["철수가","주어","main"],["새","관형어","sub"],["책을","목적어","main"],["열심히","부사어","sub"],["읽었다","서술어","main"]];
+  r.innerHTML = `<div class="an-st">어절마다 역할이 있어요</div><div class="an-row" style="gap:10px;justify-content:center;flex-wrap:wrap">${W.map(([w,l,k],i) => `<span class="an-chip" data-i="${i}"><b>${w}</b><small class="${k}">${l}</small></span>`).join("")}</div>
+  <div class="an-legend"><span class="lg main">주성분</span><span class="lg sub">부속 성분</span></div>`;
+  const on = (i, msg) => () => { q(r, `[data-i="${i}"]`).classList.add("show"); setStatus(r, msg); };
+  return [
+    [on(4, "① 먼저 <b>서술어</b>: 읽었다"), 1400], [on(0, "② 누가? → <b>주어</b>: 철수가"), 1300], [on(2, "③ 무엇을? → <b>목적어</b>: 책을"), 1300],
+    [on(1, "④ '책'을 꾸밈 → <b>관형어</b>"), 1300], [on(3, "⑤ '읽었다'를 꾸밈 → <b>부사어</b>"), 2400]
+  ];
+}},
+
+/* 안은문장 */
+"t-embed": { cap: "<b>안은문장</b> · 문장이 다른 문장 속에 들어가 하나의 성분이 돼요", build(r){
+  r.innerHTML = `<div class="an-st">두 문장이 있어요</div>
+    <div class="an-col"><div class="an-line a"><span class="an-box">그가 범인<span class="end">이다</span>.</span></div>
+    <div class="an-line b">나는 <span class="slot">그것을</span> 알았다.</div></div>`;
+  return [
+    [() => { q(r, ".slot").classList.add("hi"); setStatus(r, "'그것을' 자리에 첫 문장을 넣어 볼게요"); }, 1500],
+    [() => { const e = q(r, ".end"); e.textContent = "임"; e.classList.add("hi2"); setStatus(r, "'-이다' → '-임' : 명사처럼 쓰이게 바뀜"); }, 1700],
+    [() => { q(r, ".an-line.a").classList.add("gone"); const s = q(r, ".slot"); s.classList.remove("hi"); s.innerHTML = `<span class="an-box in">그가 범인<span class="hi2">임</span></span>을`; setStatus(r, "<b>명사절</b>(안긴문장)이 목적어 자리에 들어감"); }, 2000],
+    [() => { q(r, ".an-line.b").classList.add("outer"); setStatus(r, "문장 전체 = <b>안은문장</b>"); }, 2400]
+  ];
+}},
+
+/* 높임 */
+"t-honor": { cap: "<b>높임 표현</b> · 누구를 높이는지에 따라 주체·객체·상대 높임", build(r){
+  r.innerHTML = `<div class="an-sentence">할머니<span class="m s">께서</span> 선생님<span class="m o">께</span> 책을 <span class="m o">드리</span><span class="m s">시</span>었<span class="m h">습니다</span>.</div>
+  <div class="an-row" style="gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
+    <span class="an-role" data-r="s"><b>주체 높임</b><small>할머니 (문장의 주어)</small></span>
+    <span class="an-role" data-r="o"><b>객체 높임</b><small>선생님 (받는 대상)</small></span>
+    <span class="an-role" data-r="h"><b>상대 높임</b><small>이 말을 듣는 사람</small></span></div>`;
+  const on = k => () => { qa(r, ".m").forEach(m => m.classList.toggle("hi", m.classList.contains(k))); qa(r, ".an-role").forEach(x => x.classList.toggle("on", x.dataset.r === k)); };
+  return [[on("s"), 1700], [on("o"), 1700], [on("h"), 1700], [() => { qa(r, ".m").forEach(m => m.classList.add("hi")); qa(r, ".an-role").forEach(x => x.classList.add("on")); }, 2400]];
+}},
+
+/* 담화: 문장 vs 발화 */
+"u-damhwa": { cap: "<b>발화와 담화</b> · 같은 문장도 맥락 속에서 의도를 가져요", build(r){
+  r.innerHTML = `<div class="an-chat">
+    <div class="bub l">좀 춥지 않니?</div>
+    <div class="an-tag t1">문장으로 보면: <b>의문문</b></div>
+    <div class="an-tag t2">맥락 속 의도: <b>창문 좀 닫아 줘</b> (요청)</div>
+    <div class="bub r">아, 닫을게!</div>
+    <svg class="win" viewBox="0 0 120 80" aria-hidden="true"><rect x="2" y="2" width="116" height="76" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><rect class="pane-l" x="6" y="6" width="52" height="68" fill="var(--soft)" stroke="currentColor"/><rect class="pane-r" x="62" y="6" width="52" height="68" fill="var(--soft)" stroke="currentColor"/></svg>
+  </div>`;
+  return [[() => q(r, ".t1").classList.add("show"), 1500], [() => q(r, ".t2").classList.add("show"), 1600], [() => q(r, ".bub.r").classList.add("show"), 900], [() => q(r, ".win").classList.add("closed"), 2600]];
+}},
+
+/* 응집성 */
+"t-cohesion": { cap: "<b>응집성</b> · 지시·접속 표현으로 문장이 이어지고, <b>통일성</b> · 한 주제로 묶여요", build(r){
+  r.innerHTML = `<div class="an-col" style="gap:6px">
+    <div class="an-line">어제 동네 <span class="k a">서점</span>에 갔다.</div>
+    <div class="an-line"><span class="k a">그 서점</span>은 역 바로 앞에 있다.</div>
+    <div class="an-line"><span class="k b">그래서</span> 앞으로 자주 갈 것 같다.</div></div>
+    <div class="an-row" style="gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap"><span class="an-tag ta">지시 표현: '그 서점' → 앞의 '서점'</span><span class="an-tag tb">접속 표현: '그래서' → 원인과 결과</span><span class="an-tag tc">모두 '동네 서점' 이야기 = 통일성</span></div>`;
+  return [
+    [() => { qa(r, ".k.a").forEach(x => x.classList.add("hi")); q(r, ".ta").classList.add("show"); }, 1800],
+    [() => { q(r, ".k.b").classList.add("hi2"); q(r, ".tb").classList.add("show"); }, 1800],
+    [() => q(r, ".tc").classList.add("show"), 2400]
+  ];
+}},
+
+/* 국어사: 시간에 따라 바뀌는 말 */
+"u-guksa": { cap: "<b>국어사</b> · 말소리와 표기는 시대에 따라 바뀌어 왔어요", build(r){
+  const E = ["고대","중세","근대","현대"];
+  r.innerHTML = `<div class="an-time"><div class="bar"></div>${E.map((e,i) => `<span class="era" style="left:${8 + i*28}%">${e}</span>`).join("")}<span class="mk" style="left:36%"></span></div>
+  <div class="an-col" style="gap:8px;margin-top:8px">
+    <div class="an-word"><span class="w old" data-w="0">믈</span><small data-n="0">15세기</small></div>
+    <div class="an-word"><span class="w old" data-w="1">텬디</span><small data-n="1">15세기</small></div>
+    <div class="an-word"><span class="w old" data-w="2">ᄆᆞᅀᆞᆷ</span><small data-n="2">15세기</small></div></div>`;
+  const set = (i, w, note) => { const e = q(r, `[data-w="${i}"]`); e.textContent = w; e.classList.remove("pop"); void e.offsetWidth; e.classList.add("pop"); q(r, `[data-n="${i}"]`).innerHTML = note; };
+  const mk = p => q(r, ".mk").style.left = p;
+  return [
+    [() => { mk("64%"); set(0, "물", "원순 모음화 (ㅁ 뒤 ㅡ → ㅜ)"); }, 1500],
+    [() => set(1, "천지", "구개음화 (ㄷ·ㅌ + ㅣ → ㅈ·ㅊ)"), 1500],
+    [() => set(2, "ᄆᆞ음", "ㅿ이 사라짐"), 1500],
+    [() => { mk("92%"); set(2, "마음", "ㆍ가 사라짐 → 오늘날의 말"); }, 2600]
+  ];
+}},
+
+/* 훈민정음 가획 */
+"t-jaeja": { cap: "<b>훈민정음 제자 원리</b> · 기본자에 획을 더해 센소리 글자를 만들었어요", build(r){
+  const G = {
+    "ㄱ": ["M10 12H48V52"], "ㅋ": ["M10 12H48V52", "+M10 32H46"],
+    "ㄴ": ["M12 10V48H50"], "ㄷ": ["M12 12V48H50", "+M12 12H50"], "ㅌ": ["M12 12V48H50", "M12 12H50", "+M12 30H48"],
+    "ㅁ": ["M12 22H48V50H12Z"], "ㅂ": ["M12 22H48V50H12Z", "+M12 22V8", "+M48 22V8"], "ㅍ": ["+M10 12H50", "+M10 50H50", "+M22 12V50", "+M38 12V50"],
+    "ㅅ": ["M30 20L12 52", "M30 20L48 52"], "ㅈ": ["M30 20L12 52", "M30 20L48 52", "+M12 20H48"], "ㅊ": ["M30 20L12 52", "M30 20L48 52", "M12 20H48", "+M30 6V16"],
+    "ㅇ": ["C30 36 14"], "ㆆ": ["C30 38 13", "+M14 18H46"], "ㅎ": ["C30 40 12", "M14 22H46", "+M30 6V16"]
+  };
+  const svg = ch => `<svg viewBox="0 0 60 60" class="gl" aria-label="${ch}">${G[ch].map(d => { const add = d[0] === "+"; const p = add ? d.slice(1) : d;
+    if (p[0] === "C"){ const [cx, cy, rr] = p.slice(1).split(" ").map(Number); return `<circle class="st${add ? " add" : ""}" cx="${cx}" cy="${cy}" r="${rr}" pathLength="1"/>`; }
+    return `<path class="st${add ? " add" : ""}" d="${p}" pathLength="1"/>`; }).join("")}</svg>`;
+  const rows = [["아음","ㄱ","ㅋ"],["설음","ㄴ","ㄷ","ㅌ"],["순음","ㅁ","ㅂ","ㅍ"],["치음","ㅅ","ㅈ","ㅊ"],["후음","ㅇ","ㆆ","ㅎ"]];
+  r.innerHTML = `<div class="an-jaeja">${rows.map(([n, ...cs]) => `<div class="jr"><span class="an-lab">${n}</span>${cs.map((c,i) => `${i ? `<span class="an-plus">→</span>` : ""}<span class="gw" data-s="${i}">${svg(c)}</span>`).join("")}</div>`).join("")}</div>
+  <div class="an-legend"><span class="lg base">기본자 (발음 기관 모양)</span><span class="lg addl">더한 획 (소리가 세짐)</span></div>`;
+  const stage = s => () => qa(r, `.gw[data-s="${s}"]`).forEach(g => g.classList.add("drawn"));
+  return [[stage(0), 1600], [stage(1), 1600], [stage(2), 2600]];
+}}
+};
+
+function mountScene(el){
+  const sc = SCENES[el.dataset.scene]; if (!sc) return;
+  el.className = "anim";
+  el.innerHTML = `<div class="an-body"></div><div class="anim-cap"><span>${sc.cap}</span><button class="btn small" type="button">다시 보기</button></div>`;
+  const body = q(el, ".an-body"), reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let frames, i, timer = null, visible = true;
+  const reset = () => { frames = sc.build(body); i = 0; };
+  const step = () => {
+    clearTimeout(timer);
+    if (!el.isConnected) return;
+    if (!visible){ timer = null; return; }
+    if (i < frames.length){ const [fn, d] = frames[i++]; fn(); timer = setTimeout(step, d || 1200); }
+    else timer = setTimeout(() => { reset(); timer = setTimeout(step, 900); }, 3000);
+  };
+  reset();
+  if (reduce){ frames.forEach(([fn]) => fn()); }
+  else {
+    timer = setTimeout(step, 900);
+    if ("IntersectionObserver" in window){
+      new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !timer) step(); }).observe(el);
+    }
+  }
+  q(el, ".anim-cap button").onclick = () => { clearTimeout(timer); reset(); if (reduce) frames.forEach(([fn]) => fn()); else timer = setTimeout(step, 500); };
+}
+
+"use strict";
+/* ---------- 기본 데이터 ---------- */
+const EXAMS = ["수능","6월 모의평가","9월 모의평가","3월 학력평가","4월 학력평가","7월 학력평가","10월 학력평가","내신","기타"];
+const UNIT_BY_ID = Object.fromEntries(UNITS.map(u => [u.id, u]));
+const ROUTES = ["home", ...UNITS.map(u => u.id), "gichul"];
+const NAVER = q => "https://ko.dict.naver.com/#/search?query=" + encodeURIComponent(q);
+const STD = q => "https://stdict.korean.go.kr/search/searchResult.do?searchKeyword=" + encodeURIComponent(q);
+
+const PHON = [
+ {w:"꽃잎", steps:[["꼳입","음절의 끝소리 규칙","교체"],["꼳닙","'ㄴ' 첨가","첨가"],["꼰닙","비음화","교체"]]},
+ {w:"닭만", steps:[["닥만","자음군 단순화","탈락"],["당만","비음화","교체"]]},
+ {w:"닫히다", steps:[["다티다","거센소리되기","축약"],["다치다","구개음화","교체"]]},
+ {w:"읊고", steps:[["읖고","자음군 단순화","탈락"],["읍고","음절의 끝소리 규칙","교체"],["읍꼬","된소리되기","교체"]]},
+ {w:"홑이불", steps:[["혿이불","음절의 끝소리 규칙","교체"],["혿니불","'ㄴ' 첨가","첨가"],["혼니불","비음화","교체"]]},
+ {w:"협력", steps:[["협녁","'ㄹ'의 비음화","교체"],["혐녁","비음화","교체"]]},
+ {w:"들일", steps:[["들닐","'ㄴ' 첨가","첨가"],["들ː릴","유음화","교체"]]},
+ {w:"값지다", steps:[["갑지다","자음군 단순화","탈락"],["갑찌다","된소리되기","교체"]]},
+ {w:"밟는", steps:[["밥는","자음군 단순화","탈락"],["밤ː는","비음화","교체"]]},
+ {w:"국물", steps:[["궁물","비음화","교체"]]},
+ {w:"신라", steps:[["실라","유음화(역행)","교체"]]},
+ {w:"칼날", steps:[["칼랄","유음화(순행)","교체"]]},
+ {w:"같이", steps:[["가치","구개음화","교체"]]},
+ {w:"국밥", steps:[["국빱","된소리되기","교체"]]},
+ {w:"솜이불", steps:[["솜ː니불","'ㄴ' 첨가","첨가"]]},
+ {w:"좋은", steps:[["조ː은","'ㅎ' 탈락","탈락"]]},
+ {w:"놓고", steps:[["노코","거센소리되기","축약"]]},
+ {w:"맏형", steps:[["마텽","거센소리되기","축약"]]},
+ {w:"쓰-+-어", base:"쓰어", steps:[["써","'ㅡ' 탈락","탈락"]]},
+ {w:"울-+-는", base:"울는", steps:[["우는","'ㄹ' 탈락","탈락"]]},
+ {w:"앞니", steps:[["압니","음절의 끝소리 규칙","교체"],["암니","비음화","교체"]]},
+ {w:"꽃눈", steps:[["꼳눈","음절의 끝소리 규칙","교체"],["꼰눈","비음화","교체"]]},
+ {w:"깎는", steps:[["깍는","음절의 끝소리 규칙","교체"],["깡는","비음화","교체"]]},
+ {w:"흙냄새", steps:[["흑냄새","자음군 단순화","탈락"],["흥냄새","비음화","교체"]]},
+ {w:"값만", steps:[["갑만","자음군 단순화","탈락"],["감만","비음화","교체"]]},
+ {w:"침략", steps:[["침냑","'ㄹ'의 비음화","교체"]]},
+ {w:"백로", steps:[["백노","'ㄹ'의 비음화","교체"],["뱅노","비음화","교체"]]},
+ {w:"국립", steps:[["국닙","'ㄹ'의 비음화","교체"],["궁닙","비음화","교체"]]},
+ {w:"줄넘기", steps:[["줄럼기","유음화(순행)","교체"],["줄럼끼","된소리되기","교체"]]},
+ {w:"해돋이", steps:[["해도지","구개음화","교체"]]},
+ {w:"붙이다", steps:[["부치다","구개음화","교체"]]},
+ {w:"꽂고", steps:[["꼳고","음절의 끝소리 규칙","교체"],["꼳꼬","된소리되기","교체"]]},
+ {w:"넓다", steps:[["널다","자음군 단순화","탈락"],["널따","된소리되기","교체"]]},
+ {w:"앓는", steps:[["알는","'ㅎ' 탈락","탈락"],["알른","유음화(순행)","교체"]]},
+ {w:"끓이다", steps:[["끄리다","'ㅎ' 탈락","탈락"]]},
+ {w:"낳은", steps:[["나은","'ㅎ' 탈락","탈락"]]},
+ {w:"식용유", steps:[["시굥뉴","'ㄴ' 첨가","첨가"]]},
+ {w:"솔잎", steps:[["솔입","음절의 끝소리 규칙","교체"],["솔닙","'ㄴ' 첨가","첨가"],["솔립","유음화(순행)","교체"]]},
+ {w:"서울역", steps:[["서울녁","'ㄴ' 첨가","첨가"],["서울력","유음화(순행)","교체"]]},
+ {w:"깻잎", steps:[["깯입","음절의 끝소리 규칙","교체"],["깯닙","'ㄴ' 첨가","첨가"],["깬닙","비음화","교체"]]},
+ {w:"각하", steps:[["가카","거센소리되기","축약"]]},
+ {w:"쌓지", steps:[["싸치","거센소리되기","축약"]]},
+ {w:"넓히다", steps:[["널피다","거센소리되기","축약"]]},
+ {w:"크-+-어", base:"크어", steps:[["커","'ㅡ' 탈락","탈락"]]},
+ {w:"서-+-어서", base:"서어서", steps:[["서서","동음 탈락","탈락"]]},
+ {w:"찌-+-어", base:"찌어", steps:[["쪄","반모음화","교체"],["쩌","반모음 탈락","탈락"]]}
+];
+const TYPE_COLOR = {"교체":"var(--t-sub)","탈락":"var(--t-del)","첨가":"var(--t-add)","축약":"var(--t-con)"};
+
+const MORPH = [
+ {s:"철수가 책을 읽었다", m:[["철수",1,1,"명사"],["가",0,0,"조사"],["책",1,1,"명사"],["을",0,0,"조사"],["읽-",0,1,"어간"],["-었-",0,0,"선어말 어미"],["-다",0,0,"어말 어미"]], words:["철수","가","책","을","읽었다"]},
+ {s:"새 신발을 신었다", m:[["새",1,1,"관형사"],["신",1,1,"명사"],["발",1,1,"명사"],["을",0,0,"조사"],["신-",0,1,"어간"],["-었-",0,0,"선어말 어미"],["-다",0,0,"어말 어미"]], words:["새","신발","을","신었다"], note:"'신발'은 '신+발'로 된 합성어라 형태소는 둘이지만 단어는 하나예요."},
+ {s:"아이에게 먹이를 주었다", m:[["아이",1,1,"명사"],["에게",0,0,"조사"],["먹-",0,1,"어근"],["-이",0,0,"접미사"],["를",0,0,"조사"],["주-",0,1,"어간"],["-었-",0,0,"선어말 어미"],["-다",0,0,"어말 어미"]], words:["아이","에게","먹이","를","주었다"], note:"'먹이'는 '먹-+-이'로 된 파생어예요. 접미사 '-이'는 의존·형식 형태소예요."},
+ {s:"하늘이 매우 푸르다", m:[["하늘",1,1,"명사"],["이",0,0,"조사"],["매우",1,1,"부사"],["푸르-",0,1,"어간"],["-다",0,0,"어말 어미"]], words:["하늘","이","매우","푸르다"]}
+];
+const WORDS = [
+ ["하늘","단일어","더 나눌 수 없음"],["나무","단일어","더 나눌 수 없음"],["먹다","단일어","먹- + -다(어미)"],
+ ["풋사과","파생어","풋-(접두사) + 사과"],["맨손","파생어","맨-(접두사) + 손"],["헛기침","파생어","헛-(접두사) + 기침"],["군소리","파생어","군-(접두사) + 소리"],
+ ["짓밟다","파생어","짓-(접두사) + 밟다"],["치솟다","파생어","치-(접두사) + 솟다"],["새파랗다","파생어","새-(접두사) + 파랗다"],
+ ["지우개","파생어","지우- + -개(접미사)"],["낚시꾼","파생어","낚시 + -꾼(접미사)"],["가위질","파생어","가위 + -질(접미사)"],["욕심쟁이","파생어","욕심 + -쟁이(접미사)"],
+ ["믿음","파생어","믿- + -음(접미사)"],["사랑스럽다","파생어","사랑 + -스럽-(접미사)"],["출렁거리다","파생어","출렁 + -거리-(접미사)"],["깨뜨리다","파생어","깨- + -뜨리-(접미사)"],
+ ["먹이다","파생어","먹- + -이-(사동 접미사)"],["아름답다","파생어","아름(어근) + -답-(접미사)"],["해돋이","파생어","[해 + 돋-] + -이(접미사)"],["헛웃음","파생어","헛-(접두사) + [웃음]"],
+ ["손발","합성어","손 + 발 (대등)"],["밤낮","합성어","밤 + 낮 (융합: 늘)"],["돌다리","합성어","돌 + 다리 (종속)"],["큰집","합성어","큰(관형사형) + 집, 통사적"],
+ ["새해","합성어","새(관형사) + 해, 통사적"],["늦잠","합성어","늦-(어간) + 잠, 비통사적"],["덮밥","합성어","덮-(어간) + 밥, 비통사적"],["부슬비","합성어","부슬(부사) + 비, 비통사적"],
+ ["오르내리다","합성어","오르- + 내리-, 비통사적"],["굳세다","합성어","굳- + 세-, 비통사적"],["뛰어가다","합성어","뛰- + -어 + 가다, 통사적"],["힘들다","합성어","힘(이) + 들다, 통사적"],
+ ["본받다","합성어","본(을) + 받다, 통사적"],["잘생기다","합성어","잘(부사) + 생기다, 통사적"],["손목시계","합성어","[손 + 목] + 시계"],["코웃음","합성어","코 + [웃음]"],["집안일","합성어","[집 + 안] + 일"]
+];
+const TOPIC_SCENE = {"eumun-5":"t-change","danei-2":"t-form","munjang-3":"t-embed","munjang-6":"t-honor","damhwa-3":"t-cohesion","guksa-3":"t-jaeja"};
+const SENTS = [
+ {s:[["철수가","주어"],["새","관형어"],["책을","목적어"],["열심히","부사어"],["읽었다","서술어"]], note:"'읽다'는 주어와 목적어가 필요한 두 자리 서술어예요."},
+ {s:[["물이","주어"],["얼음이","보어"],["되었다","서술어"]], note:"'되다, 아니다' 앞의 '이/가'가 붙은 말은 보어예요."},
+ {s:[["아,","독립어"],["그는","주어"],["동생에게","필수적 부사어"],["선물을","목적어"],["주었다","서술어"]], note:"'주다'는 '누가, 누구에게, 무엇을'이 필요한 세 자리 서술어예요."},
+ {s:[["영희는","주어"],["엄마와","필수적 부사어"],["닮았다","서술어"]], note:"'닮다'는 '~와'가 없으면 문장이 불완전해요."},
+ {s:[["코끼리는","주어"],["코가","서술절의 주어"],["길다","서술절의 서술어"]], note:"'코가 길다' 전체가 '코끼리는'의 서술어 역할을 하는 서술절이에요."}
+];
+
+/* ---------- 유틸 ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function rich(s){ // 사용자 글: 이스케이프 → [[단어]] 사전 링크 → 줄바꿈
+  return esc(s).replace(/\[\[([^\]\n]{1,30})\]\]/g, (m, w) => `<a class="w" href="${NAVER(w)}" target="_blank" rel="noopener">${w}</a>`).replace(/\n/g, "<br>");
+}
+function countPh(str){
+  const DIPH = new Set([2,3,6,7,9,10,12,14,15,17,19]); // ㅑㅒㅕㅖㅘㅙㅛㅝㅞㅠㅢ
+  const CLUSTER = new Set([3,5,6,9,10,11,12,13,14,15,18]);
+  let n = 0;
+  for (const ch of str){
+    const c = ch.codePointAt(0) - 0xAC00;
+    if (c < 0 || c > 11171) continue;
+    const ini = Math.floor(c/588), med = Math.floor((c%588)/28), fin = c%28;
+    if (ini !== 11) n++;
+    n += DIPH.has(med) ? 2 : 1;
+    if (fin) n += CLUSTER.has(fin) ? 2 : 1;
+  }
+  return n;
+}
+function linkWords(root){
+  root.querySelectorAll("w").forEach(el => {
+    const a = document.createElement("a");
+    const q = el.getAttribute("q") || el.textContent.trim();
+    a.className = "w"; a.href = NAVER(q); a.target = "_blank"; a.rel = "noopener";
+    a.title = "네이버 국어사전: " + q;
+    a.innerHTML = el.innerHTML;
+    el.replaceWith(a);
+  });
+}
+function srcLabel(g){ return [g.year ? g.year + (g.exam === "수능" || /모의평가/.test(g.exam||"") ? "학년도" : "") : "", g.exam || ""].filter(Boolean).join(" "); }
+function sortG(a, b){
+  return (b.year||0) - (a.year||0) || EXAMS.indexOf(a.exam) - EXAMS.indexOf(b.exam) || (parseInt(a.num)||0) - (parseInt(b.num)||0);
+}
+
+/* ---------- 상태 ---------- */
+const S = { gichul: [], notes: [], db: "loading", canWrite: false, f: {unit:"all", exam:"all", year:"all", q:""} };
+let DB = null, ASSETS = null, demoTimer = null;
+
+/* ---------- 라우팅 ---------- */
+function route(){ const h = location.hash.replace("#",""); return ROUTES.includes(h) ? h : "home"; }
+function renderTabs(){
+  const r = route();
+  $("#tabs").innerHTML = [["home","홈"], ...UNITS.map(u => [u.id, u.name]), ["gichul","기출 자료실"]]
+    .map(([id, name]) => `<a href="#${id}" class="${r===id?"on":""}" style="--c:${UNIT_BY_ID[id]?.color || "var(--seal)"}">${esc(name)}</a>`).join("");
+}
+function render(){
+  renderTabs();
+  clearInterval(demoTimer);
+  const r = route(), v = $("#view");
+  if (r === "home") v.innerHTML = homeHTML();
+  else if (r === "gichul") v.innerHTML = archiveHTML();
+  else v.innerHTML = unitHTML(UNIT_BY_ID[r]);
+  linkWords(v);
+  if (r === "home") startDemo();
+  if (r === "gichul") bindArchive();
+  v.querySelectorAll("[data-widget]").forEach(initWidget);
+  v.querySelectorAll("[data-scene]").forEach(mountScene);
+  updateDyn();
+}
+window.addEventListener("hashchange", () => { render(); window.scrollTo(0,0); });
+
+/* ---------- 홈 ---------- */
+function homeHTML(){
+  return `
+<section class="hero">
+  <div>
+    <h1>소리가 바뀌고, 단어가 생기고,<br>문장이 짜이는 <em>원리</em>까지.</h1>
+    <p>고등 국어 문법 다섯 단원의 개념을 정리하고, 기출 문제를 단원별로 모아 두는 공부 공간이에요. 낯선 단어는 밑줄을 눌러 네이버 국어사전에서 바로 확인하세요.</p>
+    <div class="row-actions" style="margin-top:18px"><a class="btn primary" href="#eumun">음운부터 시작하기</a><a class="btn" href="#gichul">기출 자료실</a></div>
+  </div>
+  <div class="demo" style="--c:var(--u1)">
+    <div class="demo-label"><span>음운 변동 미리 보기</span><span id="demo-w"></span></div>
+    <div class="chain" id="demo-chain"></div>
+    <div class="demo-foot" id="demo-foot"></div>
+  </div>
+</section>
+<div class="sec-h"><h2>단원</h2><span class="muted">${UNITS.reduce((a,u)=>a+u.topics.length,0)}개 개념</span></div>
+<div class="units">${UNITS.map((u,i) => `
+  <a class="ucard" href="#${u.id}" style="--c:${u.color}">
+    <span class="n">${String(i+1).padStart(2,"0")}</span>
+    <h3>${esc(u.name)}</h3>
+    <p>${esc(u.sub)}</p>
+    <div class="meta"><span class="chip">개념 ${u.topics.length}</span><span class="chip">퀴즈 ${(QUIZ[u.id]||[]).length}</span><span class="chip dyn-count" data-unit="${u.id}">기출 –</span></div>
+  </a>`).join("")}
+</div>
+<div class="home-row">
+  <div class="panel"><div class="sec-h" style="margin-top:0"><h3>최근 추가한 기출</h3><a href="#gichul" class="muted" style="font-size:14px">전체 보기 →</a></div><div id="dyn-recent"></div></div>
+  <div class="panel"><h3>국어사전 바로 찾기</h3>
+    <div class="field"><input id="homedict" type="search" placeholder="예: 다리, 금융, 깻잎" aria-label="찾을 단어"></div>
+    <div class="row-actions"><a class="btn" id="hd-n" href="https://ko.dict.naver.com/" target="_blank" rel="noopener">네이버 국어사전 ↗</a><a class="btn" id="hd-s" href="https://stdict.korean.go.kr/" target="_blank" rel="noopener">표준국어대사전 ↗</a></div>
+    <p class="muted" style="font-size:14px;margin:10px 0 0">개념 설명 속 글자를 드래그해도 사전 링크가 떠요.</p>
+  </div>
+</div>`;
+}
+function startDemo(){
+  const list = PHON.filter(p => p.steps.length >= 2);
+  let ex = 0, st = 0;
+  const foot = $("#demo-foot");
+  foot.innerHTML = list.map((p,i) => `<button data-i="${i}">${esc(p.w)}</button>`).join("");
+  foot.onclick = e => { const b = e.target.closest("button"); if (!b) return; ex = +b.dataset.i; st = 0; draw(true); restart(); };
+  function draw(swap){
+    const p = list[ex], chain = $("#demo-chain");
+    if (!chain) return;
+    const forms = [p.w, ...p.steps.map(s => s[0])];
+    const html = forms.map((f, i) => {
+      const last = i === forms.length - 1;
+      const cls = "form" + (i === st ? " on" : "") + (last && st === forms.length - 1 ? " final" : "");
+      const txt = last ? `[${f}]` : (i === 0 ? `/${f}/` : f);
+      const arrow = i < p.steps.length ? `<span class="arrow" style="--tc:${TYPE_COLOR[p.steps[i][2]]}"><i>→</i><small>${esc(p.steps[i][1])}<br>${p.steps[i][2]}</small></span>` : "";
+      return `<span class="${cls}">${esc(txt)}</span>${arrow}`;
+    }).join("");
+    $("#demo-w").textContent = `${p.w} · 음운 ${countPh(p.base||p.w)}개 → ${countPh(forms[forms.length-1])}개`;
+    foot.querySelectorAll("button").forEach((b,i) => b.classList.toggle("on", i === ex));
+    if (swap){ chain.classList.add("fade"); setTimeout(() => { chain.innerHTML = html; chain.classList.remove("fade"); }, 200); }
+    else chain.innerHTML = html;
+  }
+  function tick(){
+    const p = list[ex];
+    if (st < p.steps.length){ st++; draw(false); }
+    else { ex = (ex + 1) % list.length; st = 0; draw(true); }
+  }
+  function restart(){ clearInterval(demoTimer); if (!matchMedia("(prefers-reduced-motion: reduce)").matches) demoTimer = setInterval(tick, 1500); }
+  st = list[0].steps.length; draw(false); st = 0; setTimeout(() => draw(false), 900); restart();
+  const hd = $("#homedict");
+  hd.addEventListener("input", () => { const q = hd.value.trim(); $("#hd-n").href = q ? NAVER(q) : "https://ko.dict.naver.com/"; $("#hd-s").href = q ? STD(q) : "https://stdict.korean.go.kr/"; });
+  hd.addEventListener("keydown", e => { if (e.key === "Enter" && hd.value.trim()) $("#hd-n").click(); });
+}
+
+/* ---------- 단원 ---------- */
+function unitHTML(u){
+  return `<div style="--c:${u.color}">
+<div class="uhead"><h1>${esc(u.name)}</h1><p>${esc(u.blurb)}</p>
+  <div class="row-actions"><span class="chip">${esc(u.ch)}</span><span class="chip">개념 ${u.topics.length}</span><a class="chip" href="#${u.id}" data-jump="u-quiz" style="text-decoration:none">퀴즈 ${(QUIZ[u.id]||[]).length}문항 풀기 →</a><span class="chip dyn-count" data-unit="${u.id}">기출 –</span></div></div>
+<div class="anim" data-scene="u-${u.id}"></div>
+<div class="ulayout">
+  <nav class="toc" aria-label="개념 목차">${u.topics.map((t,i) => `<a href="#${u.id}" data-jump="${t.id}"><span>${i+1}</span>${esc(t.title)}</a>`).join("")}
+    <a href="#${u.id}" data-jump="u-quiz"><span>Q</span>단원 퀴즈</a><a href="#${u.id}" data-jump="u-notes"><span>+</span>내 정리</a><a href="#${u.id}" data-jump="u-gichul"><span>기</span>이 단원 기출</a></nav>
+  <div>
+    ${u.topics.map((t,i) => `<section class="topic" id="${t.id}"><h2><span>${String(i+1).padStart(2,"0")}</span>${esc(t.title)}</h2>${TOPIC_SCENE[t.id] ? `<div data-scene="${TOPIC_SCENE[t.id]}"></div>` : ""}${t.body}${MORE[t.id] ? `<div class="more"><div class="more-h">더 자세히</div>${MORE[t.id]}</div>` : ""}</section>`).join("")}
+    <section class="topic" id="u-quiz"><h2><span>Q</span>단원 퀴즈</h2><div data-widget="quiz" data-unit="${u.id}"></div></section>
+    <section class="notes" id="u-notes"><div class="sec-h"><h2>내 정리</h2><span id="dyn-addnote"></span></div><div id="dyn-notes" data-unit="${u.id}"></div></section>
+    <section class="notes" id="u-gichul"><div class="sec-h"><h2>이 단원 기출</h2><a href="#gichul" data-filter-unit="${u.id}" class="muted" style="font-size:14px">자료실에서 보기 →</a></div><div id="dyn-ugichul" data-unit="${u.id}"></div></section>
+  </div>
+</div></div>`;
+}
+document.addEventListener("click", e => {
+  const j = e.target.closest("[data-jump]");
+  if (j){ e.preventDefault(); document.getElementById(j.dataset.jump)?.scrollIntoView({behavior:"smooth", block:"start"}); return; }
+  const fu = e.target.closest("[data-filter-unit]");
+  if (fu){ S.f = {unit: fu.dataset.filterUnit, exam:"all", year:"all", q:""}; }
+  const q = e.target.closest("[data-open]");
+  if (q){ openDetail(q.dataset.open); }
+});
+
+/* ---------- 위젯 ---------- */
+function initWidget(el){
+  const kind = el.dataset.widget;
+  if (kind === "phon"){
+    el.className = "wg"; let cur = 0, typ = "전체";
+    const draw = () => {
+      const p = PHON[cur]; let prev = p.base || p.w;
+      const shown = PHON.map((x,i) => [x,i]).filter(([x]) => typ === "전체" || x.steps.some(s => s[2] === typ));
+      el.innerHTML = `<div class="mtabs" style="margin-bottom:10px">${["전체","교체","탈락","첨가","축약"].map(t => `<button data-t="${t}" class="${typ===t?"on":""}">${t}${t==="전체"?` ${PHON.length}`:` ${PHON.filter(x => x.steps.some(s => s[2]===t)).length}`}</button>`).join("")}</div>
+      <div class="wg-pick">${shown.map(([x,i]) => `<button data-i="${i}" class="${i===cur?"on":""}">${esc(x.w)}</button>`).join("")}</div>
+      <div class="steps"><div class="step"><span class="f">/${esc(p.w)}/</span><span class="r muted">기본 형태</span><span class="cnt">음운 ${countPh(prev)}개</span></div>
+      ${p.steps.map((s, i) => { const before = countPh(prev), after = countPh(s[0]); prev = s[0]; const d = after - before;
+        return `<div class="step" style="--tc:${TYPE_COLOR[s[2]]}"><span class="f">${i===p.steps.length-1?"["+esc(s[0])+"]":esc(s[0])}</span><span class="r"><b>${s[2]}</b> · ${esc(s[1])}</span><span class="cnt">${after}개 (${d>0?"+"+d:d===0?"±0":d})</span></div>`; }).join("")}</div>`;
+    };
+    el.onclick = e => { const b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.t){ typ = b.dataset.t; const first = PHON.findIndex(x => typ === "전체" || x.steps.some(s => s[2] === typ)); if (!(typ === "전체" || PHON[cur].steps.some(s => s[2] === typ))) cur = first; draw(); }
+      else if (b.dataset.i){ cur = +b.dataset.i; draw(); } };
+    draw();
+  }
+  if (kind === "wordtype"){
+    el.className = "wg"; let f = "전체";
+    const draw = () => {
+      const list = WORDS.filter(w => f === "전체" || w[1] === f);
+      el.innerHTML = `<p style="margin:0 0 8px"><b>파생어·합성어 분류 연습</b> — 단어를 눌러 어떤 짜임인지 확인해 보세요.</p>
+        <div class="mtabs" style="margin-bottom:10px">${["전체","단일어","파생어","합성어"].map(t => `<button data-f="${t}" class="${f===t?"on":""}">${t}</button>`).join("")}<button data-all="1">모두 보기</button></div>
+        <div class="sent wt">${list.map(([w,t,s]) => `<button data-k="1" style="min-width:auto"><b>${esc(w)}</b><small>${esc(t)}</small><small style="font-weight:500">${esc(s)}</small></button>`).join("")}</div>`;
+    };
+    el.onclick = e => { const b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.f){ f = b.dataset.f; draw(); }
+      else if (b.dataset.all) el.querySelectorAll(".sent button").forEach(x => x.classList.add("show"));
+      else if (b.dataset.k) b.classList.toggle("show"); };
+    draw();
+  }
+  if (kind === "morph"){
+    el.className = "wg"; let cur = 0, mode = "m";
+    const draw = () => {
+      const x = MORPH[cur];
+      let body;
+      if (mode === "w") body = `<div class="mrow">${x.words.map(w => `<span class="mc">${esc(w)}</span>`).join("")}</div><p class="muted" style="margin:4px 0">단어 ${x.words.length}개 (조사는 단어, 어미는 앞말에 붙여 한 단어)</p>`;
+      else body = `<div class="mrow">${x.m.map(([t,ja,sil,pos]) => { const on = mode==="ja" ? ja : mode==="sil" ? sil : -1;
+          const lab = mode==="ja" ? (ja?"자립":"의존") : mode==="sil" ? (sil?"실질":"형식") : pos;
+          return `<span class="mc ${on===1?"a":on===0?"b":""}">${esc(t)}<small>${lab}</small></span>`; }).join("")}</div>
+          <p class="muted" style="margin:4px 0">형태소 ${x.m.length}개${mode==="ja"?` · 자립 ${x.m.filter(m=>m[1]).length} / 의존 ${x.m.filter(m=>!m[1]).length}`:""}${mode==="sil"?` · 실질 ${x.m.filter(m=>m[2]).length} / 형식 ${x.m.filter(m=>!m[2]).length}`:""}</p>`;
+      el.innerHTML = `<div class="wg-pick">${MORPH.map((m,i) => `<button data-i="${i}" class="${i===cur?"on":""}">${esc(m.s)}</button>`).join("")}</div>
+        <div class="mtabs">${[["m","형태소로 나누기"],["ja","자립 / 의존"],["sil","실질 / 형식"],["w","단어로 나누기"]].map(([k,l]) => `<button data-m="${k}" class="${mode===k?"on":""}">${l}</button>`).join("")}</div>
+        ${body}${x.note ? `<div class="tip">${esc(x.note)}</div>` : ""}`;
+    };
+    el.onclick = e => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.i) cur = +b.dataset.i; if (b.dataset.m) mode = b.dataset.m; draw(); };
+    draw();
+  }
+  if (kind === "quiz"){
+    const qs = QUIZ[el.dataset.unit] || [];
+    el.className = "quiz";
+    let order, i, picks, lockd, perms;
+    const NUM = ["①","②","③","④","⑤","⑥"];
+    const shuffle = arr => { const a = [...arr]; for (let k = a.length - 1; k > 0; k--){ const j = Math.floor(Math.random()*(k+1)); [a[k],a[j]] = [a[j],a[k]]; } return a; };
+    const start = (idx) => { order = idx; i = 0; picks = []; lockd = false; perms = idx.map(q => shuffle(qs[q].c.map((_,k) => k))); draw(); };
+    // 선택지를 섞은 뒤 문제 p번째 자리의 원래 번호 → 화면 번호로 바꿔 해설 속 ①② 표기를 맞춤
+    const view = (pos) => { const x = qs[order[pos]], pm = perms[pos], inv = []; pm.forEach((o,k) => inv[o] = k);
+      const e = x.e.replace(/[①-⑤]+/g, run => [...run].map(ch => inv[NUM.indexOf(ch)]).sort((m,n)=>m-n).map(k => NUM[k]).join(""));
+      return { q: x.q, c: pm.map(o => x.c[o]), a: inv[x.a], e }; };
+    function draw(){
+      if (i >= order.length) return result();
+      const x = view(i), p = picks[i];
+      el.innerHTML = `<div class="qz-top"><span>${i+1} / ${order.length}</span><span class="qz-bar"><i style="width:${(i/order.length)*100}%"></i></span><span>맞힌 문제 ${picks.filter((pk,k)=>pk===view(k).a).length}</span></div>
+        <p class="qz-q">${esc(x.q)}</p>
+        <div class="qz-c">${x.c.map((c,k) => `<button data-k="${k}" class="${p===undefined?"":k===x.a?"ok":k===p?"no":"dim"}" ${p===undefined?"":"disabled"}><b>${NUM[k]}</b><span>${esc(c)}</span></button>`).join("")}</div>
+        ${p===undefined ? "" : `<div class="qz-e ${p===x.a?"ok":"no"}"><b>${p===x.a?"정답이에요!":"아쉬워요. 정답은 "+NUM[x.a]+"이에요."}</b><br>${esc(x.e)}</div>
+        <div class="row-actions"><button class="btn primary" data-next="1">${i===order.length-1?"결과 보기":"다음 문제 →"}</button></div>`}`;
+    }
+    function result(){
+      const wrong = order.map((q,k) => [q,picks[k],view(k)]).filter(([q,pk,v]) => pk !== v.a);
+      const score = order.length - wrong.length;
+      el.innerHTML = `<div class="qz-res"><b>${score} / ${order.length}</b><span>${score===order.length?"완벽해요! 이 단원은 자신 있게 넘어가도 돼요.":score>=order.length*0.7?"잘했어요. 틀린 문제의 개념만 다시 확인해 보세요.":"개념을 한 번 더 읽고 다시 풀어 보세요."}</span></div>
+        ${wrong.length ? `<h4>틀린 문제 다시 보기</h4>${wrong.map(([q,pk,v]) => `<div class="qz-w"><p><b>${esc(v.q)}</b></p><p>내 답: ${NUM[pk]} ${esc(v.c[pk])}<br>정답: ${NUM[v.a]} ${esc(v.c[v.a])}</p><p class="muted">${esc(v.e)}</p></div>`).join("")}` : ""}
+        <div class="row-actions"><button class="btn primary" data-again="all">순서 섞어서 다시 풀기</button>${wrong.length?`<button class="btn" data-again="wrong">틀린 문제만 다시 풀기</button>`:""}</div>`;
+      el.querySelector("[data-again='wrong']")?.addEventListener("click", () => start(shuffle(wrong.map(w => w[0]))));
+    }
+    el.onclick = e => {
+      const b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.k !== undefined && picks[i] === undefined){ picks[i] = +b.dataset.k; draw(); }
+      else if (b.dataset.next){ i++; draw(); el.scrollIntoView({block:"nearest"}); }
+      else if (b.dataset.again === "all") start(shuffle(qs.map((_,k) => k)));
+    };
+    start(qs.map((_,k) => k));
+  }
+  if (kind === "sent"){
+    el.className = "wg"; let cur = 0;
+    const draw = () => {
+      const x = SENTS[cur];
+      el.innerHTML = `<p style="margin:0 0 8px"><b>어절을 눌러 문장 성분을 확인해 보세요.</b></p>
+        <div class="wg-pick">${SENTS.map((s,i) => `<button data-i="${i}" class="${i===cur?"on":""}">${i+1}</button>`).join("")}<button data-all="1">모두 보기</button></div>
+        <div class="sent">${x.s.map(([t,r],i) => `<button data-k="${i}" aria-label="${esc(t)}"><b>${esc(t)}</b><small>${esc(r)}</small></button>`).join("")}</div>
+        <div class="tip">${esc(x.note)}</div>`;
+    };
+    el.onclick = e => { const b = e.target.closest("button"); if (!b) return;
+      if (b.dataset.i){ cur = +b.dataset.i; draw(); }
+      else if (b.dataset.all) el.querySelectorAll(".sent button").forEach(x => x.classList.add("show"));
+      else if (b.dataset.k) b.classList.toggle("show"); };
+    draw();
+  }
+}
+
+/* ---------- 기출 자료실 ---------- */
+function filtered(){
+  const f = S.f, q = f.q.trim().toLowerCase();
+  return S.gichul.filter(g => (f.unit==="all"||g.unit===f.unit) && (f.exam==="all"||g.exam===f.exam) && (f.year==="all"||String(g.year)===f.year)
+    && (!q || [g.title,g.topic,g.question,g.explanation,(g.tags||[]).join(" "),srcLabel(g)].join(" ").toLowerCase().includes(q))).sort(sortG);
+}
+function archiveHTML(){
+  return `<div class="arch-h"><div><h1>기출 자료실</h1><p class="muted" style="margin:4px 0 0">단원·시험·연도로 골라 보고, 문제를 누르면 해설과 첨부 파일이 열려요.</p></div>
+  <div class="row-actions" id="dyn-archtools"></div></div>
+  <div class="filters">
+    <div class="ufilter" id="f-unit"></div>
+    <select id="f-exam" aria-label="시험 종류"><option value="all">모든 시험</option>${EXAMS.map(x => `<option>${x}</option>`).join("")}</select>
+    <select id="f-year" aria-label="연도"></select>
+    <input id="f-q" type="search" placeholder="제목, 개념, 태그로 검색" aria-label="기출 검색">
+  </div>
+  <div id="dyn-arch"></div>`;
+}
+function bindArchive(){
+  $("#f-exam").value = S.f.exam; $("#f-q").value = S.f.q;
+  $("#f-exam").onchange = e => { S.f.exam = e.target.value; updateDyn(); };
+  $("#f-year").onchange = e => { S.f.year = e.target.value; updateDyn(); };
+  $("#f-q").oninput = e => { S.f.q = e.target.value; drawArchList(); };
+  $("#f-unit").onclick = e => { const b = e.target.closest("button"); if (b){ S.f.unit = b.dataset.u; updateDyn(); } };
+}
+function qItem(g){
+  const u = UNIT_BY_ID[g.unit] || {color:"var(--muted)", name:"미분류"};
+  const n = (g.files||[]).length, img = (g.files||[]).find(f => /^image\//.test(f.type||""));
+  return `<button class="qitem" style="--c:${u.color}" data-open="${esc(g.id)}">
+    ${img ? `<img class="qthumb" src="${esc(fileURL(img))}" alt="" loading="lazy">` : ""}
+    <span class="src">${esc(g.year||"")}${g.num ? ` · ${esc(g.num)}번` : ""}<small>${esc(g.exam||"")}</small></span>
+    <span class="qmain"><span class="tt">${esc(g.title||autoTitle(g))}${g.example ? `<span class="example-badge">예시</span>` : ""}</span>
+      <span class="tags"><span class="chip" style="box-shadow:inset 3px 0 0 ${u.color}">${esc(u.name)}</span>${g.topic ? `<span class="chip">${esc(g.topic)}</span>` : ""}${(g.tags||[]).slice(0,4).map(t => `<span class="chip">#${esc(t)}</span>`).join("")}${g.explanation ? `<span class="chip">해설 있음</span>` : ""}</span></span>
+    <span class="att">${n ? `사진 ${n}` : ""}</span></button>`;
+}
+function stateHTML(){
+  if (S.db === "off") return `<div class="state">기출 자료는 Claude에 로그인한 상태로 이 페이지를 열면 보여요.</div>`;
+  if (S.db === "loading") return `<div class="state">기출 자료를 불러오는 중이에요…</div>`;
+  if (S.db === "slow") return `<div class="state">자료를 아직 불러오지 못했어요. 인터넷 연결을 확인해 주세요.</div>`;
+  if (S.db === "error") return `<div class="state">자료를 불러오지 못했어요. 페이지를 다시 열어 주세요.</div>`;
+  return "";
+}
+function drawArchList(){
+  const box = $("#dyn-arch"); if (!box) return;
+  const st = stateHTML(); if (st){ box.innerHTML = st; return; }
+  const list = filtered();
+  box.innerHTML = `<p class="muted" style="margin:0 0 8px;font-size:14px">${list.length}문항</p>` +
+    (list.length ? `<div class="qlist">${list.map(qItem).join("")}</div>` :
+     `<div class="state">${S.gichul.length ? "조건에 맞는 기출이 없어요. 필터를 바꿔 보세요." : (S.canWrite ? "아직 기출이 없어요. 오른쪽 위 [+ 기출 추가]로 첫 문제를 넣어 보세요." : "아직 등록된 기출이 없어요.")}</div>`);
+}
+
+/* ---------- 동적 영역 갱신 ---------- */
+function updateDyn(){
+  document.querySelectorAll(".dyn-count").forEach(el => {
+    el.textContent = S.db === "ok" ? `기출 ${S.gichul.filter(g => g.unit === el.dataset.unit).length}` : "기출 –";
+  });
+  const rec = $("#dyn-recent");
+  if (rec){ const st = stateHTML();
+    rec.innerHTML = st || (S.gichul.length ? `<div class="qlist">${[...S.gichul].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,4).map(qItem).join("")}</div>` : `<div class="state">아직 등록된 기출이 없어요.</div>`); }
+  const uf = $("#f-unit");
+  if (uf){
+    uf.innerHTML = [["all","전체","var(--ink)"], ...UNITS.map(u => [u.id, u.name, u.color])].map(([id,n,c]) => `<button data-u="${id}" style="--c:${c}" class="${S.f.unit===id?"on":""}">${esc(n)}</button>`).join("");
+    const years = [...new Set(S.gichul.map(g => g.year).filter(Boolean))].sort((a,b)=>b-a);
+    if (S.f.year !== "all" && !years.map(String).includes(S.f.year)) S.f.year = "all";
+    $("#f-year").innerHTML = `<option value="all">모든 연도</option>` + years.map(y => `<option value="${y}" ${String(y)===S.f.year?"selected":""}>${y}</option>`).join("");
+    $("#f-exam").value = S.f.exam;
+    $("#dyn-archtools").innerHTML = S.canWrite ? `<button class="btn" id="bk">백업 · 가져오기</button><button class="btn primary" id="addq">+ 기출 추가</button>` : "";
+    if (S.canWrite){ $("#addq").onclick = () => openForm(null); $("#bk").onclick = openBackup; }
+    drawArchList();
+  }
+  const ug = $("#dyn-ugichul");
+  if (ug){ const st = stateHTML(); const list = S.gichul.filter(g => g.unit === ug.dataset.unit).sort(sortG);
+    ug.innerHTML = st || (list.length ? `<div class="qlist">${list.map(qItem).join("")}</div>` : `<div class="state">이 단원에 등록된 기출이 아직 없어요.</div>`); }
+  const nb = $("#dyn-notes");
+  if (nb){
+    const unit = nb.dataset.unit, st = stateHTML();
+    const list = S.notes.filter(n => n.unit === unit).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    $("#dyn-addnote").innerHTML = S.canWrite ? `<button class="btn small" id="addnote">+ 정리 추가</button>` : "";
+    if (S.canWrite) $("#addnote").onclick = () => openNote(null, unit);
+    nb.innerHTML = st || (list.length ? list.map(n => `<div class="note"><h4>${esc(n.title||"")}</h4><div class="body">${rich(n.body)}</div>
+      ${S.canWrite ? `<div class="row-actions"><button class="btn small" data-editnote="${esc(n.id)}">고치기</button></div>` : ""}</div>`).join("")
+      : `<div class="state">${S.canWrite ? "수업에서 덧붙인 설명, 헷갈리는 예외, 암기 팁을 여기에 바로 추가할 수 있어요." : "아직 추가된 정리가 없어요."}</div>`);
+    nb.querySelectorAll("[data-editnote]").forEach(b => b.onclick = () => openNote(S.notes.find(n => n.id === b.dataset.editnote), unit));
+  }
+}
+
+/* ---------- 모달 ---------- */
+function modal(html){
+  const root = $("#modalroot");
+  root.innerHTML = `<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true"><button class="xbtn" aria-label="닫기">×</button>${html}</div></div>`;
+  const bg = root.firstElementChild;
+  bg.addEventListener("mousedown", e => { if (e.target === bg) closeModal(); });
+  $(".xbtn", bg).onclick = closeModal;
+  document.body.style.overflow = "hidden";
+  return $(".modal", bg);
+}
+function closeModal(){ $("#modalroot").innerHTML = ""; document.body.style.overflow = ""; }
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#modalroot").innerHTML) closeModal(); });
+function fileURL(f){ return f.local || f.url || ("/_blob/" + f.id); }
+
+function openDetail(id){
+  const g = S.gichul.find(x => x.id === id); if (!g) return;
+  const u = UNIT_BY_ID[g.unit] || {name:"미분류", color:"var(--muted)"};
+  const ch = (g.choices||"").split("\n").filter(s => s.trim());
+  const m = modal(`<div style="--c:${u.color}">
+    <div class="row-actions" style="margin:0 0 6px"><span class="chip" style="box-shadow:inset 3px 0 0 ${u.color}">${esc(u.name)}</span>${g.topic?`<span class="chip">${esc(g.topic)}</span>`:""}<span class="chip">${esc(srcLabel(g))}${g.num?` ${esc(g.num)}번`:""}</span>${g.example?`<span class="example-badge">예시</span>`:""}</div>
+    <h2>${esc(g.title||autoTitle(g))}</h2>
+    ${g.question?`<div class="dsec"><h4>문제</h4><div class="txt">${rich(g.question)}</div></div>`:""}
+    ${ch.length?`<div class="dsec"><h4>선지</h4><ul class="choices">${ch.map(c => `<li>${rich(c)}</li>`).join("")}</ul></div>`:""}
+    ${(g.files||[]).length?`<div class="dsec"><div class="attach">${g.files.map(f => /^image\//.test(f.type||"") ? `<img class="zoomable" src="${esc(fileURL(f))}" alt="${esc(f.name||"문제 사진")}" title="눌러서 크게 보기">` : `<a class="btn" href="${esc(fileURL(f))}" target="_blank" rel="noopener">${esc(f.name||"첨부 파일")} 열기 ↗</a>`).join("")}</div></div>`:""}
+    <details class="dsec" ${g.answer||g.explanation?"":"open"}><summary style="cursor:pointer;font-weight:700">정답과 해설 보기</summary>
+      ${g.answer?`<p><b>정답</b> ${esc(g.answer)}</p>`:""}${g.explanation?`<div class="txt">${rich(g.explanation)}</div>`:`<p class="muted">해설이 아직 없어요.</p>`}</details>
+    ${g.link?`<p><a href="${esc(g.link)}" target="_blank" rel="noopener">원문 출처 ↗</a></p>`:""}
+    ${S.canWrite?`<div class="row-actions" id="dact"><button class="btn" id="d-edit">고치기</button><button class="btn danger" id="d-del">삭제</button></div>`:""}
+  </div>`);
+  linkWords(m);
+  m.querySelectorAll(".zoomable").forEach(im => im.onclick = () => {
+    const ov = document.createElement("div"); ov.className = "zoom-ov"; ov.innerHTML = `<img src="${im.src}" alt=""><span>화면을 누르면 닫혀요</span>`;
+    ov.onclick = () => ov.remove(); document.body.appendChild(ov);
+  });
+  if (S.canWrite){
+    $("#d-edit", m).onclick = () => openForm(g);
+    $("#d-del", m).onclick = () => {
+      $("#dact", m).innerHTML = `<div class="confirm">이 기출을 삭제할까요? 첨부 파일도 함께 지워져요. <button class="btn small danger" id="d-yes">삭제</button><button class="btn small" id="d-no">취소</button></div>`;
+      $("#d-no", m).onclick = () => openDetail(id);
+      $("#d-yes", m).onclick = async e => { e.target.disabled = true;
+        try { await DB.doc("gichul/" + id).delete(); if (window.STATIC && SYNC) await SYNC;
+          for (const f of g.files||[]) { try { if (!window.STATIC) await ASSETS?.delete(f.id); else if (GH.cfg() && /^images\//.test(f.url||"")) await GH.delFile(f.url, "기출 사진 삭제"); } catch(_){} } closeModal(); }
+        catch(err){ $("#dact", m).insertAdjacentHTML("beforeend", `<p class="err">삭제하지 못했어요: ${esc(err.message||err.code)}</p>`); } };
+    };
+  }
+}
+
+const EXAM_SLUG = {"수능":"suneung","6월 모의평가":"mo6","9월 모의평가":"mo9","3월 학력평가":"hak3","4월 학력평가":"hak4","7월 학력평가":"hak7","10월 학력평가":"hak10","내신":"naesin","기타":"etc"};
+// 휴대폰 사진처럼 큰 이미지는 긴 변 2200px, JPEG로 줄여서 올려요 (글씨가 읽힐 정도로 선명하게).
+async function compressImage(file){
+  if (!/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type)) return file;
+  try {
+    const url = URL.createObjectURL(file);
+    const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = url; });
+    const k = Math.min(1, 2200 / Math.max(img.naturalWidth, img.naturalHeight));
+    const cv = document.createElement("canvas"); cv.width = Math.round(img.naturalWidth * k); cv.height = Math.round(img.naturalHeight * k);
+    const cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
+    URL.revokeObjectURL(url);
+    const blob = await new Promise(ok => cv.toBlob(ok, "image/jpeg", 0.88));
+    return blob && blob.size < file.size ? new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", {type: "image/jpeg"}) : file;
+  } catch(_){ return file; }
+}
+function autoTitle(d){ return [srcLabel(d), d.num ? d.num + "번" : ""].filter(Boolean).join(" ") || "제목 없는 기출"; }
+
+function openForm(g){
+  const isNew = !g; g = g || {unit: S.f.unit !== "all" ? S.f.unit : "eumun", exam:"수능", year: new Date().getFullYear() + 1, files: []};
+  let files = [...(g.files||[])], removed = [];
+  const ghOn = window.STATIC && GH.cfg();
+  const canUpload = !window.STATIC ? !!ASSETS : true;
+  const m = modal(`<h2>${isNew ? "기출 추가" : "기출 고치기"}</h2>
+  <form id="qf" novalidate>
+    <div class="frow">
+      <div class="field"><label for="q-unit">단원</label><select id="q-unit">${UNITS.map(u => `<option value="${u.id}" ${g.unit===u.id?"selected":""}>${esc(u.name)}</option>`).join("")}</select></div>
+      <div class="field"><label for="q-exam">시험</label><select id="q-exam">${EXAMS.map(x => `<option ${g.exam===x?"selected":""}>${x}</option>`).join("")}</select></div>
+      <div class="field"><label for="q-year">연도</label><input id="q-year" type="number" inputmode="numeric" value="${esc(g.year||"")}"><small>수능·모평은 학년도</small></div>
+      <div class="field"><label for="q-num">문항 번호</label><input id="q-num" value="${esc(g.num||"")}" placeholder="35 또는 11~12"><small>묶음 문제는 11~12</small></div>
+    </div>
+    <div class="field"><label>문제 사진 <small style="font-weight:400">(여러 장 가능 · 순서대로 보여요)</small></label>
+      <label class="drop" id="q-drop" for="q-files"><b>사진을 여기로 끌어다 놓거나 눌러서 고르세요</b><span>지문·묶음 문제는 여러 장으로 나눠 올려도 돼요. 휴대폰 사진은 자동으로 용량을 줄여요.</span></label>
+      <input id="q-files" type="file" multiple accept="image/*,application/pdf" hidden>
+      <div class="thumbs" id="q-thumbs"></div></div>
+    <div class="frow" style="grid-template-columns:1fr 2fr 2fr">
+      <div class="field"><label for="q-answer">정답</label><input id="q-answer" value="${esc(g.answer||"")}" placeholder="③ 또는 11번 ③, 12번 ⑤"></div>
+      <div class="field"><label for="q-topic">세부 개념</label><input id="q-topic" value="${esc(g.topic||"")}" placeholder="예: 음운 변동"></div>
+      <div class="field"><label for="q-tags">태그</label><input id="q-tags" value="${esc((g.tags||[]).join(", "))}" placeholder="비음화, ㄴ 첨가"></div>
+    </div>
+    <div class="field"><label for="q-exp">해설</label><textarea id="q-exp" style="min-height:140px" placeholder="Claude에게 받은 해설을 그대로 붙여 넣으세요. [[금융]]처럼 쓰면 사전 링크가 돼요.">${esc(g.explanation||"")}</textarea></div>
+    <div class="field"><label for="q-title">제목 <small style="font-weight:400">(비워 두면 '2026학년도 수능 35번'처럼 자동으로 붙어요)</small></label><input id="q-title" value="${esc(g.title && g.title !== autoTitle(g) ? g.title : "")}" placeholder="예: 음운 변동과 음운 개수 변화"></div>
+    <details class="more-in" ${g.question || g.choices ? "open" : ""}><summary>문제를 글로도 입력하기 (선택)</summary>
+      <div class="field"><label for="q-question">문제·&lt;보기&gt;</label><textarea id="q-question">${esc(g.question||"")}</textarea></div>
+      <div class="field"><label for="q-choices">선지</label><textarea id="q-choices" placeholder="한 줄에 하나씩: ① …">${esc(g.choices||"")}</textarea></div>
+      <div class="field"><label for="q-link">출처 링크</label><input id="q-link" type="url" value="${esc(g.link||"")}" placeholder="https://"></div>
+    </details>
+    <p class="err" id="q-err"></p>
+    <div class="row-actions"><button class="btn primary" type="submit" id="q-save">저장</button><button class="btn" type="button" id="q-cancel">취소</button><span class="muted" id="q-prog" style="font-size:14px"></span></div>
+  </form>`);
+  const drawFiles = () => {
+    $("#q-thumbs", m).innerHTML = files.map((f,i) => `<div class="th"><span class="no">${i+1}</span>${/^image\//.test(f.type||"") ? `<img src="${esc(fileURL(f))}" alt="">` : `<span class="pdf">PDF</span>`}
+      <small>${esc(f.name||"")}</small><span class="ta">${i ? `<button type="button" data-mv="${i}" aria-label="앞으로">←</button>` : ""}<button type="button" data-rm="${i}" aria-label="빼기">빼기</button></span></div>`).join("");
+  };
+  drawFiles();
+  $("#q-thumbs", m).onclick = e => {
+    const rm = e.target.closest("[data-rm]"), mv = e.target.closest("[data-mv]");
+    if (rm){ const [f] = files.splice(+rm.dataset.rm, 1); if (!f.pending) removed.push(f); drawFiles(); }
+    if (mv){ const i = +mv.dataset.mv; [files[i-1], files[i]] = [files[i], files[i-1]]; drawFiles(); }
+  };
+  const addFiles = async list => {
+    if (!canUpload){ $("#q-err", m).textContent = "이 화면에서는 사진을 올릴 수 없어요."; return; }
+    for (const f0 of list){
+      if (!/^image\/|application\/pdf/.test(f0.type)) continue;
+      const f = (ghOn || !window.STATIC) ? await compressImage(f0) : f0;
+      if (f.size > 20*1024*1024){ $("#q-err", m).textContent = `'${f0.name}'이(가) 너무 커요 (20MB까지).`; continue; }
+      files.push({pending: true, blob: f, name: f.name, type: f.type, local: URL.createObjectURL(f)});
+    }
+    drawFiles();
+  };
+  const drop = $("#q-drop", m);
+  $("#q-files", m).onchange = e => { addFiles([...e.target.files]); e.target.value = ""; };
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
+  drop.ondragleave = () => drop.classList.remove("over");
+  drop.ondrop = e => { e.preventDefault(); drop.classList.remove("over"); addFiles([...e.dataTransfer.files]); };
+  $("#q-cancel", m).onclick = () => isNew ? closeModal() : openDetail(g.id);
+  if (window.STATIC && !ghOn) drop.insertAdjacentHTML("afterend", `<small class="muted">GitHub 연결 전이라 사진은 미리 보기만 돼요. 같은 이름의 파일을 GitHub의 <b>images</b> 폴더에 직접 올려 주세요. (편집 막대의 [GitHub 연결]을 하면 자동으로 올라가요.)</small>`);
+  $("#qf", m).onsubmit = async e => {
+    e.preventDefault();
+    const val = id => $(id, m).value.trim();
+    const err = $("#q-err", m); err.textContent = "";
+    const save = $("#q-save", m); save.disabled = true;
+    const prog = t => $("#q-prog", m).textContent = t;
+    try {
+      const base = { unit: val("#q-unit"), exam: val("#q-exam"), year: +val("#q-year") || null, num: val("#q-num").replace(/번$/, "") };
+      const pend = files.filter(f => f.pending);
+      for (let i = 0; i < pend.length; i++){
+        const f = pend[i]; prog(`사진 올리는 중 ${i+1}/${pend.length}…`);
+        if (!window.STATIC){
+          const r = await ASSETS.upload(f.blob);
+          Object.assign(f, {id: r.id, url: r.url, type: r.contentType || f.type, size: r.sizeBytes || f.blob.size});
+        } else if (ghOn){
+          const ext = (f.name.match(/\.(\w+)$/) || [, "jpg"])[1].toLowerCase();
+          const path = `images/${base.year || "x"}-${EXAM_SLUG[base.exam] || "etc"}-${(base.num || "q").replace(/[^0-9a-z]+/gi, "-")}-${Date.now().toString(36)}${i}.${ext}`;
+          await GH.putFile(path, f.blob, "기출 사진 추가");
+          f.url = path;
+        } else f.url = "images/" + f.name;
+        delete f.pending; delete f.blob;
+      }
+      prog("저장 중…");
+      const now = Date.now();
+      const data = { ...base, title: val("#q-title") || autoTitle(base), topic: val("#q-topic"), question: $("#q-question", m).value, choices: $("#q-choices", m).value,
+        answer: val("#q-answer"), tags: val("#q-tags").split(",").map(s => s.trim()).filter(Boolean),
+        explanation: $("#q-exp", m).value, link: /^https?:\/\//.test(val("#q-link")) ? val("#q-link") : "",
+        files: files.map(({pending, blob, ...f}) => f), createdAt: g.createdAt || now, updatedAt: now };
+      let id = g.id;
+      if (isNew){ const ref = await DB.collection("gichul").add(data); id = ref.id; }
+      else await DB.doc("gichul/" + id).set(data);
+      if (window.STATIC && SYNC) await SYNC;
+      for (const f of removed){ try { if (!window.STATIC) await ASSETS?.delete(f.id); else if (ghOn && f.url && /^images\//.test(f.url)) await GH.delFile(f.url, "기출 사진 삭제"); } catch(_){} }
+      S.gichul = S.gichul.filter(x => x.id !== id).concat([{id, ...data}]);
+      openDetail(id);
+    } catch(ex){
+      err.textContent = ex.code === "quota_exceeded" ? "저장 공간이 가득 찼어요. 오래된 자료나 큰 첨부를 지운 뒤 다시 시도해 주세요." : ("저장하지 못했어요: " + (ex.message || ex.code || ex));
+      save.disabled = false; prog("");
+    }
+  };
+}
+
+function openNote(n, unit){
+  const isNew = !n; n = n || {unit};
+  const m = modal(`<h2>${isNew ? "정리 추가" : "정리 고치기"}</h2><p class="muted" style="margin:0 0 12px">${esc(UNIT_BY_ID[unit].name)} 단원</p>
+  <form id="nf" novalidate>
+    <div class="field"><label for="n-title">제목</label><input id="n-title" value="${esc(n.title||"")}" placeholder="예: '밟-'은 왜 [밥]일까"></div>
+    <div class="field"><label for="n-body">내용</label><textarea id="n-body" style="min-height:160px" placeholder="[[단어]]처럼 쓰면 네이버 사전 링크가 돼요.">${esc(n.body||"")}</textarea></div>
+    <p class="err" id="n-err"></p>
+    <div class="row-actions" id="n-act"><button class="btn primary" type="submit">저장</button><button class="btn" type="button" id="n-cancel">취소</button>${isNew?"":`<button class="btn danger" type="button" id="n-del">삭제</button>`}</div>
+  </form>`);
+  $("#n-cancel", m).onclick = closeModal;
+  if (!isNew) $("#n-del", m).onclick = () => {
+    $("#n-act", m).innerHTML = `<div class="confirm">이 정리를 삭제할까요? <button class="btn small danger" type="button" id="n-yes">삭제</button><button class="btn small" type="button" id="n-no">취소</button></div>`;
+    $("#n-no", m).onclick = () => openNote(n, unit);
+    $("#n-yes", m).onclick = async () => { try { await DB.doc("notes/" + n.id).delete(); closeModal(); } catch(ex){ $("#n-err", m).textContent = "삭제하지 못했어요: " + (ex.message||ex.code); } };
+  };
+  $("#nf", m).onsubmit = async e => {
+    e.preventDefault();
+    const title = $("#n-title", m).value.trim(), body = $("#n-body", m).value;
+    if (!title){ $("#n-err", m).textContent = "제목을 적어 주세요."; return; }
+    const data = {unit, title, body, createdAt: n.createdAt || Date.now(), updatedAt: Date.now()};
+    try { if (isNew) await DB.collection("notes").add(data); else await DB.doc("notes/" + n.id).set(data); closeModal(); }
+    catch(ex){ $("#n-err", m).textContent = "저장하지 못했어요: " + (ex.message||ex.code); }
+  };
+}
+
+function openBackup(){
+  const strip = ({id, ...rest}) => rest;
+  const json = JSON.stringify({gichul: S.gichul.map(strip), notes: S.notes.map(strip)}, null, 1);
+  const m = modal(`<h2>백업 · 가져오기</h2>
+  <p class="muted">기출 ${S.gichul.length}문항과 정리 ${S.notes.length}개를 글자(JSON)로 복사해 보관할 수 있어요. 나중에 다른 곳으로 옮길 때도 이 내용을 쓰면 돼요.</p>
+  <div class="field"><label for="bk-out">현재 자료</label><textarea id="bk-out" readonly style="min-height:120px;font-family:monospace;font-size:12.5px">${esc(json)}</textarea></div>
+  <div class="row-actions"><button class="btn" id="bk-copy">복사하기</button><span class="muted" id="bk-msg" style="font-size:14px"></span></div>
+  <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+  <div class="field"><label for="bk-in">가져오기</label><textarea id="bk-in" style="min-height:100px;font-family:monospace;font-size:12.5px" placeholder="백업해 둔 JSON을 붙여 넣으세요. 기존 자료는 그대로 두고 새로 추가돼요."></textarea></div>
+  <p class="err" id="bk-err"></p>
+  <div class="row-actions"><button class="btn primary" id="bk-imp">가져오기</button></div>`);
+  $("#bk-copy", m).onclick = async () => { try { await navigator.clipboard.writeText(json); $("#bk-msg", m).textContent = "복사했어요."; } catch(_){ $("#bk-out", m).select(); $("#bk-msg", m).textContent = "자동 복사가 막혀 있어요. 선택된 글자를 직접 복사해 주세요."; } };
+  $("#bk-imp", m).onclick = async e => {
+    const btn = e.target; let d;
+    try { d = JSON.parse($("#bk-in", m).value); } catch(_){ $("#bk-err", m).textContent = "JSON 형식이 올바르지 않아요."; return; }
+    const gs = Array.isArray(d) ? d : (d.gichul || []), ns = Array.isArray(d) ? [] : (d.notes || []);
+    btn.disabled = true; let k = 0;
+    try {
+      for (const g of gs){ if (g && g.title && UNIT_BY_ID[g.unit]){ await DB.collection("gichul").add({...g, files: g.files || [], createdAt: g.createdAt || Date.now()}); k++; } }
+      for (const n of ns){ if (n && n.title && UNIT_BY_ID[n.unit]){ await DB.collection("notes").add({...n, createdAt: n.createdAt || Date.now()}); k++; } }
+      $("#bk-err", m).textContent = ""; $("#bk-msg", m).textContent = `${k}개를 가져왔어요.`; btn.disabled = false;
+    } catch(ex){ $("#bk-err", m).textContent = `${k}개까지 가져오고 멈췄어요: ` + (ex.message||ex.code); btn.disabled = false; }
+  };
+}
+
+/* ---------- 사전 검색 & 드래그 찾기 ---------- */
+const dq = $("#dictq"), da = $("#dicta");
+dq.addEventListener("input", () => { const q = dq.value.trim(); da.href = q ? NAVER(q) : "https://ko.dict.naver.com/"; });
+dq.addEventListener("keydown", e => { if (e.key === "Enter" && dq.value.trim()) da.click(); });
+const pop = $("#selpop");
+document.addEventListener("mouseup", e => {
+  if (pop.contains(e.target)) return;
+  setTimeout(() => {
+    const sel = window.getSelection(), t = sel ? sel.toString().trim() : "";
+    const inContent = sel && sel.rangeCount && sel.anchorNode && sel.anchorNode.parentElement?.closest(".topic, .modal .txt, .note");
+    if (!t || t.length > 20 || /\n/.test(t) || !inContent){ pop.style.display = "none"; return; }
+    const r = sel.getRangeAt(0).getBoundingClientRect();
+    $("#selnaver").href = NAVER(t); $("#selstd").href = STD(t);
+    pop.style.display = "flex";
+    pop.style.left = Math.max(8, Math.min(window.scrollX + r.left, window.scrollX + document.documentElement.clientWidth - pop.offsetWidth - 8)) + "px";
+    pop.style.top = (window.scrollY + r.bottom + 8) + "px";
+  }, 10);
+});
+document.addEventListener("scroll", () => { pop.style.display = "none"; }, {passive:true});
+
+/* ---------- 데이터 연결 ---------- */
+render();
+(async () => {
+  if (window.STATIC){ await startStatic(); return; }
+  if (window.OFFLINE){ // 오프라인 파일: 저장해 둔 기출·정리를 읽기 전용으로 보여 줌
+    S.gichul = window.OFFLINE.gichul.map((g,k) => ({id: "off" + k, ...g})); S.notes = window.OFFLINE.notes.map((n,k) => ({id: "offn" + k, ...n}));
+    S.db = "ok"; updateDyn(); return;
+  }
+  const C = window.claude;
+  if (!C || typeof C.use !== "function"){ S.db = "off"; updateDyn(); return; }
+  let user = null;
+  try { user = await C.use("user"); } catch(_){}
+  try { DB = await C.use("db"); } catch(_){}
+  if (!DB){ S.db = "off"; updateDyn(); return; }
+  try { S.canWrite = !!(user && await user.canEdit()); } catch(_){ S.canWrite = false; }
+  if (S.canWrite){ try { ASSETS = await C.use("assets"); } catch(_){} }
+  let gotG = false, gotN = false;
+  const timer = setTimeout(() => { if (!gotG){ S.db = "slow"; updateDyn(); } }, 10000);
+  DB.collection("gichul").onSnapshot(snap => {
+    S.gichul = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    if (!snap.metadata.fromCache){ gotG = true; clearTimeout(timer); }
+    S.db = "ok"; updateDyn();
+  }, () => { clearTimeout(timer); S.db = "error"; updateDyn(); });
+  DB.collection("notes").onSnapshot(snap => {
+    S.notes = snap.docs.map(d => ({id: d.id, ...d.data()})); gotN = true; updateDyn();
+  }, () => {});
+})();
+
+
+/* ---------- 정적 사이트(Vercel) 모드 ---------- */
+// data.json을 읽어 보여 줘요. 편집 모드에서 고친 내용은
+// GitHub에 연결돼 있으면 바로 GitHub에 저장되고(1분 뒤 사이트 반영),
+// 연결 전이면 [data.json 내용 복사]로 직접 붙여 넣어요.
+const DRAFT_KEY = "madang-draft", EDIT_KEY = "madang-edit", GH_KEY = "madang-gh", SYNCED_KEY = "madang-synced";
+const ls = { get(k){ try { return localStorage.getItem(k); } catch(_){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(_){} }, del(k){ try { localStorage.removeItem(k); } catch(_){} } };
+let ORIGINAL = "", SYNC = null, SYNC_STATE = "";
+
+const GH = {
+  cfg(){ try { return JSON.parse(ls.get(GH_KEY) || "null"); } catch(_){ return null; } },
+  msg(status){ return ({401:"토큰이 틀렸거나 기간이 끝났어요.",403:"토큰 권한이 부족해요. Contents를 'Read and write'로 설정했는지 확인해 주세요.",404:"저장소를 찾을 수 없어요. 저장소 주소와, 토큰을 만들 때 고른 저장소를 확인해 주세요.",409:"다른 곳에서 동시에 고쳐졌어요. 새로고침한 뒤 다시 시도해 주세요.",422:"다른 곳에서 동시에 고쳐졌어요. 새로고침한 뒤 다시 시도해 주세요."})[status] || `GitHub 오류(${status})가 났어요.`; },
+  async api(path, opt = {}, c = GH.cfg()){
+    let r;
+    try { r = await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}${path ? "/" + path : ""}`, {...opt, headers: {Authorization: `Bearer ${c.token}`, Accept: "application/vnd.github+json", ...(opt.body ? {"Content-Type": "application/json"} : {})}}); }
+    catch(_){ throw {message: "인터넷 연결을 확인해 주세요."}; }
+    if (!r.ok) throw {status: r.status, message: GH.msg(r.status)};
+    return r.status === 204 ? null : r.json();
+  },
+  enc(p){ return p.split("/").map(encodeURIComponent).join("/"); },
+  async sha(p){ const c = GH.cfg(); try { return (await GH.api(`contents/${GH.enc(p)}?ref=${encodeURIComponent(c.branch)}`)).sha; } catch(e){ if (e.status === 404) return null; throw e; } },
+  async put(p, b64, message){ const c = GH.cfg(), sha = await GH.sha(p); return GH.api(`contents/${GH.enc(p)}`, {method: "PUT", body: JSON.stringify({message, content: b64, branch: c.branch, ...(sha ? {sha} : {})})}); },
+  async putFile(p, blob, message){ const b64 = await new Promise((ok, no) => { const fr = new FileReader(); fr.onload = () => ok(String(fr.result).split(",")[1]); fr.onerror = no; fr.readAsDataURL(blob); }); return GH.put(p, b64, message); },
+  async putText(p, text, message){ const bytes = new TextEncoder().encode(text); let bin = ""; for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000)); return GH.put(p, btoa(bin), message); },
+  async delFile(p, message){ const c = GH.cfg(), sha = await GH.sha(p); if (sha) await GH.api(`contents/${GH.enc(p)}`, {method: "DELETE", body: JSON.stringify({message, sha, branch: c.branch})}); }
+};
+
+function exportJSON(){
+  const clean = x => { const {local, pending, blob, ...r} = x; return r; };
+  return JSON.stringify({ gichul: S.gichul.map(g => ({...g, files: (g.files||[]).map(clean)})), notes: S.notes }, null, 2);
+}
+function syncNow(){
+  const json = exportJSON();
+  SYNC_STATE = "saving"; drawEditBar();
+  const run = (SYNC || Promise.resolve()).catch(() => {}).then(() => GH.putText("data.json", json, "기출 자료 업데이트"))
+    .then(() => { ORIGINAL = json; ls.del(DRAFT_KEY); ls.set(SYNCED_KEY, JSON.stringify({t: Date.now(), json})); SYNC_STATE = "saved"; drawEditBar(); })
+    .catch(e => { SYNC_STATE = "error:" + (e.message || "저장하지 못했어요."); drawEditBar(); throw e; });
+  SYNC = run; return run;
+}
+function changed(){ ls.set(DRAFT_KEY, exportJSON()); updateDyn(); if (GH.cfg()) syncNow().catch(() => {}); else drawEditBar(); }
+const LocalDB = {
+  collection(name){ return { add: async d => { const id = name[0] + Date.now().toString(36) + Math.random().toString(36).slice(2,5); S[name] = S[name].concat([{id, ...d}]); changed(); return {id}; } }; },
+  doc(path){ const [name, id] = path.split("/"); return {
+    set: async d => { S[name] = S[name].filter(x => x.id !== id).concat([{id, ...d}]); changed(); },
+    delete: async () => { S[name] = S[name].filter(x => x.id !== id); changed(); } }; }
+};
+function loadData(d){
+  S.gichul = (d.gichul||[]).map((g,k) => ({id: g.id || "g" + k, ...g}));
+  S.notes = (d.notes||[]).map((n,k) => ({id: n.id || "n" + k, ...n}));
+}
+async function startStatic(){
+  try {
+    const r = await fetch("data.json", {cache: "no-cache"});
+    let txt = await r.text();
+    // 방금 GitHub에 저장했는데 사이트가 아직 새로 올라가기 전이면, 이 브라우저에 남은 최신본을 보여 줘요.
+    try { const s = JSON.parse(ls.get(SYNCED_KEY) || "null"); if (s && Date.now() - s.t < 5*60*1000 && s.json.trim() !== txt.trim()) txt = s.json; } catch(_){}
+    ORIGINAL = txt; loadData(JSON.parse(txt)); S.db = "ok";
+  } catch(e){ S.db = "error"; }
+  if (ls.get(EDIT_KEY) === "1") enterEdit(true);
+  updateDyn(); drawEditBar();
+  const ft = document.querySelector("footer");
+  ft.insertAdjacentHTML("beforeend", `<br><button class="btn small" id="edit-toggle" style="margin-top:10px">${S.canWrite ? "편집 모드 끄기" : "편집 모드"}</button>`);
+  $("#edit-toggle").onclick = () => S.canWrite ? leaveEdit() : enterEdit(false);
+}
+function enterEdit(){
+  S.canWrite = true; DB = LocalDB; ls.set(EDIT_KEY, "1");
+  const draft = ls.get(DRAFT_KEY);
+  if (draft && draft.trim() !== ORIGINAL.trim()){ try { loadData(JSON.parse(draft)); } catch(_){} }
+  updateDyn(); drawEditBar();
+  const t = $("#edit-toggle"); if (t) t.textContent = "편집 모드 끄기";
+}
+function leaveEdit(){
+  S.canWrite = false; ls.set(EDIT_KEY, "0");
+  try { loadData(JSON.parse(ORIGINAL)); } catch(_){}
+  updateDyn(); drawEditBar();
+  const t = $("#edit-toggle"); if (t) t.textContent = "편집 모드";
+}
+function isDirty(){ try { return exportJSON().trim() !== JSON.stringify(JSON.parse(ORIGINAL), null, 2).trim(); } catch(_){ return true; } }
+function drawEditBar(){
+  let bar = $("#editbar");
+  if (!S.canWrite){ bar?.remove(); return; }
+  if (!bar){ document.body.insertAdjacentHTML("beforeend", `<div id="editbar"></div>`); bar = $("#editbar"); }
+  const gh = GH.cfg(), dirty = isDirty();
+  let status, actions = "";
+  if (gh){
+    status = SYNC_STATE === "saving" ? "GitHub에 저장하는 중…" : SYNC_STATE === "saved" ? "GitHub에 저장했어요 · 1분쯤 뒤 사이트에 반영돼요" : SYNC_STATE.startsWith("error:") ? "저장 실패: " + esc(SYNC_STATE.slice(6)) : (dirty ? "저장하지 않은 변경이 있어요" : `GitHub(${esc(gh.repo)})에 연결됨 · 바꾸면 바로 저장돼요`);
+    if (SYNC_STATE.startsWith("error:") || (dirty && SYNC_STATE !== "saving")) actions += `<button class="btn small primary" id="eb-retry">다시 저장</button>`;
+    actions += `<button class="btn small" id="eb-gh">연결 설정</button>`;
+  } else {
+    status = dirty ? "GitHub에 아직 반영하지 않은 변경이 있어요" : "변경 사항 없음";
+    actions += `<button class="btn small primary" id="eb-gh">GitHub 연결 (사진 자동 저장)</button><button class="btn small" id="eb-copy" ${dirty?"":"disabled"}>data.json 내용 복사</button>${dirty?`<button class="btn small" id="eb-reset">변경 버리기</button>`:""}`;
+  }
+  bar.innerHTML = `<span><b>편집 모드</b> · ${status}</span><span class="row-actions" style="margin:0">${actions}<button class="btn small" id="eb-off">끄기</button></span>`;
+  $("#eb-off").onclick = leaveEdit;
+  $("#eb-gh").onclick = openConnect;
+  $("#eb-retry")?.addEventListener("click", () => syncNow().catch(() => {}));
+  if (!gh && dirty){
+    $("#eb-copy").onclick = openPublish;
+    $("#eb-reset").onclick = () => { ls.del(DRAFT_KEY); try { loadData(JSON.parse(ORIGINAL)); } catch(_){} updateDyn(); drawEditBar(); };
+  }
+}
+function openConnect(){
+  const c = GH.cfg() || {};
+  const m = modal(`<h2>GitHub 연결</h2>
+  <p class="muted" style="margin-top:0">한 번만 연결해 두면, 기출을 저장할 때 사진과 내용이 GitHub에 바로 올라가요. 연결 정보는 <b>이 브라우저에만</b> 저장돼요.</p>
+  <h4 style="margin:14px 0 6px">1. 토큰 만들기 (처음 한 번)</h4>
+  <ol class="howto">
+    <li>GitHub 오른쪽 위 내 사진 → <b>Settings</b></li>
+    <li>왼쪽 메뉴 맨 아래 <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b></li>
+    <li><b>Generate new token</b>을 누르고 이름(예: 문법마당)을 적어요. 기간(Expiration)은 1년 정도로 골라요.</li>
+    <li><b>Repository access</b>에서 <b>Only select repositories</b> → 이 사이트 저장소를 골라요.</li>
+    <li><b>Permissions</b>에서 <b>Contents</b>를 찾아 <b>Read and write</b>로 바꿔요.</li>
+    <li>맨 아래 <b>Generate token</b> → <code>github_pat_</code>로 시작하는 글자를 복사해요. (이 화면을 벗어나면 다시 볼 수 없어요)</li>
+  </ol>
+  <h4 style="margin:14px 0 6px">2. 아래에 붙여 넣기</h4>
+  <div class="field"><label for="gh-repo">저장소 주소</label><input id="gh-repo" value="${c.owner ? `https://github.com/${esc(c.owner)}/${esc(c.repo)}` : ""}" placeholder="https://github.com/내아이디/저장소이름"></div>
+  <div class="field"><label for="gh-token">토큰</label><input id="gh-token" type="password" value="${esc(c.token||"")}" placeholder="github_pat_…" autocomplete="off"></div>
+  <p class="err" id="gh-err"></p>
+  <div class="row-actions"><button class="btn primary" id="gh-ok">연결하기</button>${c.token ? `<button class="btn danger" id="gh-off">연결 끊기</button>` : ""}<span class="muted" id="gh-msg" style="font-size:14px"></span></div>
+  <div class="tip">토큰은 비밀번호처럼 다른 사람에게 보여 주지 마세요. 공용 컴퓨터에서는 다 쓴 뒤 [연결 끊기]를 눌러 주세요.</div>`);
+  $("#gh-off", m)?.addEventListener("click", () => { ls.del(GH_KEY); SYNC_STATE = ""; closeModal(); drawEditBar(); });
+  $("#gh-ok", m).onclick = async e => {
+    const err = $("#gh-err", m); err.textContent = "";
+    const mt = $("#gh-repo", m).value.trim().replace(/\.git$/, "").replace(/\/+$/, "").match(/(?:github\.com\/)?([\w.-]+)\/([\w.-]+)$/);
+    const token = $("#gh-token", m).value.trim();
+    if (!mt){ err.textContent = "저장소 주소를 확인해 주세요. 예: https://github.com/내아이디/저장소이름"; return; }
+    if (!token){ err.textContent = "토큰을 붙여 넣어 주세요."; return; }
+    e.target.disabled = true; $("#gh-msg", m).textContent = "확인하는 중…";
+    const cfg = {owner: mt[1], repo: mt[2], token};
+    try {
+      const info = await GH.api("", {}, cfg);
+      cfg.branch = info.default_branch || "main";
+      await GH.api(`contents/data.json?ref=${encodeURIComponent(cfg.branch)}`, {}, cfg);
+      ls.set(GH_KEY, JSON.stringify(cfg)); SYNC_STATE = "";
+      closeModal(); drawEditBar();
+      if (isDirty()) syncNow().catch(() => {});
+    } catch(ex){
+      err.textContent = ex.status === 404 ? "저장소나 data.json을 찾지 못했어요. 주소가 맞는지, 토큰을 만들 때 이 저장소를 골랐는지 확인해 주세요." : (ex.message || "연결하지 못했어요.");
+      e.target.disabled = false; $("#gh-msg", m).textContent = "";
+    }
+  };
+}
+function openPublish(){
+  const json = exportJSON();
+  const imgs = S.gichul.flatMap(g => (g.files||[]).filter(f => f.local).map(f => f.name));
+  const m = modal(`<h2>사이트에 반영하기</h2>
+    <ol style="padding-left:20px;line-height:1.9">
+      <li>아래 <b>복사하기</b>를 눌러요.</li>
+      <li>GitHub 저장소에서 <b>data.json</b> 파일을 열고 오른쪽 위 연필(✏️) 버튼을 눌러요.</li>
+      <li>안의 글자를 <b>전부 지우고</b>(Ctrl+A → Delete, 맥은 ⌘+A) 붙여 넣어요.</li>
+      <li>초록색 <b>Commit changes</b> 버튼을 두 번 눌러 저장해요. 1분 안에 사이트에 반영돼요.</li>
+    </ol>
+    ${imgs.length ? `<div class="tip">새 사진 <b>${imgs.map(esc).join(", ")}</b>도 GitHub의 <b>images</b> 폴더에 올려 주세요. (images 폴더 → Add file → Upload files)</div>` : ""}
+    <div class="row-actions"><button class="btn primary" id="pb-copy">복사하기</button><span class="muted" id="pb-msg" style="font-size:14px"></span></div>
+    <div class="field" style="margin-top:12px"><label for="pb-out">복사할 내용</label><textarea id="pb-out" readonly style="min-height:140px;font-family:monospace;font-size:12.5px">${esc(json)}</textarea></div>
+    <div class="row-actions"><button class="btn" id="pb-done">GitHub에 붙여 넣었어요</button></div>`);
+  $("#pb-copy", m).onclick = async () => { try { await navigator.clipboard.writeText(json); $("#pb-msg", m).textContent = "복사했어요. 이제 GitHub에 붙여 넣으세요."; } catch(_){ $("#pb-out", m).select(); $("#pb-msg", m).textContent = "아래 글자가 선택됐어요. Ctrl+C로 복사해 주세요."; } };
+  $("#pb-done", m).onclick = () => { ORIGINAL = json; ls.del(DRAFT_KEY); closeModal(); drawEditBar(); };
+}
+
+</script>
+</body>
+</html>
